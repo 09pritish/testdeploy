@@ -723,10 +723,11 @@ img, video {
 
 .reveal-visual {
   position: absolute;
-  top: 0;
+  --reveal-visual-top: clamp(32px, 4vw, 64px);
+  top: var(--reveal-visual-top);
   left: 0;
   width: 100%;
-  height: 100%;
+  height: calc(100% - var(--reveal-visual-top));
   overflow: hidden;
   will-change: width;
 
