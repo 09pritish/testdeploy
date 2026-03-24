@@ -1,0 +1,85 @@
+<section class="services-page">
+  <section class="services-hero" aria-labelledby="services-hero-title">
+    <video
+      class="services-hero__video"
+      src="assets/main landing video.mp4"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      aria-hidden="true"
+    ></video>
+    <div class="services-hero__bg" aria-hidden="true"></div>
+    <div class="services-hero__grain" aria-hidden="true"></div>
+
+    <div class="services-hero__inner site-container">
+      <div class="services-hero__headline-wrap">
+        <h1 id="services-hero-title">
+          BUILT FOR
+          <br />
+          <span class="services-hero__service-line">SERVICE</span> EXCELLENCE
+        </h1>
+      </div>
+
+      <aside class="services-hero__panel" aria-label="Services page intro">
+        <div class="services-hero__eyebrow" aria-hidden="true"></div>
+        <h2>Services that keep business moving</h2>
+        <p>
+          From consulting and deployment to managed support, CES services are designed to deliver resilience,
+          performance, and measurable outcomes across your IT landscape.
+        </p>
+        <a routerLink="/contact-us">Talk to a service expert</a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="services-cards" aria-labelledby="services-cards-title">
+    <div class="services-cards__inner site-container">
+      <h2 id="services-cards-title" class="services-cards__title">Explore CES Services</h2>
+
+      <div class="services-cards__grid">
+        <article class="service-story-card" *ngFor="let card of serviceCards">
+          <div class="service-story-card__front" [style.background-image]="'url(' + card.image + ')'">
+            <div class="service-story-card__overlay"></div>
+            <div class="service-story-card__content service-story-card__content--front">
+              <p>{{ card.tag }}</p>
+              <h3>{{ card.title }}</h3>
+            </div>
+          </div>
+
+          <div class="service-story-card__back">
+            <div class="service-story-card__content service-story-card__content--back">
+              <p>{{ card.tag }}</p>
+              <h3>{{ card.title }}</h3>
+              <span>{{ card.intro }}</span>
+            </div>
+            <a [routerLink]="card.href">
+              {{ card.cta }}
+              <span aria-hidden="true">&gt;</span>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="services-cta-band" aria-labelledby="services-cta-band-title">
+    <div class="services-cta-band__inner site-container">
+      <div class="services-cta-band__content">
+        <p class="services-cta-band__eyebrow">Need a custom service roadmap?</p>
+        <h2 id="services-cta-band-title">Plan, deploy, and scale with CES experts by your side.</h2>
+        <p>
+          Talk to our team to design a services package aligned to your infrastructure, security, and
+          business goals.
+        </p>
+      </div>
+
+      <a class="services-cta-band__button" routerLink="/contact-us">Book a consultation</a>
+    </div>
+  </section>
+
+  <app-partner-band></app-partner-band>
+  <app-awards-strip></app-awards-strip>
+</section>
+

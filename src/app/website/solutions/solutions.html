@@ -1,0 +1,65 @@
+<section class="solutions-page">
+  <section class="solutions-hero" aria-labelledby="solutions-hero-title">
+    <video
+      class="solutions-hero__video"
+      src="assets/main landing video.mp4"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      aria-hidden="true"
+    ></video>
+    <div class="solutions-hero__overlay" aria-hidden="true"></div>
+
+    <div class="solutions-hero__content site-container">
+      <h1 id="solutions-hero-title">Solutions</h1>
+      <p>
+        CES delivers end-to-end enterprise solutions across network, cloud, cybersecurity, data center, and
+        collaboration to help organizations modernize, scale, and operate with confidence.
+      </p>
+      <p class="solutions-hero__quote">"The right solution architecture turns technology investments into measurable business outcomes." - CES Solutions Team</p>
+      <a class="solutions-hero__cta" routerLink="/solutions">Explore Solutions</a>
+    </div>
+  </section>
+
+  <section class="services-spotlight site-container" aria-labelledby="services-spotlight-title">
+    <p class="services-spotlight__eyebrow">SOLUTIONS</p>
+    <h2 id="services-spotlight-title">The solutions to help you reinvent</h2>
+
+    <div class="services-spotlight__body">
+      <div class="services-spotlight__list" role="tablist" aria-label="Solutions list">
+        <button
+          *ngFor="let service of services; let i = index; trackBy: trackByIndex"
+          type="button"
+          role="tab"
+          class="service-link"
+          [class.is-active]="i === activeServiceIndex"
+          [attr.aria-selected]="i === activeServiceIndex"
+          (click)="setActiveService(i)"
+        >
+          <span class="service-link__dot" aria-hidden="true"></span>
+          <span>{{ service.name }}</span>
+        </button>
+      </div>
+
+      <article class="services-spotlight__detail" role="tabpanel" [attr.aria-label]="activeService.name">
+        <div class="solution-preview-card">
+          <div class="solution-preview-card__image-wrap">
+            <img [src]="activeService.image" [alt]="activeService.name + ' preview'" loading="lazy" />
+          </div>
+          <div class="solution-preview-card__body">
+            <h3>{{ activeService.name }}</h3>
+            <p>{{ activeService.description }}</p>
+            <a class="solution-preview-card__readmore" [routerLink]="['/solutions', activeService.slug]">Read more</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <app-partner-band></app-partner-band>
+  <app-awards-strip></app-awards-strip>
+
+</section>
+

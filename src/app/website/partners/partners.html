@@ -1,0 +1,116 @@
+<section class="partners-page">
+  <div class="partners-shell site-container">
+    <section class="partners-carousel" aria-labelledby="partners-carousel-title">
+      <h1 id="partners-carousel-title">Our Strategic Partner Ecosystem</h1>
+
+      <div class="partners-carousel__stage">
+        <button
+          type="button"
+          class="partners-carousel__arrow partners-carousel__arrow--left"
+          (click)="prevCard()"
+          aria-label="Previous partner card"
+        >
+          &larr;
+        </button>
+
+        <div class="partners-carousel__track" role="region" aria-label="Partners slider">
+          <article
+            *ngFor="let card of partnerCards; let i = index"
+            class="partner-card"
+            [class.partner-card--active]="isActive(i)"
+            [class.partner-card--side]="isSide(i)"
+            [style.--offset]="getRelativeOffset(i)"
+            [attr.aria-hidden]="!isActive(i)"
+          >
+            <div class="partner-card__media">
+              <img [src]="card.image" [alt]="card.name + ' partnership visual'" />
+            </div>
+            <div class="partner-card__content">
+              <p class="partner-card__category">{{ card.category }}</p>
+              <h2>{{ card.name }}</h2>
+              <p>{{ card.summary }}</p>
+            </div>
+          </article>
+        </div>
+
+        <button
+          type="button"
+          class="partners-carousel__arrow partners-carousel__arrow--right"
+          (click)="nextCard()"
+          aria-label="Next partner card"
+        >
+          &rarr;
+        </button>
+      </div>
+
+      <div class="partners-carousel__dots" aria-label="Select partner card">
+        <button
+          type="button"
+          *ngFor="let card of partnerCards; let i = index"
+          [class.active]="i === activePartnerIndex"
+          [attr.aria-label]="'Show ' + card.name + ' card'"
+          [attr.aria-pressed]="i === activePartnerIndex"
+          (click)="selectCard(i)"
+        ></button>
+      </div>
+    </section>
+
+    <section class="partners-trust" aria-labelledby="partners-trust-title" #trustSection>
+      <h2 id="partners-trust-title">TRUSTED BY 2M+ USERS GLOBALLY AT</h2>
+
+      <div class="partners-trust__grid">
+        <article *ngFor="let brand of trustedBrands" class="partners-trust__item">
+          <img class="partners-trust__logo" [src]="brand.logo" [alt]="brand.label + ' logo'" loading="lazy" />
+          <button
+            *ngIf="brand.hasCaseStudy"
+            type="button"
+            class="partners-trust__plus"
+            [attr.aria-label]="'Open case study for ' + brand.label"
+            [attr.aria-pressed]="expandedBrandId === brand.id"
+            (mouseenter)="onCaseTriggerEnter($event, brand)"
+            (mouseleave)="onCaseTriggerLeave()"
+            (focus)="onCaseTriggerEnter($event, brand)"
+            (blur)="onCaseTriggerLeave()"
+            (click)="toggleTrustedCase($event, brand)"
+          >
+            +
+          </button>
+        </article>
+      </div>
+
+      <div
+        class="partners-trust__case"
+        *ngIf="expandedTrustedBrand as activeCase"
+        [ngStyle]="casePopoverStyle"
+        (mouseenter)="onCasePopoverEnter()"
+        (mouseleave)="onCasePopoverLeave()"
+      >
+        <a
+          class="partners-trust__cta"
+          [routerLink]="activeCase.caseSlug ? ['/case-studies', activeCase.caseSlug] : ['/achievements']"
+        >
+          Read case study &rarr;
+        </a>
+        <article class="partners-trust__card">
+          <h3>{{ activeCase.label }}</h3>
+          <p class="partners-trust__quote">{{ activeCase.quote }}</p>
+          <p class="partners-trust__author">{{ activeCase.author }}</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="partner-next-step" aria-labelledby="partner-next-step-title">
+      <div class="partner-next-step__inner site-container">
+        <h2 id="partner-next-step-title">Become a CES Partner</h2>
+        <div class="partner-next-step__actions">
+          <a class="partner-next-step__btn partner-next-step__btn--primary" href="/partners">
+            Explore partnership models
+          </a>
+          <a class="partner-next-step__btn partner-next-step__btn--ghost" href="/about-us">
+            Talk to our alliances team
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>

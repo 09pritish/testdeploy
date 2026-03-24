@@ -1,0 +1,36 @@
+<section class="awards-hub" aria-labelledby="awards-hub-title">
+  <div class="awards-hub__inner site-container">
+    <h2 id="awards-hub-title">Awards and Certifications</h2>
+    <p class="awards-hub__lede section-subtext">
+      Recognized globally for delivery excellence, partner credentials, and verified technical competency across networking, cloud, and cybersecurity.
+    </p>
+
+    <div class="awards-hub__divider" aria-hidden="true"></div>
+
+    <div class="awards-hub__cert-scroller" aria-label="Certifications scroller">
+      <div class="awards-hub__cert-track">
+        <a
+          *ngFor="let cert of badges"
+          class="awards-hub__cert"
+          routerLink="/achievements"
+          [attr.aria-label]="'View details for ' + cert.alt"
+          [title]="cert.alt"
+        >
+          <img [src]="cert.image" [alt]="cert.alt" loading="lazy" />
+        </a>
+
+        <a
+          *ngFor="let cert of badges"
+          class="awards-hub__cert"
+          routerLink="/achievements"
+          [attr.aria-label]="'View details for ' + cert.alt"
+          [title]="cert.alt"
+          aria-hidden="true"
+          tabindex="-1"
+        >
+          <img [src]="cert.image" [alt]="cert.alt" loading="lazy" />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

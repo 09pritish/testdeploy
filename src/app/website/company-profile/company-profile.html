@@ -1,0 +1,61 @@
+<section class="company-profile-page">
+  <div class="company-profile-shell site-container">
+    <div class="company-profile-breadcrumb">Home <span>&rsaquo;</span> Company Profile</div>
+
+    <section class="company-profile-hero" aria-labelledby="company-profile-title">
+      <div class="company-profile-hero__copy">
+        <p class="company-profile-hero__kicker">Company Profile</p>
+        <h1 id="company-profile-title">Request the CES Tech company profile</h1>
+        <p>Submit your details and we will email you a copy of the company profile PDF.</p>
+      </div>
+    </section>
+
+    <section class="company-profile-request" aria-labelledby="company-profile-form-title">
+      <h2 id="company-profile-form-title">Share your details</h2>
+
+      <form class="profile-form" [formGroup]="profileForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="profile-form__row profile-form__row--two">
+          <label class="field" [class.is-invalid]="hasError('firstName')">
+            <span>First name *</span>
+            <input type="text" formControlName="firstName" autocomplete="given-name" />
+            <small *ngIf="hasError('firstName')">First name is required.</small>
+          </label>
+
+          <label class="field" [class.is-invalid]="hasError('lastName')">
+            <span>Last name *</span>
+            <input type="text" formControlName="lastName" autocomplete="family-name" />
+            <small *ngIf="hasError('lastName')">Last name is required.</small>
+          </label>
+        </div>
+
+        <label class="field" [class.is-invalid]="hasError('phone')">
+          <span>Phone number *</span>
+          <input type="tel" formControlName="phone" autocomplete="tel" />
+          <small *ngIf="hasError('phone')">Enter a valid phone number.</small>
+        </label>
+
+        <label class="field" [class.is-invalid]="hasError('email')">
+          <span>Email ID *</span>
+          <input type="email" formControlName="email" autocomplete="email" />
+          <small *ngIf="hasError('email')">Enter a valid email address.</small>
+        </label>
+
+        <label class="field" [class.is-invalid]="hasError('companyName')">
+          <span>Company name *</span>
+          <input type="text" formControlName="companyName" autocomplete="organization" />
+          <small *ngIf="hasError('companyName')">Company name is required.</small>
+        </label>
+
+        <button class="profile-form__submit" type="submit" [disabled]="isSubmitting">
+          {{ isSubmitting ? 'Submitting...' : 'Submit and get PDF' }}
+        </button>
+
+        <p class="profile-form__success" *ngIf="submitSuccess">
+          Thanks. Your details are saved and the company profile has been emailed to you.
+        </p>
+        <p class="profile-form__warning" *ngIf="submitWarning">{{ submitWarning }}</p>
+        <p class="profile-form__error" *ngIf="submitError">{{ submitError }}</p>
+      </form>
+    </section>
+  </div>
+</section>

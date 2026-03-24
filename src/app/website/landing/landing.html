@@ -1,0 +1,1706 @@
+<section class="hero">
+  <div class="hero-bg">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto" webkit-playsinline aria-hidden="true">
+      <source src="https://res.cloudinary.com/dxujexjb9/video/upload/f_auto,q_auto/main_video_ypt4m0.mp4"
+        type="video/mp4" />
+    </video>
+  </div>
+
+  
+
+  <!-- AFTER -->
+  <div class="hero-content">
+    <div class="hero-text">
+      <h1>{{ titleCase('Beyond IT Services, We Deliver Solutions') }}</h1>
+      <p>
+        Welcome to CES Tech, where innovation meets reliability, and technology becomes
+        a catalyst for success. Our journey began in 2015, fueled by a passion for
+        revolutionizing IT infrastructure support.
+      </p>
+      <div class="hero-cta">
+        <a class="hero-consult-btn" routerLink="/contact-us">
+          Consult Our Strategy Team
+          <mat-icon aria-hidden="true">north_east</mat-icon>
+        </a>
+      </div>
+    </div>
+
+    <!-- <div class="hero-awards" aria-label="Awards and recognition">
+      <div class="hero-award-card">
+        <img src="assets/certifications/cisco-gold.png" alt="Cisco Gold Partner" loading="lazy" />
+      </div>
+      <div class="hero-award-card">
+        <img src="assets/certifications/fortinet.png" alt="Fortinet Partner" loading="lazy" />
+      </div>
+      <div class="hero-award-card">
+        <img src="assets/certifications/hpe.png" alt="HPE Partner" loading="lazy" />
+      </div>
+    </div> -->
+  </div>
+</section>
+
+<section class="growth-story" aria-labelledby="growth-story-title">
+  <div class="growth-story__inner site-container">
+    <h2 id="growth-story-title">
+      {{ titleCase('Game changing work & People-powered growth') }}
+    </h2>
+    <p class="section-subtext">
+      Building enterprise momentum with trusted partners and proven delivery models that scale.
+    </p>
+
+    <div class="growth-story__hero-image">
+      <img src="/assets/1.jpeg" alt="CES growth highlight image 1" loading="lazy" />
+      <a class="growth-story__hero-link" href="/services">
+        <img src="/assets/2.jpeg" alt="CES growth highlight image 2" loading="lazy" />
+      </a>
+      <img src="/assets/3.jpeg" alt="CES growth highlight image 3" loading="lazy" />
+    </div>
+
+    <div class="growth-story__logos-band" aria-label="Trusted CES partner logos">
+      <p class="growth-story__logos-title">Trusted by leading partners and enterprise customers</p>
+      <div class="growth-story__logos-scroller" aria-label="Partner logos scroller">
+        <div class="growth-story__logos-track">
+          <a class="growth-story__logo-item" *ngFor="let partner of homepagePartnerLogos" routerLink="/partners"
+            [attr.aria-label]="'View partners page: ' + partner.name">
+            <img [src]="partner.image" [alt]="partner.name + ' logo'" loading="lazy" />
+          </a>
+          <a class="growth-story__logo-item" *ngFor="let partner of homepagePartnerLogos" routerLink="/partners"
+            [attr.aria-label]="'View partners page: ' + partner.name" aria-hidden="true" tabindex="-1">
+            <img [src]="partner.image" [alt]="partner.name + ' logo'" loading="lazy" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<app-company-overview></app-company-overview>
+
+<section class="case-hub" aria-labelledby="case-hub-title" [style.--active-accent]="activeTrusted.accent">
+  <div class="case-hub__inner site-container">
+    <div class="case-hub__head">
+      <h2 id="case-hub-title">Trusted Globally To Defend What's Critical</h2>
+      <p class="section-subtext">CES is trusted by global organizations to protect critical assets, networks, and
+        operations.</p>
+    </div>
+
+    <div class="case-hub__logos" aria-label="Company use case tabs">
+      <button type="button" class="case-hub__logo" *ngFor="let showcase of trustedShowcases; let i = index"
+        [class.case-hub__logo--active]="i === selectedTrustedIndex" [attr.aria-pressed]="i === selectedTrustedIndex"
+        [attr.aria-label]="'Show use case for ' + showcase.name" [style.--brand-accent]="showcase.accent"
+        (click)="selectTrusted(i)">
+        <img [src]="showcase.logo" [alt]="showcase.name + ' logo'" loading="lazy" />
+      </button>
+    </div>
+
+    <div class="case-hub__body" [class.case-hub__body--anim-out]="caseHubAnimationPhase === 'out'"
+      [class.case-hub__body--anim-in]="caseHubAnimationPhase === 'in'"
+      [class.case-hub__body--next]="caseHubSlideDirection === 'next'"
+      [class.case-hub__body--prev]="caseHubSlideDirection === 'prev'">
+      <div class="case-hub__details">
+        <div class="case-hub__block">
+          <h3>{{ titleCase('About') }}</h3>
+          <p>{{ activeTrusted.about }}</p>
+          <a class="case-hub__cta" href="/about-us">Learn more <mat-icon aria-hidden="true"
+              svgIcon="landing-arrow-forward"></mat-icon></a>
+        </div>
+
+        <div class="case-hub__block">
+          <h3>{{ titleCase('Use Case') }}</h3>
+          <p>{{ activeTrusted.useCase }}</p>
+        </div>
+
+        <div class="case-hub__block">
+          <h3>{{ titleCase('Products Used') }}</h3>
+          <p>{{ activeTrusted.productsUsed }}</p>
+        </div>
+      </div>
+
+      <article class="case-hub__card" [style.background-image]="trustedCaseBackground">
+        <div class="case-hub__card-overlay">
+          <img class="case-hub__card-logo" [src]="activeTrusted.logo" [alt]="activeTrusted.brand + ' logo'" />
+          <p class="case-hub__quote">{{ activeTrusted.quote }}</p>
+          <div class="case-hub__author">{{ activeTrusted.author }}</div>
+          <a class="case-hub__cta"
+            [routerLink]="['/case-studies', activeTrusted.slug || activeTrusted.name.toLowerCase()]">
+            {{ activeTrusted.ctaLabel }} <mat-icon aria-hidden="true" svgIcon="landing-arrow-forward"></mat-icon>
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <div class="case-hub__mobile-nav" aria-label="Use case slide controls">
+      <button type="button" class="case-hub__arrow" (click)="prevTrusted()" aria-label="Previous use case"><mat-icon
+          aria-hidden="true" svgIcon="landing-arrow-back"></mat-icon></button>
+      <div class="case-hub__dots">
+        <button type="button" class="case-hub__dot" *ngFor="let showcase of trustedShowcases; let i = index"
+          [class.case-hub__dot--active]="i === selectedTrustedIndex" [attr.aria-label]="'Go to use case ' + (i + 1)"
+          (click)="selectTrusted(i)"></button>
+      </div>
+      <button type="button" class="case-hub__arrow" (click)="nextTrusted()" aria-label="Next use case"><mat-icon
+          aria-hidden="true" svgIcon="landing-arrow-forward"></mat-icon></button>
+    </div>
+  </div>
+</section>
+
+<section class="services-switchboard" aria-labelledby="services-switchboard-title">
+  <div class="services-switchboard__inner site-container">
+    <h2 id="services-switchboard-title">Infrastructure Solutions for Enterprise Operations</h2>
+    <p class="section-subtext">Comprehensive solutions across networking, cloud, security, and operations.</p>
+
+    <article class="services-switchboard__panel">
+      <nav class="services-switchboard__tabs-wrap" aria-label="CES services tabs">
+        <button type="button" class="services-switchboard__arrow services-switchboard__arrow--left"
+          aria-label="Scroll services tabs left" (click)="scrollServiceTabs('left')">
+          <mat-icon aria-hidden="true" svgIcon="landing-chevron-left"></mat-icon>
+        </button>
+
+        <div class="services-switchboard__tabs" #servicesTabs>
+          <button type="button" *ngFor="let service of serviceFeatureTabs; let i = index"
+            [class.active]="activeServiceFeatureIndex === i" [attr.aria-selected]="activeServiceFeatureIndex === i"
+            (click)="selectServiceFeature(i)">
+            {{ service.label }}
+          </button>
+        </div>
+
+        <button type="button" class="services-switchboard__arrow services-switchboard__arrow--right"
+          aria-label="Scroll services tabs right" (click)="scrollServiceTabs('right')">
+          <mat-icon aria-hidden="true" svgIcon="landing-chevron-right"></mat-icon>
+        </button>
+      </nav>
+
+      <div class="services-switchboard__media">
+        <div class="services-switchboard__graphic" [ngSwitch]="activeServiceFeatureIndex">
+          <svg *ngSwitchCase="0" viewBox="0 0 1100 552" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="14" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="glow2">
+                <feGaussianBlur stdDeviation="6" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="glow3">
+                <feGaussianBlur stdDeviation="2.5" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <radialGradient id="rg1" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#1a3a80" />
+                <stop offset="100%" stop-color="#050c1a" />
+              </radialGradient>
+              <linearGradient id="cardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#0d1e3a" />
+                <stop offset="100%" stop-color="#070f22" />
+              </linearGradient>
+
+              <path id="q1" d="M550,276 C480,220 360,170 220,130" />
+              <path id="q2" d="M550,276 C560,190 590,140 780,100" />
+              <path id="q3" d="M550,276 C660,220 820,200 920,150" />
+              <path id="q4" d="M550,276 C480,340 360,380 220,420" />
+              <path id="q5" d="M550,276 C560,360 590,400 780,440" />
+              <path id="q6" d="M550,276 C660,340 820,360 920,410" />
+            </defs>
+
+            <rect width="1100" height="552" fill="#050c1a" />
+            <ellipse cx="550" cy="276" rx="380" ry="260" fill="url(#rg1)" opacity="0.7" />
+
+            <g fill="rgba(77,139,255,0.07)">
+              <circle cx="92" cy="92" r="1.2" /><circle cx="184" cy="92" r="1.2" /><circle cx="276" cy="92" r="1.2" /><circle cx="368" cy="92" r="1.2" /><circle cx="460" cy="92" r="1.2" /><circle cx="552" cy="92" r="1.2" /><circle cx="644" cy="92" r="1.2" /><circle cx="736" cy="92" r="1.2" /><circle cx="828" cy="92" r="1.2" /><circle cx="920" cy="92" r="1.2" /><circle cx="1012" cy="92" r="1.2" />
+              <circle cx="92" cy="184" r="1.2" /><circle cx="184" cy="184" r="1.2" /><circle cx="276" cy="184" r="1.2" /><circle cx="368" cy="184" r="1.2" /><circle cx="460" cy="184" r="1.2" /><circle cx="552" cy="184" r="1.2" /><circle cx="644" cy="184" r="1.2" /><circle cx="736" cy="184" r="1.2" /><circle cx="828" cy="184" r="1.2" /><circle cx="920" cy="184" r="1.2" /><circle cx="1012" cy="184" r="1.2" />
+              <circle cx="92" cy="276" r="1.2" /><circle cx="184" cy="276" r="1.2" /><circle cx="276" cy="276" r="1.2" /><circle cx="368" cy="276" r="1.2" /><circle cx="460" cy="276" r="1.2" /><circle cx="644" cy="276" r="1.2" /><circle cx="736" cy="276" r="1.2" /><circle cx="828" cy="276" r="1.2" /><circle cx="920" cy="276" r="1.2" /><circle cx="1012" cy="276" r="1.2" />
+              <circle cx="92" cy="368" r="1.2" /><circle cx="184" cy="368" r="1.2" /><circle cx="276" cy="368" r="1.2" /><circle cx="368" cy="368" r="1.2" /><circle cx="460" cy="368" r="1.2" /><circle cx="552" cy="368" r="1.2" /><circle cx="644" cy="368" r="1.2" /><circle cx="736" cy="368" r="1.2" /><circle cx="828" cy="368" r="1.2" /><circle cx="920" cy="368" r="1.2" /><circle cx="1012" cy="368" r="1.2" />
+              <circle cx="92" cy="460" r="1.2" /><circle cx="184" cy="460" r="1.2" /><circle cx="276" cy="460" r="1.2" /><circle cx="368" cy="460" r="1.2" /><circle cx="460" cy="460" r="1.2" /><circle cx="552" cy="460" r="1.2" /><circle cx="644" cy="460" r="1.2" /><circle cx="736" cy="460" r="1.2" /><circle cx="828" cy="460" r="1.2" /><circle cx="920" cy="460" r="1.2" /><circle cx="1012" cy="460" r="1.2" />
+            </g>
+
+            <circle cx="550" cy="276" r="130" fill="none" stroke="rgba(77,139,255,0.06)" stroke-width="1">
+              <animate attributeName="r" values="130;150;130" dur="5s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.4;0.1;0.4" dur="5s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="550" cy="276" r="220" fill="none" stroke="rgba(77,139,255,0.04)" stroke-width="1">
+              <animate attributeName="r" values="220;240;220" dur="6s" repeatCount="indefinite" begin="-2s" />
+              <animate attributeName="opacity" values="0.3;0.05;0.3" dur="6s" repeatCount="indefinite" begin="-2s" />
+            </circle>
+
+            <path d="M550,276 C480,220 360,170 220,130" fill="none" stroke="rgba(77,139,255,0.2)" stroke-width="1.2" />
+            <path d="M550,276 C560,190 590,140 780,100" fill="none" stroke="rgba(77,139,255,0.2)" stroke-width="1.2" />
+            <path d="M550,276 C660,220 820,200 920,150" fill="none" stroke="rgba(77,139,255,0.16)" stroke-width="1.2" />
+            <path d="M550,276 C480,340 360,380 220,420" fill="none" stroke="rgba(106,143,168,0.2)" stroke-width="1.2" />
+            <path d="M550,276 C560,360 590,400 780,440" fill="none" stroke="rgba(106,143,168,0.2)" stroke-width="1.2" />
+            <path d="M550,276 C660,340 820,360 920,410" fill="none" stroke="rgba(106,143,168,0.16)" stroke-width="1.2" />
+
+            <circle r="4.5" fill="#4d8bff" filter="url(#glow3)">
+              <animateMotion dur="1.4s" repeatCount="indefinite" begin="0s"><mpath href="#q1" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" dur="1.4s" repeatCount="indefinite" />
+            </circle>
+            <circle r="3" fill="#4d8bff" filter="url(#glow3)">
+              <animateMotion dur="1.4s" repeatCount="indefinite" begin="-0.7s"><mpath href="#q1" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" dur="1.4s" repeatCount="indefinite" begin="-0.7s" />
+            </circle>
+            <circle r="4.5" fill="#4d8bff" filter="url(#glow3)">
+              <animateMotion dur="1.6s" repeatCount="indefinite" begin="-0.3s"><mpath href="#q2" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" dur="1.6s" repeatCount="indefinite" begin="-0.3s" />
+            </circle>
+            <circle r="3" fill="#4d8bff" filter="url(#glow3)">
+              <animateMotion dur="1.6s" repeatCount="indefinite" begin="-1.1s"><mpath href="#q2" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" dur="1.6s" repeatCount="indefinite" begin="-1.1s" />
+            </circle>
+            <circle r="4.5" fill="#4d8bff" filter="url(#glow3)">
+              <animateMotion dur="1.5s" repeatCount="indefinite" begin="-0.6s"><mpath href="#q3" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" begin="-0.6s" />
+            </circle>
+            <circle r="4" fill="#6a8fa8" filter="url(#glow3)">
+              <animateMotion dur="1.7s" repeatCount="indefinite" begin="-0.2s"><mpath href="#q4" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" dur="1.7s" repeatCount="indefinite" begin="-0.2s" />
+            </circle>
+            <circle r="3" fill="#6a8fa8" filter="url(#glow3)">
+              <animateMotion dur="1.7s" repeatCount="indefinite" begin="-1s"><mpath href="#q4" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" dur="1.7s" repeatCount="indefinite" begin="-1s" />
+            </circle>
+            <circle r="4" fill="#6a8fa8" filter="url(#glow3)">
+              <animateMotion dur="1.5s" repeatCount="indefinite" begin="-0.5s"><mpath href="#q5" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" begin="-0.5s" />
+            </circle>
+            <circle r="4" fill="#6a8fa8" filter="url(#glow3)">
+              <animateMotion dur="1.8s" repeatCount="indefinite" begin="-0.9s"><mpath href="#q6" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" dur="1.8s" repeatCount="indefinite" begin="-0.9s" />
+            </circle>
+
+            <circle cx="550" cy="276" r="72" fill="rgba(8,18,42,0.98)" stroke="#4d8bff" stroke-width="1.8" filter="url(#glow2)" />
+            <circle cx="550" cy="276" r="55" fill="rgba(20,50,110,0.35)" stroke="rgba(77,139,255,0.25)" stroke-width="1" />
+            <rect x="524" y="256" width="52" height="11" rx="2.5" fill="none" stroke="#4d8bff" stroke-width="1.4" />
+            <rect x="524" y="271" width="52" height="11" rx="2.5" fill="none" stroke="#4d8bff" stroke-width="1.4" opacity="0.7" />
+            <rect x="524" y="286" width="52" height="11" rx="2.5" fill="none" stroke="#4d8bff" stroke-width="1.4" opacity="0.4" />
+            <circle cx="531" cy="262" r="2.2" fill="#4d8bff">
+              <animate attributeName="opacity" values="1;0.15;1" dur="0.9s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="531" cy="277" r="2.2" fill="#4d8bff">
+              <animate attributeName="opacity" values="1;0.15;1" dur="1.1s" repeatCount="indefinite" begin="-0.3s" />
+            </circle>
+            <circle cx="531" cy="292" r="2.2" fill="#3cb371">
+              <animate attributeName="opacity" values="1;0.15;1" dur="0.8s" repeatCount="indefinite" begin="-0.6s" />
+            </circle>
+            <circle cx="550" cy="276" r="80" fill="none" stroke="rgba(77,139,255,0.12)" stroke-width="1" stroke-dasharray="8 6">
+              <animateTransform attributeName="transform" type="rotate" from="0 550 276" to="360 550 276" dur="12s" repeatCount="indefinite" />
+            </circle>
+
+            <rect x="80" y="68" width="200" height="118" rx="9" fill="url(#cardBg)" stroke="rgba(77,139,255,0.3)" stroke-width="1" />
+            <rect x="80" y="68" width="200" height="3.5" rx="2" fill="#4d8bff" />
+            <rect x="80" y="68" width="200" height="118" rx="9" fill="rgba(77,139,255,0.025)" />
+            <path d="M90 100 h20 v16 h30" fill="none" stroke="rgba(77,139,255,0.2)" stroke-width="0.8" />
+            <path d="M90 120 h15 v-10 h20" fill="none" stroke="rgba(77,139,255,0.15)" stroke-width="0.8" />
+            <circle cx="108" cy="110" r="9" fill="rgba(77,139,255,0.15)" stroke="#4d8bff" stroke-width="1.2" />
+            <circle cx="108" cy="110" r="3" fill="#4d8bff" />
+            <circle cx="122" cy="100" r="4" fill="none" stroke="#4d8bff" stroke-width="1" opacity="0.6" />
+            <circle cx="122" cy="120" r="4" fill="none" stroke="#4d8bff" stroke-width="1" opacity="0.5" />
+            <line x1="112" y1="107" x2="119" y2="102" stroke="#4d8bff" stroke-width="0.9" opacity="0.6" />
+            <line x1="112" y1="113" x2="119" y2="118" stroke="#4d8bff" stroke-width="0.9" opacity="0.5" />
+            <text x="140" y="103" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="15" font-weight="700" fill="#e9f0fa">Networking</text>
+            <text x="140" y="118" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">LAN · WAN · SD-WAN</text>
+            <text x="140" y="131" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">Cisco · Juniper · Aruba</text>
+            <line x1="96" y1="152" x2="264" y2="152" stroke="rgba(77,139,255,0.1)" stroke-width="0.8" />
+            <text x="96" y="167" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#2a4872" letter-spacing="0.3">Design → Deploy → Optimise</text>
+
+            <rect x="670" y="48" width="200" height="118" rx="9" fill="url(#cardBg)" stroke="rgba(77,139,255,0.3)" stroke-width="1" />
+            <rect x="670" y="48" width="200" height="3.5" rx="2" fill="#4d8bff" />
+            <path d="M686 96 c0-6.6 5.4-12 12-12 1.8-5.4 6.6-9 12-9 7.8 0 13.8 6.6 13.8 14.4 h2.4 c4.2 0 7.8 3.6 7.8 7.8s-3.6 7.8-7.8 7.8H686c-3.6 0-6-2.4-6-7.8z" fill="none" stroke="#4d8bff" stroke-width="1.4" />
+            <line x1="706" y1="101" x2="706" y2="93" stroke="#4d8bff" stroke-width="1.2" stroke-linecap="round" />
+            <path d="M703 96 l3-4 3 4" fill="none" stroke="#4d8bff" stroke-width="1.2" stroke-linecap="round" />
+            <text x="726" y="85" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="15" font-weight="700" fill="#e9f0fa">Cloud</text>
+            <text x="726" y="100" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">Azure · AWS · Hybrid</text>
+            <text x="726" y="113" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">Migration &amp; Mgmt</text>
+            <line x1="686" y1="136" x2="854" y2="136" stroke="rgba(77,139,255,0.1)" stroke-width="0.8" />
+            <text x="686" y="151" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#2a4872" letter-spacing="0.3">Plan → Migrate → Manage</text>
+
+            <rect x="890" y="68" width="200" height="118" rx="9" fill="url(#cardBg)" stroke="rgba(77,139,255,0.22)" stroke-width="1" />
+            <rect x="890" y="68" width="200" height="3.5" rx="2" fill="#6a8fa8" />
+            <path d="M908 90 l12-5 12 5 v10 c0 6 -12 12-12 12 s-12-6-12-12z" fill="rgba(106,143,168,0.15)" stroke="#6a8fa8" stroke-width="1.3" />
+            <path d="M914 100 l3 3 6-6" fill="none" stroke="#6a8fa8" stroke-width="1.3" stroke-linecap="round" />
+            <text x="938" y="92" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="15" font-weight="700" fill="#e9f0fa">Security</text>
+            <text x="938" y="108" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">Firewall · VAPT</text>
+            <text x="938" y="121" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">Zero Trust · Fortinet</text>
+            <line x1="906" y1="148" x2="1074" y2="148" stroke="rgba(106,143,168,0.1)" stroke-width="0.8" />
+            <text x="906" y="163" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#2a4872" letter-spacing="0.3">Assess → Harden → Monitor</text>
+
+            <rect x="80" y="366" width="200" height="118" rx="9" fill="url(#cardBg)" stroke="rgba(106,143,168,0.3)" stroke-width="1" />
+            <rect x="80" y="366" width="200" height="3.5" rx="2" fill="#6a8fa8" />
+            <rect x="96" y="382" width="32" height="7" rx="1.5" fill="none" stroke="#6a8fa8" stroke-width="1.2" />
+            <rect x="96" y="393" width="32" height="7" rx="1.5" fill="none" stroke="#6a8fa8" stroke-width="1.2" opacity="0.7" />
+            <rect x="96" y="404" width="32" height="7" rx="1.5" fill="none" stroke="#6a8fa8" stroke-width="1.2" opacity="0.5" />
+            <circle cx="123" cy="386" r="1.5" fill="#3cb371">
+              <animate attributeName="opacity" values="1;0.2;1" dur="0.9s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="123" cy="397" r="1.5" fill="#3cb371">
+              <animate attributeName="opacity" values="1;0.2;1" dur="1.2s" repeatCount="indefinite" begin="-0.4s" />
+            </circle>
+            <circle cx="123" cy="408" r="1.5" fill="#4d8bff">
+              <animate attributeName="opacity" values="1;0.2;1" dur="0.8s" repeatCount="indefinite" begin="-0.8s" />
+            </circle>
+            <text x="140" y="392" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="15" font-weight="700" fill="#e9f0fa">Data Center</text>
+            <text x="140" y="408" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">Rack · Cabling · Storage</text>
+            <text x="140" y="421" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">Dell · HPE · Schneider</text>
+            <line x1="96" y1="448" x2="264" y2="448" stroke="rgba(106,143,168,0.1)" stroke-width="0.8" />
+            <text x="96" y="464" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#2a4872" letter-spacing="0.3">Build → Rack → Scale</text>
+
+            <rect x="670" y="386" width="200" height="118" rx="9" fill="url(#cardBg)" stroke="rgba(106,143,168,0.3)" stroke-width="1" />
+            <rect x="670" y="386" width="200" height="3.5" rx="2" fill="#6a8fa8" />
+            <rect x="686" y="402" width="32" height="24" rx="4" fill="none" stroke="#6a8fa8" stroke-width="1.3" />
+            <path d="M690 426 l4 6 6-6" fill="none" stroke="#6a8fa8" stroke-width="1.2" />
+            <line x1="692" y1="410" x2="712" y2="410" stroke="#6a8fa8" stroke-width="1" opacity="0.6" />
+            <line x1="692" y1="416" x2="708" y2="416" stroke="#6a8fa8" stroke-width="1" opacity="0.4" />
+            <text x="730" y="413" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="15" font-weight="700" fill="#e9f0fa">Collab</text>
+            <text x="730" y="429" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">UC · VoIP · Video</text>
+            <text x="730" y="442" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">Teams · Webex · Zoom</text>
+            <line x1="686" y1="466" x2="854" y2="466" stroke="rgba(106,143,168,0.1)" stroke-width="0.8" />
+            <text x="686" y="482" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#2a4872" letter-spacing="0.3">Deploy → Integrate → Support</text>
+
+            <rect x="890" y="366" width="200" height="118" rx="9" fill="url(#cardBg)" stroke="rgba(106,143,168,0.22)" stroke-width="1" />
+            <rect x="890" y="366" width="200" height="3.5" rx="2" fill="#6a8fa8" />
+            <circle cx="918" cy="413" r="10" fill="none" stroke="#6a8fa8" stroke-width="1.3">
+              <animateTransform attributeName="transform" type="rotate" from="0 918 413" to="360 918 413" dur="6s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="918" cy="413" r="4" fill="rgba(106,143,168,0.2)" stroke="#6a8fa8" stroke-width="1" />
+            <text x="940" y="406" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="15" font-weight="700" fill="#e9f0fa">Automation</text>
+            <text x="940" y="422" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">Network · IT Process</text>
+            <text x="940" y="435" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">Ansible · Python · APIs</text>
+            <line x1="906" y1="460" x2="1074" y2="460" stroke="rgba(106,143,168,0.1)" stroke-width="0.8" />
+            <text x="906" y="476" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#2a4872" letter-spacing="0.3">Script → Test → Deploy</text>
+
+            <rect x="0" y="522" width="1100" height="30" fill="rgba(5,12,26,0.95)" />
+            <line x1="0" y1="522" x2="1100" y2="522" stroke="rgba(77,139,255,0.12)" stroke-width="0.8" />
+            <circle cx="32" cy="537" r="4" fill="#3cb371" filter="url(#glow3)">
+              <animate attributeName="opacity" values="1;0.3;1" dur="1.4s" repeatCount="indefinite" />
+            </circle>
+            <text x="44" y="541" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" font-weight="600" fill="#3cb371">All Systems Operational</text>
+            <text x="240" y="541" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#1e3560">· 500+ Projects · 300+ Clients · 10+ Yrs · 24/7 Support · Cisco · Juniper · Dell · Microsoft ·</text>
+            <text x="980" y="541" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#162a50">CES Tech 2015</text>
+          </svg>
+          <svg *ngSwitchCase="1" viewBox="0 0 1100 552" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <filter id="glo">
+                <feGaussianBlur stdDeviation="14" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="glm">
+                <feGaussianBlur stdDeviation="5" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="gls">
+                <feGaussianBlur stdDeviation="2" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <linearGradient id="scanG" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#4d8bff" stop-opacity="0" />
+                <stop offset="40%" stop-color="#4d8bff" stop-opacity="0.12" />
+                <stop offset="100%" stop-color="#4d8bff" stop-opacity="0" />
+              </linearGradient>
+              <linearGradient id="cg" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#0d1e3a" />
+                <stop offset="100%" stop-color="#070f22" />
+              </linearGradient>
+              <clipPath id="leftClip"><rect x="40" y="40" width="480" height="472" /></clipPath>
+            </defs>
+
+            <rect width="1100" height="552" fill="#050c1a" />
+            <g fill="rgba(77,139,255,0.055)">
+              <circle cx="92" cy="92" r="1.2" /><circle cx="184" cy="92" r="1.2" /><circle cx="276" cy="92" r="1.2" /><circle cx="368" cy="92" r="1.2" /><circle cx="460" cy="92" r="1.2" /><circle cx="552" cy="92" r="1.2" /><circle cx="644" cy="92" r="1.2" /><circle cx="736" cy="92" r="1.2" /><circle cx="828" cy="92" r="1.2" /><circle cx="920" cy="92" r="1.2" /><circle cx="1012" cy="92" r="1.2" />
+              <circle cx="92" cy="184" r="1.2" /><circle cx="184" cy="184" r="1.2" /><circle cx="276" cy="184" r="1.2" /><circle cx="368" cy="184" r="1.2" /><circle cx="460" cy="184" r="1.2" /><circle cx="552" cy="184" r="1.2" /><circle cx="644" cy="184" r="1.2" /><circle cx="736" cy="184" r="1.2" /><circle cx="828" cy="184" r="1.2" /><circle cx="920" cy="184" r="1.2" /><circle cx="1012" cy="184" r="1.2" />
+              <circle cx="92" cy="276" r="1.2" /><circle cx="184" cy="276" r="1.2" /><circle cx="276" cy="276" r="1.2" /><circle cx="368" cy="276" r="1.2" /><circle cx="460" cy="276" r="1.2" /><circle cx="644" cy="276" r="1.2" /><circle cx="736" cy="276" r="1.2" /><circle cx="828" cy="276" r="1.2" /><circle cx="920" cy="276" r="1.2" /><circle cx="1012" cy="276" r="1.2" />
+              <circle cx="92" cy="368" r="1.2" /><circle cx="184" cy="368" r="1.2" /><circle cx="276" cy="368" r="1.2" /><circle cx="368" cy="368" r="1.2" /><circle cx="460" cy="368" r="1.2" /><circle cx="552" cy="368" r="1.2" /><circle cx="644" cy="368" r="1.2" /><circle cx="736" cy="368" r="1.2" /><circle cx="828" cy="368" r="1.2" /><circle cx="920" cy="368" r="1.2" /><circle cx="1012" cy="368" r="1.2" />
+              <circle cx="92" cy="460" r="1.2" /><circle cx="184" cy="460" r="1.2" /><circle cx="276" cy="460" r="1.2" /><circle cx="368" cy="460" r="1.2" /><circle cx="460" cy="460" r="1.2" /><circle cx="552" cy="460" r="1.2" /><circle cx="644" cy="460" r="1.2" /><circle cx="736" cy="460" r="1.2" /><circle cx="828" cy="460" r="1.2" /><circle cx="920" cy="460" r="1.2" /><circle cx="1012" cy="460" r="1.2" />
+            </g>
+
+            <ellipse cx="280" cy="276" rx="260" ry="220" fill="rgba(77,139,255,0.05)" filter="url(#glo)" />
+            <ellipse cx="850" cy="276" rx="200" ry="180" fill="rgba(106,143,168,0.04)" filter="url(#glo)" />
+
+            <rect x="40" y="40" width="480" height="472" rx="12" fill="rgba(7,14,30,0.9)" stroke="rgba(77,139,255,0.15)" stroke-width="1" />
+            <rect x="40" y="40" width="480" height="4" rx="2" fill="#4d8bff" />
+            <text x="60" y="64" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" font-weight="600" fill="#2a4a7a" letter-spacing="1.5">LIVE NETWORK SCAN</text>
+            <circle cx="476" cy="57" r="4" fill="#3cb371" filter="url(#gls)">
+              <animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" />
+            </circle>
+
+            <g clip-path="url(#leftClip)">
+              <rect x="40" y="0" width="480" height="120" fill="url(#scanG)">
+                <animateTransform attributeName="transform" type="translate" values="0,40;0,412;0,40" dur="2.8s" repeatCount="indefinite" calcMode="ease-in-out" />
+              </rect>
+              <rect x="40" y="160" width="480" height="2" fill="#4d8bff" opacity="0.5">
+                <animateTransform attributeName="transform" type="translate" values="0,-120;0,252;0,-120" dur="2.8s" repeatCount="indefinite" calcMode="ease-in-out" />
+              </rect>
+            </g>
+
+            <rect x="240" y="226" width="72" height="52" rx="6" fill="rgba(10,24,52,0.98)" stroke="#4d8bff" stroke-width="1.4" />
+            <rect x="240" y="226" width="72" height="4" rx="2" fill="#4d8bff" />
+            <text x="276" y="246" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="8" font-weight="700" fill="#4d8bff">CORE</text>
+            <circle cx="260" cy="262" r="2" fill="#3cb371"><animate attributeName="opacity" values="1;0.2;1" dur="0.8s" repeatCount="indefinite" /></circle>
+            <circle cx="270" cy="262" r="2" fill="#3cb371"><animate attributeName="opacity" values="1;0.2;1" dur="1.1s" repeatCount="indefinite" begin="-0.3s" /></circle>
+            <circle cx="280" cy="262" r="2" fill="#4d8bff"><animate attributeName="opacity" values="1;0.2;1" dur="0.7s" repeatCount="indefinite" begin="-0.6s" /></circle>
+
+            <line x1="276" y1="226" x2="160" y2="140" stroke="rgba(77,139,255,0.3)" stroke-width="1" />
+            <line x1="312" y1="226" x2="400" y2="140" stroke="rgba(77,139,255,0.3)" stroke-width="1" />
+            <line x1="240" y1="260" x2="120" y2="280" stroke="rgba(77,139,255,0.25)" stroke-width="1" />
+            <line x1="312" y1="260" x2="440" y2="270" stroke="rgba(77,139,255,0.25)" stroke-width="1" />
+            <line x1="276" y1="278" x2="200" y2="380" stroke="rgba(106,143,168,0.25)" stroke-width="1" />
+            <line x1="276" y1="278" x2="370" y2="390" stroke="rgba(106,143,168,0.25)" stroke-width="1" />
+
+            <rect x="124" y="112" width="72" height="44" rx="5" fill="rgba(10,24,52,0.98)" stroke="rgba(77,139,255,0.3)" stroke-width="1" />
+            <text x="160" y="132" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="8" font-weight="600" fill="#6a8fa8">FIREWALL</text>
+            <text x="160" y="146" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="7" fill="#2a4872">Fortinet FG60</text>
+
+            <rect x="360" y="112" width="72" height="44" rx="5" fill="rgba(10,24,52,0.98)" stroke="rgba(77,139,255,0.3)" stroke-width="1" />
+            <text x="396" y="132" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="8" font-weight="600" fill="#6a8fa8">SWITCH L3</text>
+            <text x="396" y="146" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="7" fill="#2a4872">Cisco 3850</text>
+
+            <rect x="72" y="254" width="72" height="44" rx="5" fill="rgba(10,24,52,0.98)" stroke="rgba(106,143,168,0.3)" stroke-width="1" />
+            <text x="108" y="273" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="8" font-weight="600" fill="#6a8fa8">AP CLUSTER</text>
+            <text x="108" y="287" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="7" fill="#2a4872">Aruba IAP</text>
+
+            <rect x="420" y="248" width="72" height="44" rx="5" fill="rgba(10,24,52,0.98)" stroke="rgba(106,143,168,0.3)" stroke-width="1" />
+            <text x="456" y="268" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="8" font-weight="600" fill="#6a8fa8">WAN EDGE</text>
+            <text x="456" y="282" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="7" fill="#2a4872">SD-WAN GW</text>
+
+            <rect x="162" y="358" width="72" height="44" rx="5" fill="rgba(30,10,10,0.98)" stroke="rgba(220,60,60,0.6)" stroke-width="1.2" />
+            <text x="198" y="377" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="8" font-weight="700" fill="#e05050">SERVER 01</text>
+            <text x="198" y="390" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="7" fill="#803030">CVE FOUND</text>
+            <circle cx="228" cy="362" r="5" fill="#e05050" opacity="0.8">
+              <animate attributeName="opacity" values="0.8;0.1;0.8" dur="0.7s" repeatCount="indefinite" />
+            </circle>
+
+            <rect x="326" y="368" width="72" height="44" rx="5" fill="rgba(10,24,52,0.98)" stroke="rgba(106,143,168,0.25)" stroke-width="1" />
+            <text x="362" y="387" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="8" font-weight="600" fill="#6a8fa8">SERVER 02</text>
+            <text x="362" y="400" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="7" fill="#2a4872">Patched OK</text>
+
+            <circle r="5" fill="#4d8bff" filter="url(#gls)" opacity="0.9">
+              <animate attributeName="cx" values="120;160;240;312;400;456;362;276;198;120" dur="4s" repeatCount="indefinite" calcMode="linear" />
+              <animate attributeName="cy" values="280;134;252;252;134;270;390;252;380;280" dur="4s" repeatCount="indefinite" calcMode="linear" />
+              <animate attributeName="opacity" values="1;1;1;1;1;1;1;1;1;1" dur="4s" repeatCount="indefinite" />
+            </circle>
+
+            <rect x="560" y="40" width="500" height="472" rx="12" fill="rgba(7,14,30,0.9)" stroke="rgba(77,139,255,0.12)" stroke-width="1" />
+            <rect x="560" y="40" width="500" height="4" rx="2" fill="#6a8fa8" />
+            <text x="580" y="64" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" font-weight="600" fill="#2a4a7a" letter-spacing="1.5">AUDIT REPORT</text>
+
+            <text x="810" y="64" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#2a4a7a" letter-spacing="1">SECURITY SCORE</text>
+            <circle cx="1020" cy="57" r="22" fill="rgba(10,24,52,0.98)" stroke="rgba(77,139,255,0.2)" stroke-width="1" />
+            <text x="1020" y="62" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#4d8bff">72</text>
+
+            <text x="580" y="95" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" font-weight="600" fill="#2a4a7a" letter-spacing="1.2">HOW WE AUDIT</text>
+            <line x1="596" y1="106" x2="596" y2="430" stroke="rgba(77,139,255,0.12)" stroke-width="1" stroke-dasharray="3 4" />
+
+            <circle cx="596" cy="118" r="8" fill="#4d8bff" filter="url(#gls)" />
+            <text x="596" y="122" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="8" font-weight="700" fill="#fff">1</text>
+            <text x="614" y="114" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="13" font-weight="700" fill="#e9f0fa">Discovery &amp; Scoping</text>
+            <text x="614" y="128" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">Map all devices, IPs, VLANs, traffic flows</text>
+
+            <circle cx="596" cy="184" r="8" fill="#4d8bff" filter="url(#gls)" />
+            <text x="596" y="188" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="8" font-weight="700" fill="#fff">2</text>
+            <text x="614" y="180" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="13" font-weight="700" fill="#e9f0fa">Config Review</text>
+            <text x="614" y="194" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">Analyze ACLs, routing, VLAN, QoS policies</text>
+
+            <circle cx="596" cy="250" r="8" fill="#4d8bff" filter="url(#gls)" />
+            <text x="596" y="254" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="8" font-weight="700" fill="#fff">3</text>
+            <text x="614" y="246" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="13" font-weight="700" fill="#e9f0fa">Vulnerability Scan</text>
+            <text x="614" y="260" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">CVE detection, misconfigs, open ports, weak auth</text>
+
+            <circle cx="596" cy="316" r="8" fill="#6a8fa8" filter="url(#gls)" />
+            <text x="596" y="320" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="8" font-weight="700" fill="#fff">4</text>
+            <text x="614" y="312" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="13" font-weight="700" fill="#e9f0fa">Risk Rating</text>
+            <text x="614" y="326" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">CVSS scoring - Critical / High / Medium / Low</text>
+
+            <circle cx="596" cy="382" r="8" fill="#6a8fa8" filter="url(#gls)" />
+            <text x="596" y="386" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="8" font-weight="700" fill="#fff">5</text>
+            <text x="614" y="378" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="13" font-weight="700" fill="#e9f0fa">Report &amp; Remediation</text>
+            <text x="614" y="392" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">Actionable fixes, priority list, re-audit support</text>
+
+            <text x="614" y="424" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" font-weight="600" fill="#2a4a7a" letter-spacing="1">FINDINGS BREAKDOWN</text>
+            <rect x="614" y="432" width="360" height="6" rx="3" fill="rgba(255,255,255,0.05)" />
+            <rect x="614" y="432" width="72" height="6" rx="3" fill="#e05050">
+              <animate attributeName="width" from="0" to="72" dur="1.2s" fill="freeze" />
+            </rect>
+            <text x="694" y="440" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="8" fill="#e05050">Critical 2</text>
+            <rect x="614" y="445" width="360" height="6" rx="3" fill="rgba(255,255,255,0.05)" />
+            <rect x="614" y="445" width="144" height="6" rx="3" fill="#e8a020">
+              <animate attributeName="width" from="0" to="144" dur="1.4s" fill="freeze" />
+            </rect>
+            <text x="766" y="453" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="8" fill="#e8a020">High 4</text>
+            <rect x="614" y="458" width="360" height="6" rx="3" fill="rgba(255,255,255,0.05)" />
+            <rect x="614" y="458" width="216" height="6" rx="3" fill="#4d8bff">
+              <animate attributeName="width" from="0" to="216" dur="1.6s" fill="freeze" />
+            </rect>
+            <text x="838" y="466" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="8" fill="#4d8bff">Medium 6</text>
+            <rect x="614" y="471" width="360" height="6" rx="3" fill="rgba(255,255,255,0.05)" />
+            <rect x="614" y="471" width="288" height="6" rx="3" fill="#6a8fa8">
+              <animate attributeName="width" from="0" to="288" dur="1.8s" fill="freeze" />
+            </rect>
+            <text x="910" y="479" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="8" fill="#6a8fa8">Low 8</text>
+
+            <rect x="0" y="522" width="1100" height="30" fill="rgba(5,12,26,0.95)" />
+            <line x1="0" y1="522" x2="1100" y2="522" stroke="rgba(77,139,255,0.12)" stroke-width="0.8" />
+            <circle cx="32" cy="537" r="4" fill="#3cb371" filter="url(#gls)">
+              <animate attributeName="opacity" values="1;0.3;1" dur="1.4s" repeatCount="indefinite" />
+            </circle>
+            <text x="44" y="541" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" font-weight="600" fill="#3cb371">Scan Running</text>
+            <text x="180" y="541" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#1e3560">| Full topology mapping | CVSS-based severity | Remediation roadmap | Retest included |</text>
+          </svg>
+          <svg *ngSwitchCase="2" viewBox="0 0 1100 552" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <filter id="glo">
+                <feGaussianBlur stdDeviation="14" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="gls">
+                <feGaussianBlur stdDeviation="2.5" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <linearGradient id="cg" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#0d1e3a" />
+                <stop offset="100%" stop-color="#070f22" />
+              </linearGradient>
+              <linearGradient id="prog" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#4d8bff" />
+                <stop offset="100%" stop-color="#2a60e0" />
+              </linearGradient>
+              <path id="dep1" d="M550,276 C480,240 380,220 260,200" />
+              <path id="dep2" d="M550,276 C550,220 550,180 550,140" />
+              <path id="dep3" d="M550,276 C620,240 720,220 840,200" />
+              <path id="ret1" d="M260,200 C380,220 480,240 550,276" />
+              <path id="ret2" d="M550,140 C550,180 550,220 550,276" />
+              <path id="ret3" d="M840,200 C720,220 620,240 550,276" />
+            </defs>
+
+            <rect width="1100" height="552" fill="#050c1a" />
+            <g fill="rgba(77,139,255,0.05)">
+              <circle cx="92" cy="92" r="1.2" /><circle cx="184" cy="92" r="1.2" /><circle cx="276" cy="92" r="1.2" /><circle cx="368" cy="92" r="1.2" /><circle cx="460" cy="92" r="1.2" /><circle cx="552" cy="92" r="1.2" /><circle cx="644" cy="92" r="1.2" /><circle cx="736" cy="92" r="1.2" /><circle cx="828" cy="92" r="1.2" /><circle cx="920" cy="92" r="1.2" /><circle cx="1012" cy="92" r="1.2" />
+              <circle cx="92" cy="184" r="1.2" /><circle cx="184" cy="184" r="1.2" /><circle cx="276" cy="184" r="1.2" /><circle cx="368" cy="184" r="1.2" /><circle cx="460" cy="184" r="1.2" /><circle cx="552" cy="184" r="1.2" /><circle cx="644" cy="184" r="1.2" /><circle cx="736" cy="184" r="1.2" /><circle cx="828" cy="184" r="1.2" /><circle cx="920" cy="184" r="1.2" /><circle cx="1012" cy="184" r="1.2" />
+              <circle cx="92" cy="276" r="1.2" /><circle cx="184" cy="276" r="1.2" /><circle cx="276" cy="276" r="1.2" /><circle cx="368" cy="276" r="1.2" /><circle cx="460" cy="276" r="1.2" /><circle cx="644" cy="276" r="1.2" /><circle cx="736" cy="276" r="1.2" /><circle cx="828" cy="276" r="1.2" /><circle cx="920" cy="276" r="1.2" /><circle cx="1012" cy="276" r="1.2" />
+              <circle cx="92" cy="368" r="1.2" /><circle cx="184" cy="368" r="1.2" /><circle cx="276" cy="368" r="1.2" /><circle cx="368" cy="368" r="1.2" /><circle cx="460" cy="368" r="1.2" /><circle cx="552" cy="368" r="1.2" /><circle cx="644" cy="368" r="1.2" /><circle cx="736" cy="368" r="1.2" /><circle cx="828" cy="368" r="1.2" /><circle cx="920" cy="368" r="1.2" /><circle cx="1012" cy="368" r="1.2" />
+              <circle cx="92" cy="460" r="1.2" /><circle cx="184" cy="460" r="1.2" /><circle cx="276" cy="460" r="1.2" /><circle cx="368" cy="460" r="1.2" /><circle cx="460" cy="460" r="1.2" /><circle cx="552" cy="460" r="1.2" /><circle cx="644" cy="460" r="1.2" /><circle cx="736" cy="460" r="1.2" /><circle cx="828" cy="460" r="1.2" /><circle cx="920" cy="460" r="1.2" /><circle cx="1012" cy="460" r="1.2" />
+            </g>
+            <ellipse cx="550" cy="276" rx="380" ry="240" fill="rgba(77,139,255,0.05)" filter="url(#glo)" />
+
+            <path d="M550,276 C480,240 380,220 260,200" fill="none" stroke="rgba(77,139,255,0.2)" stroke-width="1.2" />
+            <path d="M550,276 C550,220 550,180 550,140" fill="none" stroke="rgba(77,139,255,0.2)" stroke-width="1.2" />
+            <path d="M550,276 C620,240 720,220 840,200" fill="none" stroke="rgba(77,139,255,0.2)" stroke-width="1.2" />
+
+            <circle r="5" fill="#4d8bff" filter="url(#gls)">
+              <animateMotion dur="1.2s" repeatCount="indefinite" begin="0s"><mpath href="#dep1" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" dur="1.2s" repeatCount="indefinite" />
+            </circle>
+            <circle r="5" fill="#4d8bff" filter="url(#gls)">
+              <animateMotion dur="1s" repeatCount="indefinite" begin="-0.4s"><mpath href="#dep2" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" dur="1s" repeatCount="indefinite" begin="-0.4s" />
+            </circle>
+            <circle r="5" fill="#4d8bff" filter="url(#gls)">
+              <animateMotion dur="1.3s" repeatCount="indefinite" begin="-0.8s"><mpath href="#dep3" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" dur="1.3s" repeatCount="indefinite" begin="-0.8s" />
+            </circle>
+            <circle r="3" fill="#6a8fa8" filter="url(#gls)">
+              <animateMotion dur="1.4s" repeatCount="indefinite" begin="-0.6s"><mpath href="#ret1" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" dur="1.4s" repeatCount="indefinite" begin="-0.6s" />
+            </circle>
+            <circle r="3" fill="#6a8fa8" filter="url(#gls)">
+              <animateMotion dur="1.2s" repeatCount="indefinite" begin="-0.2s"><mpath href="#ret2" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" dur="1.2s" repeatCount="indefinite" begin="-0.2s" />
+            </circle>
+            <circle r="3" fill="#6a8fa8" filter="url(#gls)">
+              <animateMotion dur="1.5s" repeatCount="indefinite" begin="-1s"><mpath href="#ret3" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" begin="-1s" />
+            </circle>
+
+            <circle cx="550" cy="276" r="70" fill="rgba(8,18,42,0.98)" stroke="#4d8bff" stroke-width="1.6" filter="url(#gls)" />
+            <circle cx="550" cy="276" r="55" fill="rgba(20,50,110,0.3)" stroke="rgba(77,139,255,0.2)" stroke-width="1" />
+            <rect x="528" y="256" width="44" height="8" rx="2" fill="none" stroke="#4d8bff" stroke-width="1.3" />
+            <rect x="528" y="268" width="44" height="8" rx="2" fill="none" stroke="#4d8bff" stroke-width="1.3" opacity="0.7" />
+            <rect x="528" y="280" width="44" height="8" rx="2" fill="none" stroke="#4d8bff" stroke-width="1.3" opacity="0.5" />
+            <circle cx="536" cy="260" r="2" fill="#4d8bff"><animate attributeName="opacity" values="1;0.2;1" dur="0.8s" repeatCount="indefinite" /></circle>
+            <circle cx="536" cy="272" r="2" fill="#3cb371"><animate attributeName="opacity" values="1;0.2;1" dur="1.1s" repeatCount="indefinite" begin="-0.3s" /></circle>
+            <circle cx="536" cy="284" r="2" fill="#4d8bff"><animate attributeName="opacity" values="1;0.2;1" dur="0.9s" repeatCount="indefinite" begin="-0.6s" /></circle>
+            <text x="550" y="304" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="11" font-weight="700" fill="#4d8bff">CES TECH</text>
+            <text x="550" y="318" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="8" fill="#2a4872">RENTAL HUB</text>
+            <circle cx="550" cy="276" r="78" fill="none" stroke="rgba(77,139,255,0.1)" stroke-width="1" stroke-dasharray="6 5">
+              <animateTransform attributeName="transform" type="rotate" from="0 550 276" to="360 550 276" dur="14s" repeatCount="indefinite" />
+            </circle>
+
+            <rect x="160" y="144" width="200" height="112" rx="10" fill="url(#cg)" stroke="rgba(77,139,255,0.28)" stroke-width="1" />
+            <rect x="160" y="144" width="200" height="3.5" rx="2" fill="#4d8bff" />
+            <text x="260" y="168" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="13" font-weight="700" fill="#e9f0fa">Corporate HQ</text>
+            <text x="260" y="184" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">Router &middot; 4x Switches</text>
+            <text x="260" y="197" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">8x APs &middot; Firewall</text>
+            <line x1="176" y1="210" x2="344" y2="210" stroke="rgba(77,139,255,0.1)" stroke-width="0.8" />
+            <text x="260" y="224" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#3cb371">Active Rental &middot; 12 months</text>
+            <text x="260" y="238" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#2a4872">Cisco &middot; Aruba &middot; Fortinet</text>
+
+            <rect x="450" y="68" width="200" height="112" rx="10" fill="url(#cg)" stroke="rgba(77,139,255,0.28)" stroke-width="1" />
+            <rect x="450" y="68" width="200" height="3.5" rx="2" fill="#4d8bff" />
+            <text x="550" y="92" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="13" font-weight="700" fill="#e9f0fa">Event Site</text>
+            <text x="550" y="108" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">Temp Wi-Fi &middot; PoE Switches</text>
+            <text x="550" y="121" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">Video conf &middot; Cabling</text>
+            <line x1="466" y1="134" x2="634" y2="134" stroke="rgba(77,139,255,0.1)" stroke-width="0.8" />
+            <text x="550" y="148" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#e8a020">Short-term &middot; 3 days</text>
+            <text x="550" y="162" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#2a4872">Aruba &middot; Cisco Meraki</text>
+
+            <rect x="740" y="144" width="200" height="112" rx="10" fill="url(#cg)" stroke="rgba(77,139,255,0.28)" stroke-width="1" />
+            <rect x="740" y="144" width="200" height="3.5" rx="2" fill="#4d8bff" />
+            <text x="840" y="168" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="13" font-weight="700" fill="#e9f0fa">Branch Office</text>
+            <text x="840" y="184" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">Router &middot; Switch &middot; 2x APs</text>
+            <text x="840" y="197" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">Server &middot; UPS</text>
+            <line x1="756" y1="210" x2="924" y2="210" stroke="rgba(77,139,255,0.1)" stroke-width="0.8" />
+            <text x="840" y="224" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#3cb371">Active Rental &middot; 6 months</text>
+            <text x="840" y="238" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#2a4872">Juniper &middot; HPE &middot; Cisco</text>
+
+            <rect x="40" y="368" width="490" height="136" rx="12" fill="rgba(7,14,30,0.95)" stroke="rgba(77,139,255,0.14)" stroke-width="1" />
+            <rect x="40" y="368" width="490" height="4" rx="2" fill="#4d8bff" />
+            <text x="60" y="392" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" font-weight="600" fill="#2a4a7a" letter-spacing="1.5">RENTAL FLEET</text>
+            <g font-family="Helvetica Neue,Helvetica,Arial,sans-serif">
+              <text x="60" y="416" font-size="11" fill="#e9f0fa">Routers &amp; Switches</text><text x="230" y="416" font-size="10" fill="#4a6a82">Cisco &middot; Juniper &middot; Aruba</text>
+              <text x="60" y="434" font-size="11" fill="#e9f0fa">Firewalls &amp; UTM</text><text x="230" y="434" font-size="10" fill="#4a6a82">Fortinet &middot; Palo Alto &middot; SonicWall</text>
+              <text x="60" y="452" font-size="11" fill="#e9f0fa">Servers &amp; Storage</text><text x="230" y="452" font-size="10" fill="#4a6a82">Dell &middot; HPE &middot; Lenovo</text>
+              <text x="60" y="470" font-size="11" fill="#e9f0fa">Wireless Infrastructure</text><text x="230" y="470" font-size="10" fill="#4a6a82">Wi-Fi 6 APs &middot; Controllers</text>
+              <text x="60" y="488" font-size="11" fill="#e9f0fa">Video Conferencing</text><text x="230" y="488" font-size="10" fill="#4a6a82">Cisco Webex &middot; Poly rooms</text>
+            </g>
+
+            <rect x="548" y="368" width="512" height="136" rx="12" fill="rgba(7,14,30,0.95)" stroke="rgba(77,139,255,0.14)" stroke-width="1" />
+            <rect x="548" y="368" width="512" height="4" rx="2" fill="#6a8fa8" />
+            <text x="568" y="392" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" font-weight="600" fill="#2a4a7a" letter-spacing="1.5">HOW IT WORKS</text>
+            <line x1="596" y1="404" x2="596" y2="492" stroke="rgba(77,139,255,0.1)" stroke-width="1" stroke-dasharray="3 4" />
+            <g font-family="Helvetica Neue,Helvetica,Arial,sans-serif">
+              <circle cx="596" cy="416" r="8" fill="#4d8bff" filter="url(#gls)" /><text x="596" y="420" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">1</text>
+              <text x="614" y="412" font-size="12" font-weight="700" fill="#e9f0fa">Requirement Brief</text><text x="614" y="424" font-size="10" fill="#4a6a82">Scope &middot; duration &middot; site details</text>
+
+              <circle cx="596" cy="444" r="8" fill="#4d8bff" filter="url(#gls)" /><text x="596" y="448" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">2</text>
+              <text x="614" y="440" font-size="12" font-weight="700" fill="#e9f0fa">Equipment Staging</text><text x="614" y="452" font-size="10" fill="#4a6a82">Pre-configured, tested &amp; bagged</text>
+
+              <circle cx="596" cy="472" r="8" fill="#6a8fa8" filter="url(#gls)" /><text x="596" y="476" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">3</text>
+              <text x="614" y="468" font-size="12" font-weight="700" fill="#e9f0fa">Deploy &amp; Support</text><text x="614" y="480" font-size="10" fill="#4a6a82">On-site install &middot; 24/7 during event</text>
+
+              <circle cx="596" cy="492" r="8" fill="#6a8fa8" filter="url(#gls)" /><text x="596" y="496" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">4</text>
+              <text x="614" y="492" font-size="12" font-weight="700" fill="#e9f0fa">Return &amp; Audit</text>
+
+              <rect x="820" y="410" width="72" height="20" rx="5" fill="rgba(77,139,255,0.1)" stroke="rgba(77,139,255,0.2)" stroke-width="0.8" />
+              <text x="856" y="424" text-anchor="middle" font-size="9" font-weight="600" fill="#4d8bff">Daily</text>
+              <rect x="902" y="410" width="72" height="20" rx="5" fill="rgba(77,139,255,0.1)" stroke="rgba(77,139,255,0.2)" stroke-width="0.8" />
+              <text x="938" y="424" text-anchor="middle" font-size="9" font-weight="600" fill="#4d8bff">Monthly</text>
+              <rect x="984" y="410" width="72" height="20" rx="5" fill="rgba(77,139,255,0.1)" stroke="rgba(77,139,255,0.2)" stroke-width="0.8" />
+              <text x="1020" y="424" text-anchor="middle" font-size="9" font-weight="600" fill="#4d8bff">Annual</text>
+
+              <text x="820" y="450" font-size="9" fill="#2a4872">Lease terms: Daily &middot; Weekly &middot; Monthly &middot; Annual</text>
+              <text x="820" y="464" font-size="9" fill="#2a4872">Insurance &amp; logistics included</text>
+              <text x="820" y="478" font-size="9" fill="#2a4872">No CAPEX - pure OPEX model</text>
+            </g>
+
+            <rect x="0" y="522" width="1100" height="30" fill="rgba(5,12,26,0.98)" />
+            <line x1="0" y1="522" x2="1100" y2="522" stroke="rgba(77,139,255,0.12)" stroke-width="0.8" />
+            <circle cx="32" cy="537" r="4" fill="#3cb371" filter="url(#gls)"><animate attributeName="opacity" values="1;0.3;1" dur="1.4s" repeatCount="indefinite" /></circle>
+            <text x="44" y="541" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" font-weight="600" fill="#3cb371">Fleet Ready</text>
+            <text x="170" y="541" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#1e3560">Daily / Monthly / Annual lease · Pre-configured &amp; tested · No CAPEX · On-site support · All OEM brands</text>
+          </svg>
+          <svg *ngSwitchCase="3" viewBox="0 0 1100 552" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <filter id="glo">
+                <feGaussianBlur stdDeviation="14" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="gls">
+                <feGaussianBlur stdDeviation="2.5" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <linearGradient id="cg" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#0d1e3a" />
+                <stop offset="100%" stop-color="#070f22" />
+              </linearGradient>
+              <linearGradient id="gg" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#3cb371" stop-opacity="0" />
+                <stop offset="50%" stop-color="#3cb371" />
+                <stop offset="100%" stop-color="#3cb371" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+
+            <rect width="1100" height="552" fill="#050c1a" />
+            <g fill="rgba(77,139,255,0.05)">
+              <circle cx="92" cy="92" r="1.2" /><circle cx="184" cy="92" r="1.2" /><circle cx="276" cy="92" r="1.2" /><circle cx="368" cy="92" r="1.2" /><circle cx="460" cy="92" r="1.2" /><circle cx="552" cy="92" r="1.2" /><circle cx="644" cy="92" r="1.2" /><circle cx="736" cy="92" r="1.2" /><circle cx="828" cy="92" r="1.2" /><circle cx="920" cy="92" r="1.2" /><circle cx="1012" cy="92" r="1.2" />
+              <circle cx="92" cy="184" r="1.2" /><circle cx="184" cy="184" r="1.2" /><circle cx="276" cy="184" r="1.2" /><circle cx="368" cy="184" r="1.2" /><circle cx="460" cy="184" r="1.2" /><circle cx="552" cy="184" r="1.2" /><circle cx="644" cy="184" r="1.2" /><circle cx="736" cy="184" r="1.2" /><circle cx="828" cy="184" r="1.2" /><circle cx="920" cy="184" r="1.2" /><circle cx="1012" cy="184" r="1.2" />
+              <circle cx="92" cy="276" r="1.2" /><circle cx="184" cy="276" r="1.2" /><circle cx="276" cy="276" r="1.2" /><circle cx="368" cy="276" r="1.2" /><circle cx="460" cy="276" r="1.2" /><circle cx="644" cy="276" r="1.2" /><circle cx="736" cy="276" r="1.2" /><circle cx="828" cy="276" r="1.2" /><circle cx="920" cy="276" r="1.2" /><circle cx="1012" cy="276" r="1.2" />
+              <circle cx="92" cy="368" r="1.2" /><circle cx="184" cy="368" r="1.2" /><circle cx="276" cy="368" r="1.2" /><circle cx="368" cy="368" r="1.2" /><circle cx="460" cy="368" r="1.2" /><circle cx="552" cy="368" r="1.2" /><circle cx="644" cy="368" r="1.2" /><circle cx="736" cy="368" r="1.2" /><circle cx="828" cy="368" r="1.2" /><circle cx="920" cy="368" r="1.2" /><circle cx="1012" cy="368" r="1.2" />
+              <circle cx="92" cy="460" r="1.2" /><circle cx="184" cy="460" r="1.2" /><circle cx="276" cy="460" r="1.2" /><circle cx="368" cy="460" r="1.2" /><circle cx="460" cy="460" r="1.2" /><circle cx="552" cy="460" r="1.2" /><circle cx="644" cy="460" r="1.2" /><circle cx="736" cy="460" r="1.2" /><circle cx="828" cy="460" r="1.2" /><circle cx="920" cy="460" r="1.2" /><circle cx="1012" cy="460" r="1.2" />
+            </g>
+            <ellipse cx="550" cy="276" rx="400" ry="250" fill="rgba(77,139,255,0.04)" filter="url(#glo)" />
+
+            <rect x="40" y="40" width="460" height="472" rx="12" fill="rgba(7,14,30,0.95)" stroke="rgba(77,139,255,0.14)" stroke-width="1" />
+            <rect x="40" y="40" width="460" height="4" rx="2" fill="#4d8bff" />
+            <text x="60" y="64" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" font-weight="600" fill="#2a4a7a" letter-spacing="1.5">NOC - LIVE MONITORING</text>
+            <circle cx="480" cy="57" r="4" fill="#3cb371" filter="url(#gls)"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" /></circle>
+            <text x="462" y="61" text-anchor="end" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#3cb371">LIVE</text>
+
+            <text x="260" y="118" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="52" font-weight="700" fill="#4d8bff" letter-spacing="-2">99.9%</text>
+            <text x="260" y="138" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="11" fill="#2a4872" letter-spacing="1.5">NETWORK UPTIME SLA</text>
+
+            <rect x="60" y="152" width="420" height="60" rx="5" fill="rgba(5,12,26,0.8)" stroke="rgba(77,139,255,0.1)" stroke-width="0.8" />
+            <text x="70" y="168" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="8" fill="#2a4a7a" letter-spacing="1">TRAFFIC · Gbps</text>
+            <rect x="70" y="190" width="8" height="18" rx="1" fill="#4d8bff" opacity="0.6"><animate attributeName="height" values="18;28;12;22;18" dur="3s" repeatCount="indefinite" /><animate attributeName="y" values="190;180;196;186;190" dur="3s" repeatCount="indefinite" /></rect>
+            <rect x="84" y="185" width="8" height="23" rx="1" fill="#4d8bff" opacity="0.65"><animate attributeName="height" values="23;14;30;20;23" dur="3.2s" repeatCount="indefinite" begin="-0.3s" /><animate attributeName="y" values="185;194;178;188;185" dur="3.2s" repeatCount="indefinite" begin="-0.3s" /></rect>
+            <rect x="98" y="192" width="8" height="16" rx="1" fill="#4d8bff" opacity="0.5"><animate attributeName="height" values="16;24;10;20;16" dur="2.8s" repeatCount="indefinite" begin="-0.6s" /><animate attributeName="y" values="192;184;198;188;192" dur="2.8s" repeatCount="indefinite" begin="-0.6s" /></rect>
+            <rect x="112" y="183" width="8" height="25" rx="1" fill="#4d8bff" opacity="0.7"><animate attributeName="height" values="25;16;28;12;25" dur="3.4s" repeatCount="indefinite" begin="-0.9s" /><animate attributeName="y" values="183;192;180;196;183" dur="3.4s" repeatCount="indefinite" begin="-0.9s" /></rect>
+            <rect x="126" y="189" width="8" height="19" rx="1" fill="#4d8bff" opacity="0.55"><animate attributeName="height" values="19;28;14;22;19" dur="3s" repeatCount="indefinite" begin="-1.2s" /><animate attributeName="y" values="189;180;194;186;189" dur="3s" repeatCount="indefinite" begin="-1.2s" /></rect>
+            <rect x="140" y="186" width="8" height="22" rx="1" fill="#4d8bff" opacity="0.6"><animate attributeName="height" values="22;14;26;18;22" dur="2.6s" repeatCount="indefinite" begin="-1.5s" /><animate attributeName="y" values="186;194;182;190;186" dur="2.6s" repeatCount="indefinite" begin="-1.5s" /></rect>
+            <rect x="154" y="191" width="8" height="17" rx="1" fill="#4d8bff" opacity="0.5"><animate attributeName="height" values="17;26;11;21;17" dur="3.1s" repeatCount="indefinite" begin="-1.8s" /><animate attributeName="y" values="191;182;197;187;191" dur="3.1s" repeatCount="indefinite" begin="-1.8s" /></rect>
+            <rect x="168" y="184" width="8" height="24" rx="1" fill="#4d8bff" opacity="0.65"><animate attributeName="height" values="24;15;29;13;24" dur="2.9s" repeatCount="indefinite" begin="-0.2s" /><animate attributeName="y" values="184;193;179;195;184" dur="2.9s" repeatCount="indefinite" begin="-0.2s" /></rect>
+            <rect x="182" y="190" width="8" height="18" rx="1" fill="#4d8bff" opacity="0.55"><animate attributeName="height" values="18;26;12;22;18" dur="3.3s" repeatCount="indefinite" begin="-0.5s" /></rect>
+            <rect x="196" y="187" width="8" height="21" rx="1" fill="#4d8bff" opacity="0.6"><animate attributeName="height" values="21;13;27;17;21" dur="2.7s" repeatCount="indefinite" begin="-0.8s" /></rect>
+            <rect x="210" y="192" width="8" height="16" rx="1" fill="#4d8bff" opacity="0.5"><animate attributeName="height" values="16;25;10;20;16" dur="3.5s" repeatCount="indefinite" begin="-1.1s" /></rect>
+            <rect x="224" y="185" width="8" height="23" rx="1" fill="#4d8bff" opacity="0.65"><animate attributeName="height" values="23;14;29;19;23" dur="3s" repeatCount="indefinite" begin="-1.4s" /></rect>
+            <rect x="238" y="189" width="8" height="19" rx="1" fill="#6a8fa8" opacity="0.5"><animate attributeName="height" values="19;28;13;23;19" dur="2.8s" repeatCount="indefinite" begin="-0.4s" /></rect>
+            <rect x="252" y="183" width="8" height="25" rx="1" fill="#6a8fa8" opacity="0.55"><animate attributeName="height" values="25;16;30;14;25" dur="3.2s" repeatCount="indefinite" begin="-0.7s" /></rect>
+            <rect x="266" y="188" width="8" height="20" rx="1" fill="#6a8fa8" opacity="0.5"><animate attributeName="height" values="20;28;14;22;20" dur="3s" repeatCount="indefinite" begin="-1s" /></rect>
+            <rect x="280" y="186" width="8" height="22" rx="1" fill="#4d8bff" opacity="0.6"><animate attributeName="height" values="22;13;27;17;22" dur="2.9s" repeatCount="indefinite" begin="-1.3s" /></rect>
+            <rect x="294" y="191" width="8" height="17" rx="1" fill="#4d8bff" opacity="0.55"><animate attributeName="height" values="17;26;11;21;17" dur="3.4s" repeatCount="indefinite" begin="-0.1s" /></rect>
+            <rect x="308" y="184" width="8" height="24" rx="1" fill="#4d8bff" opacity="0.65"><animate attributeName="height" values="24;15;30;12;24" dur="2.7s" repeatCount="indefinite" begin="-0.6s" /></rect>
+            <rect x="322" y="190" width="8" height="18" rx="1" fill="#4d8bff" opacity="0.5"><animate attributeName="height" values="18;27;12;22;18" dur="3.1s" repeatCount="indefinite" begin="-0.9s" /></rect>
+            <rect x="336" y="185" width="8" height="23" rx="1" fill="#4d8bff" opacity="0.6"><animate attributeName="height" values="23;14;28;18;23" dur="3.3s" repeatCount="indefinite" begin="-1.2s" /></rect>
+            <rect x="350" y="189" width="8" height="19" rx="1" fill="#6a8fa8" opacity="0.5"><animate attributeName="height" values="19;28;13;23;19" dur="2.8s" repeatCount="indefinite" begin="-1.5s" /></rect>
+            <rect x="364" y="183" width="8" height="25" rx="1" fill="#6a8fa8" opacity="0.55"><animate attributeName="height" values="25;15;30;14;25" dur="3.2s" repeatCount="indefinite" begin="-0.3s" /></rect>
+            <rect x="378" y="187" width="8" height="21" rx="1" fill="#4d8bff" opacity="0.6"><animate attributeName="height" values="21;13;27;17;21" dur="3s" repeatCount="indefinite" begin="-0.8s" /></rect>
+            <rect x="392" y="192" width="8" height="16" rx="1" fill="#4d8bff" opacity="0.5"><animate attributeName="height" values="16;25;10;20;16" dur="2.6s" repeatCount="indefinite" begin="-1.1s" /></rect>
+            <rect x="406" y="185" width="8" height="23" rx="1" fill="#4d8bff" opacity="0.65"><animate attributeName="height" values="23;14;29;19;23" dur="3.4s" repeatCount="indefinite" begin="-1.4s" /></rect>
+            <rect x="420" y="190" width="8" height="18" rx="1" fill="#4d8bff" opacity="0.6"><animate attributeName="height" values="18;27;12;22;18" dur="2.9s" repeatCount="indefinite" begin="-0.5s" /></rect>
+            <rect x="434" y="184" width="8" height="24" rx="1" fill="#6a8fa8" opacity="0.55"><animate attributeName="height" values="24;15;29;13;24" dur="3.1s" repeatCount="indefinite" begin="-0.2s" /></rect>
+            <rect x="448" y="188" width="8" height="20" rx="1" fill="#4d8bff" opacity="0.5"><animate attributeName="height" values="20;28;14;22;20" dur="3.3s" repeatCount="indefinite" begin="-0.7s" /></rect>
+            <rect x="462" y="186" width="8" height="22" rx="1" fill="#4d8bff" opacity="0.6"><animate attributeName="height" values="22;13;27;17;22" dur="2.7s" repeatCount="indefinite" begin="-1s" /></rect>
+
+            <rect x="60" y="228" width="420" height="72" rx="8" fill="rgba(5,12,26,0.7)" stroke="rgba(77,139,255,0.08)" stroke-width="0.8" />
+            <line x1="200" y1="236" x2="200" y2="292" stroke="rgba(77,139,255,0.1)" stroke-width="0.8" />
+            <line x1="340" y1="236" x2="340" y2="292" stroke="rgba(77,139,255,0.1)" stroke-width="0.8" />
+            <text x="130" y="258" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="24" font-weight="700" fill="#4d8bff">24/7</text>
+            <text x="130" y="275" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#2a4872" letter-spacing="0.5">MONITORING</text>
+            <text x="270" y="258" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="24" font-weight="700" fill="#6a8fa8">&lt;15min</text>
+            <text x="270" y="275" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#2a4872" letter-spacing="0.5">MTTR SLA</text>
+            <text x="410" y="258" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="24" font-weight="700" fill="#4d8bff">NOC</text>
+            <text x="410" y="275" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#2a4872" letter-spacing="0.5">DEDICATED TEAM</text>
+
+            <rect x="60" y="312" width="420" height="24" rx="5" fill="rgba(5,12,26,0.8)" stroke="rgba(77,139,255,0.08)" stroke-width="0.8" />
+            <circle cx="76" cy="324" r="4" fill="#3cb371"><animate attributeName="opacity" values="1;0.2;1" dur="0.8s" repeatCount="indefinite" /></circle>
+            <text x="88" y="328" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#3cb371">OK</text>
+            <text x="112" y="328" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#4a6680">192.168.1.1 · Cisco Core · Latency 2ms · CPU 18%</text>
+
+            <text x="60" y="358" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" font-weight="600" fill="#2a4a7a" letter-spacing="1">MONITORED DEVICES</text>
+            <g font-family="Helvetica Neue,Helvetica,Arial,sans-serif">
+              <circle cx="72" cy="376" r="4" fill="#3cb371"><animate attributeName="opacity" values="1;0.3;1" dur="1.1s" repeatCount="indefinite" /></circle>
+              <text x="84" y="380" font-size="10" fill="#e9f0fa">Core Router</text><text x="260" y="380" font-size="9" fill="#2a4872">192.168.0.1</text><text x="380" y="380" font-size="9" fill="#3cb371">Online</text>
+              <circle cx="72" cy="396" r="4" fill="#3cb371"><animate attributeName="opacity" values="1;0.3;1" dur="0.9s" repeatCount="indefinite" begin="-0.2s" /></circle>
+              <text x="84" y="400" font-size="10" fill="#e9f0fa">Firewall FG60</text><text x="260" y="400" font-size="9" fill="#2a4872">192.168.0.2</text><text x="380" y="400" font-size="9" fill="#3cb371">Online</text>
+              <circle cx="72" cy="416" r="4" fill="#3cb371"><animate attributeName="opacity" values="1;0.3;1" dur="1.3s" repeatCount="indefinite" begin="-0.4s" /></circle>
+              <text x="84" y="420" font-size="10" fill="#e9f0fa">Switch L3 Stack</text><text x="260" y="420" font-size="9" fill="#2a4872">192.168.0.3</text><text x="380" y="420" font-size="9" fill="#3cb371">Online</text>
+              <circle cx="72" cy="436" r="4" fill="#e8a020"><animate attributeName="opacity" values="1;0.3;1" dur="0.7s" repeatCount="indefinite" begin="-0.6s" /></circle>
+              <text x="84" y="440" font-size="10" fill="#e9f0fa">AP Cluster B</text><text x="260" y="440" font-size="9" fill="#2a4872">192.168.1.10</text><text x="380" y="440" font-size="9" fill="#e8a020">Warn</text>
+              <circle cx="72" cy="456" r="4" fill="#3cb371"><animate attributeName="opacity" values="1;0.3;1" dur="1.2s" repeatCount="indefinite" begin="-0.8s" /></circle>
+              <text x="84" y="460" font-size="10" fill="#e9f0fa">WAN Edge GW</text><text x="260" y="460" font-size="9" fill="#2a4872">10.0.0.1</text><text x="380" y="460" font-size="9" fill="#3cb371">Online</text>
+              <circle cx="72" cy="476" r="4" fill="#3cb371"><animate attributeName="opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite" begin="-0.5s" /></circle>
+              <text x="84" y="480" font-size="10" fill="#e9f0fa">Data Center SW</text><text x="260" y="480" font-size="9" fill="#2a4872">192.168.2.1</text><text x="380" y="480" font-size="9" fill="#3cb371">Online</text>
+            </g>
+
+            <rect x="540" y="40" width="520" height="472" rx="12" fill="rgba(7,14,30,0.95)" stroke="rgba(77,139,255,0.12)" stroke-width="1" />
+            <rect x="540" y="40" width="520" height="4" rx="2" fill="#6a8fa8" />
+            <text x="560" y="64" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" font-weight="600" fill="#2a4a7a" letter-spacing="1.5">WHAT WE MANAGE</text>
+
+            <g font-family="Helvetica Neue,Helvetica,Arial,sans-serif">
+              <rect x="560" y="78" width="228" height="118" rx="9" fill="rgba(10,22,46,0.95)" stroke="rgba(77,139,255,0.22)" stroke-width="1" />
+              <rect x="560" y="78" width="228" height="3.5" rx="2" fill="#4d8bff" />
+              <text x="580" y="108" font-size="15" font-weight="700" fill="#e9f0fa">Network Mgmt</text>
+              <text x="580" y="125" font-size="10" fill="#4a6a82">Routers · Switches · Firewalls</text>
+              <text x="580" y="139" font-size="10" fill="#4a6a82">Config backup · Patch mgmt</text>
+              <line x1="576" y1="153" x2="780" y2="153" stroke="rgba(77,139,255,0.1)" stroke-width="0.8" />
+              <text x="576" y="168" font-size="9" fill="#2a4872">Monitor → Alert → Remediate</text>
+
+              <rect x="808" y="78" width="228" height="118" rx="9" fill="rgba(10,22,46,0.95)" stroke="rgba(77,139,255,0.22)" stroke-width="1" />
+              <rect x="808" y="78" width="228" height="3.5" rx="2" fill="#4d8bff" />
+              <text x="828" y="108" font-size="15" font-weight="700" fill="#e9f0fa">Server Mgmt</text>
+              <text x="828" y="125" font-size="10" fill="#4a6a82">Windows · Linux · VMware</text>
+              <text x="828" y="139" font-size="10" fill="#4a6a82">Patching · Backup · DR</text>
+              <line x1="824" y1="153" x2="1028" y2="153" stroke="rgba(77,139,255,0.1)" stroke-width="0.8" />
+              <text x="824" y="168" font-size="9" fill="#2a4872">Deploy → Harden → Backup</text>
+
+              <rect x="560" y="212" width="228" height="118" rx="9" fill="rgba(10,22,46,0.95)" stroke="rgba(106,143,168,0.2)" stroke-width="1" />
+              <rect x="560" y="212" width="228" height="3.5" rx="2" fill="#6a8fa8" />
+              <text x="580" y="242" font-size="15" font-weight="700" fill="#e9f0fa">Security Ops</text>
+              <text x="580" y="259" font-size="10" fill="#4a6a82">SIEM · SOC · Threat intel</text>
+              <text x="580" y="273" font-size="10" fill="#4a6a82">Incident response &amp; forensics</text>
+              <line x1="576" y1="287" x2="780" y2="287" stroke="rgba(106,143,168,0.1)" stroke-width="0.8" />
+              <text x="576" y="302" font-size="9" fill="#2a4872">Detect → Contain → Recover</text>
+
+              <rect x="808" y="212" width="228" height="118" rx="9" fill="rgba(10,22,46,0.95)" stroke="rgba(106,143,168,0.2)" stroke-width="1" />
+              <rect x="808" y="212" width="228" height="3.5" rx="2" fill="#6a8fa8" />
+              <text x="828" y="242" font-size="15" font-weight="700" fill="#e9f0fa">Cloud Mgmt</text>
+              <text x="828" y="259" font-size="10" fill="#4a6a82">Azure · AWS · Hybrid</text>
+              <text x="828" y="273" font-size="10" fill="#4a6a82">Cost optimisation · FinOps</text>
+              <line x1="824" y1="287" x2="1028" y2="287" stroke="rgba(106,143,168,0.1)" stroke-width="0.8" />
+              <text x="824" y="302" font-size="9" fill="#2a4872">Provision → Optimise → Scale</text>
+
+              <rect x="560" y="346" width="228" height="118" rx="9" fill="rgba(10,22,46,0.95)" stroke="rgba(77,139,255,0.18)" stroke-width="1" />
+              <rect x="560" y="346" width="228" height="3.5" rx="2" fill="#4d8bff" />
+              <text x="580" y="376" font-size="15" font-weight="700" fill="#e9f0fa">Helpdesk L1-L3</text>
+              <text x="580" y="393" font-size="10" fill="#4a6a82">Ticket mgmt · Remote support</text>
+              <text x="580" y="407" font-size="10" fill="#4a6a82">SLA-bound resolution</text>
+              <line x1="576" y1="421" x2="780" y2="421" stroke="rgba(77,139,255,0.1)" stroke-width="0.8" />
+              <text x="576" y="436" font-size="9" fill="#2a4872">Log → Triage → Resolve</text>
+
+              <rect x="808" y="346" width="228" height="118" rx="9" fill="rgba(10,22,46,0.95)" stroke="rgba(77,139,255,0.18)" stroke-width="1" />
+              <rect x="808" y="346" width="228" height="3.5" rx="2" fill="#4d8bff" />
+              <text x="828" y="376" font-size="15" font-weight="700" fill="#e9f0fa">Reporting</text>
+              <text x="828" y="393" font-size="10" fill="#4a6a82">Monthly MIS reports</text>
+              <text x="828" y="407" font-size="10" fill="#4a6a82">SLA dashboards · Audits</text>
+              <line x1="824" y1="421" x2="1028" y2="421" stroke="rgba(77,139,255,0.1)" stroke-width="0.8" />
+              <text x="824" y="436" font-size="9" fill="#2a4872">Collect → Analyse → Report</text>
+            </g>
+
+            <rect x="0" y="522" width="1100" height="30" fill="rgba(5,12,26,0.95)" />
+            <line x1="0" y1="522" x2="1100" y2="522" stroke="rgba(77,139,255,0.12)" stroke-width="0.8" />
+            <circle cx="32" cy="537" r="4" fill="#3cb371" filter="url(#gls)"><animate attributeName="opacity" values="1;0.3;1" dur="1.4s" repeatCount="indefinite" /></circle>
+            <text x="44" y="541" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" font-weight="600" fill="#3cb371">NOC Monitoring Active</text>
+            <text x="230" y="541" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#1e3560">99.9% Uptime SLA · MTTR &lt;15min · Dedicated NOC · Monthly MIS · 24/7</text>
+          </svg>
+          <svg *ngSwitchCase="4" viewBox="0 0 1100 552" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <filter id="glo">
+                <feGaussianBlur stdDeviation="16" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="glr">
+                <feGaussianBlur stdDeviation="10" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="gls">
+                <feGaussianBlur stdDeviation="2.5" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <linearGradient id="cg" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#0d1525" />
+                <stop offset="100%" stop-color="#06090f" />
+              </linearGradient>
+              <radialGradient id="attackR" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#e05050" stop-opacity="0.15" />
+                <stop offset="100%" stop-color="#05080f" stop-opacity="0" />
+              </radialGradient>
+              <path id="a1" d="M180,276 C280,200 400,180 520,240" />
+              <path id="a2" d="M180,276 C260,260 380,270 520,258" />
+              <path id="a3" d="M180,276 C270,340 400,360 520,300" />
+            </defs>
+
+            <rect width="1100" height="552" fill="#05080f" />
+            <g fill="rgba(220,60,60,0.04)">
+              <circle cx="92" cy="92" r="1.2" /><circle cx="184" cy="92" r="1.2" /><circle cx="276" cy="92" r="1.2" /><circle cx="368" cy="92" r="1.2" /><circle cx="460" cy="92" r="1.2" /><circle cx="552" cy="92" r="1.2" /><circle cx="644" cy="92" r="1.2" /><circle cx="736" cy="92" r="1.2" /><circle cx="828" cy="92" r="1.2" /><circle cx="920" cy="92" r="1.2" /><circle cx="1012" cy="92" r="1.2" />
+              <circle cx="92" cy="184" r="1.2" /><circle cx="184" cy="184" r="1.2" /><circle cx="276" cy="184" r="1.2" /><circle cx="368" cy="184" r="1.2" /><circle cx="460" cy="184" r="1.2" /><circle cx="552" cy="184" r="1.2" /><circle cx="644" cy="184" r="1.2" /><circle cx="736" cy="184" r="1.2" /><circle cx="828" cy="184" r="1.2" /><circle cx="920" cy="184" r="1.2" /><circle cx="1012" cy="184" r="1.2" />
+              <circle cx="92" cy="276" r="1.2" /><circle cx="184" cy="276" r="1.2" /><circle cx="276" cy="276" r="1.2" /><circle cx="368" cy="276" r="1.2" /><circle cx="460" cy="276" r="1.2" /><circle cx="644" cy="276" r="1.2" /><circle cx="736" cy="276" r="1.2" /><circle cx="828" cy="276" r="1.2" /><circle cx="920" cy="276" r="1.2" /><circle cx="1012" cy="276" r="1.2" />
+              <circle cx="92" cy="368" r="1.2" /><circle cx="184" cy="368" r="1.2" /><circle cx="276" cy="368" r="1.2" /><circle cx="368" cy="368" r="1.2" /><circle cx="460" cy="368" r="1.2" /><circle cx="552" cy="368" r="1.2" /><circle cx="644" cy="368" r="1.2" /><circle cx="736" cy="368" r="1.2" /><circle cx="828" cy="368" r="1.2" /><circle cx="920" cy="368" r="1.2" /><circle cx="1012" cy="368" r="1.2" />
+              <circle cx="92" cy="460" r="1.2" /><circle cx="184" cy="460" r="1.2" /><circle cx="276" cy="460" r="1.2" /><circle cx="368" cy="460" r="1.2" /><circle cx="460" cy="460" r="1.2" /><circle cx="552" cy="460" r="1.2" /><circle cx="644" cy="460" r="1.2" /><circle cx="736" cy="460" r="1.2" /><circle cx="828" cy="460" r="1.2" /><circle cx="920" cy="460" r="1.2" /><circle cx="1012" cy="460" r="1.2" />
+            </g>
+
+            <ellipse cx="180" cy="276" rx="200" ry="200" fill="url(#attackR)" filter="url(#glo)" />
+            <ellipse cx="760" cy="276" rx="240" ry="200" fill="rgba(77,139,255,0.05)" filter="url(#glo)" />
+
+            <circle cx="180" cy="276" r="56" fill="rgba(30,8,8,0.98)" stroke="rgba(220,60,60,0.5)" stroke-width="1.5" filter="url(#glr)" />
+            <circle cx="180" cy="276" r="44" fill="rgba(50,12,12,0.4)" stroke="rgba(220,60,60,0.2)" stroke-width="1" />
+            <rect x="162" y="260" width="36" height="28" rx="18" fill="none" stroke="#e05050" stroke-width="1.4" />
+            <rect x="169" y="284" width="22" height="8" rx="2" fill="none" stroke="#e05050" stroke-width="1.2" />
+            <line x1="176" y1="284" x2="176" y2="292" stroke="#e05050" stroke-width="1" />
+            <line x1="184" y1="284" x2="184" y2="292" stroke="#e05050" stroke-width="1" />
+            <circle cx="173" cy="270" r="4" fill="#e05050" opacity="0.8" />
+            <circle cx="187" cy="270" r="4" fill="#e05050" opacity="0.8" />
+            <text x="180" y="316" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="11" font-weight="700" fill="#e05050">ATTACKER</text>
+            <text x="180" y="330" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#803030">Simulated Threat</text>
+            <circle cx="180" cy="276" r="62" fill="none" stroke="rgba(220,60,60,0.3)" stroke-width="1">
+              <animate attributeName="r" values="56;80;56" dur="2s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.4;0;0.4" dur="2s" repeatCount="indefinite" />
+            </circle>
+
+            <path d="M180,276 C280,200 400,180 520,240" fill="none" stroke="rgba(220,60,60,0.25)" stroke-width="1.2" stroke-dasharray="6 4" />
+            <path d="M180,276 C260,260 380,270 520,258" fill="none" stroke="rgba(220,60,60,0.2)" stroke-width="1" stroke-dasharray="4 5" />
+            <path d="M180,276 C270,340 400,360 520,300" fill="none" stroke="rgba(220,60,60,0.2)" stroke-width="1" stroke-dasharray="5 4" />
+
+            <rect x="318" y="198" width="64" height="18" rx="4" fill="rgba(5,8,15,0.9)" stroke="rgba(77,139,255,0.3)" stroke-width="0.8" />
+            <text x="350" y="211" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="8" font-weight="700" fill="#4d8bff">BLOCKED OK</text>
+            <rect x="300" y="302" width="64" height="18" rx="4" fill="rgba(5,8,15,0.9)" stroke="rgba(77,139,255,0.3)" stroke-width="0.8" />
+            <text x="332" y="315" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="8" font-weight="700" fill="#4d8bff">BLOCKED OK</text>
+
+            <circle r="5" fill="#e05050" filter="url(#gls)">
+              <animateMotion dur="0.9s" repeatCount="indefinite" begin="0s"><mpath href="#a1" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" dur="0.9s" repeatCount="indefinite" />
+            </circle>
+            <circle r="4" fill="#e05050" filter="url(#gls)">
+              <animateMotion dur="0.9s" repeatCount="indefinite" begin="-0.45s"><mpath href="#a1" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" dur="0.9s" repeatCount="indefinite" begin="-0.45s" />
+            </circle>
+            <circle r="4" fill="#e05050" filter="url(#gls)">
+              <animateMotion dur="1.1s" repeatCount="indefinite" begin="-0.2s"><mpath href="#a2" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" dur="1.1s" repeatCount="indefinite" begin="-0.2s" />
+            </circle>
+            <circle r="4" fill="#e05050" filter="url(#gls)">
+              <animateMotion dur="1s" repeatCount="indefinite" begin="-0.6s"><mpath href="#a3" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" dur="1s" repeatCount="indefinite" begin="-0.6s" />
+            </circle>
+
+            <circle cx="560" cy="252" r="36" fill="rgba(8,18,42,0.98)" stroke="#4d8bff" stroke-width="1.4" filter="url(#gls)" />
+            <path d="M548,236 l12-5 12 5 v12 c0 8 -12 16-12 16 s-12-8-12-16z" fill="rgba(77,139,255,0.15)" stroke="#4d8bff" stroke-width="1.4" />
+            <path d="M554,248 l4 4 8-8" fill="none" stroke="#4d8bff" stroke-width="1.6" stroke-linecap="round" />
+            <text x="560" y="276" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" font-weight="700" fill="#4d8bff">VAPT</text>
+            <text x="560" y="288" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="8" fill="#2a4872">ENGINE</text>
+
+            <rect x="620" y="40" width="460" height="472" rx="12" fill="rgba(7,12,24,0.98)" stroke="rgba(77,139,255,0.12)" stroke-width="1" />
+            <rect x="620" y="40" width="460" height="4" rx="2" fill="#4d8bff" />
+            <text x="640" y="64" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" font-weight="600" fill="#2a4a7a" letter-spacing="1.5">VAPT ASSESSMENT REPORT</text>
+
+            <text x="640" y="92" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" font-weight="600" fill="#2a4a7a" letter-spacing="1.2">OUR PROCESS</text>
+            <line x1="656" y1="100" x2="656" y2="360" stroke="rgba(77,139,255,0.1)" stroke-width="1" stroke-dasharray="3 4" />
+
+            <g font-family="Helvetica Neue,Helvetica,Arial,sans-serif">
+              <circle cx="656" cy="112" r="9" fill="#4d8bff" filter="url(#gls)" />
+              <text x="656" y="116" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">1</text>
+              <text x="674" y="108" font-size="13" font-weight="700" fill="#e9f0fa">Reconnaissance</text>
+              <text x="674" y="122" font-size="10" fill="#4a6a82">OSINT · Port scan · Fingerprint OS &amp; services</text>
+
+              <circle cx="656" cy="160" r="9" fill="#4d8bff" filter="url(#gls)" />
+              <text x="656" y="164" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">2</text>
+              <text x="674" y="156" font-size="13" font-weight="700" fill="#e9f0fa">Vulnerability Assessment</text>
+              <text x="674" y="170" font-size="10" fill="#4a6a82">10,000+ CVE scan · OWASP Top 10 · Misconfigs</text>
+
+              <circle cx="656" cy="208" r="9" fill="#4d8bff" filter="url(#gls)" />
+              <text x="656" y="212" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">3</text>
+              <text x="674" y="204" font-size="13" font-weight="700" fill="#e9f0fa">Penetration Testing</text>
+              <text x="674" y="218" font-size="10" fill="#4a6a82">Exploit vulnerabilities · Privilege escalation · Lateral</text>
+
+              <circle cx="656" cy="256" r="9" fill="#6a8fa8" filter="url(#gls)" />
+              <text x="656" y="260" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">4</text>
+              <text x="674" y="252" font-size="13" font-weight="700" fill="#e9f0fa">CVSS Risk Rating</text>
+              <text x="674" y="266" font-size="10" fill="#4a6a82">Critical / High / Medium / Low severity mapping</text>
+
+              <circle cx="656" cy="304" r="9" fill="#6a8fa8" filter="url(#gls)" />
+              <text x="656" y="308" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">5</text>
+              <text x="674" y="300" font-size="13" font-weight="700" fill="#e9f0fa">Report &amp; Remediation</text>
+              <text x="674" y="314" font-size="10" fill="#4a6a82">Detailed findings · Fix guidance · Compliance evidence</text>
+
+              <circle cx="656" cy="352" r="9" fill="#6a8fa8" filter="url(#gls)" />
+              <text x="656" y="356" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">6</text>
+              <text x="674" y="348" font-size="13" font-weight="700" fill="#e9f0fa">Retest &amp; Certify</text>
+              <text x="674" y="362" font-size="10" fill="#4a6a82">Verify patches · Issue VAPT certificate · ISO 27001</text>
+            </g>
+
+            <line x1="636" y1="378" x2="1064" y2="378" stroke="rgba(77,139,255,0.08)" stroke-width="0.8" />
+            <text x="640" y="398" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" font-weight="600" fill="#2a4a7a" letter-spacing="1">COMPLIANCE COVERAGE</text>
+            <g font-family="Helvetica Neue,Helvetica,Arial,sans-serif">
+              <rect x="640" y="408" width="88" height="22" rx="5" fill="rgba(77,139,255,0.08)" stroke="rgba(77,139,255,0.2)" stroke-width="0.8" />
+              <text x="684" y="423" text-anchor="middle" font-size="10" font-weight="600" fill="#4d8bff">ISO 27001</text>
+              <rect x="738" y="408" width="72" height="22" rx="5" fill="rgba(77,139,255,0.08)" stroke="rgba(77,139,255,0.2)" stroke-width="0.8" />
+              <text x="774" y="423" text-anchor="middle" font-size="10" font-weight="600" fill="#4d8bff">PCI-DSS</text>
+              <rect x="820" y="408" width="64" height="22" rx="5" fill="rgba(77,139,255,0.08)" stroke="rgba(77,139,255,0.2)" stroke-width="0.8" />
+              <text x="852" y="423" text-anchor="middle" font-size="10" font-weight="600" fill="#4d8bff">GDPR</text>
+              <rect x="894" y="408" width="72" height="22" rx="5" fill="rgba(77,139,255,0.08)" stroke="rgba(77,139,255,0.2)" stroke-width="0.8" />
+              <text x="930" y="423" text-anchor="middle" font-size="10" font-weight="600" fill="#4d8bff">OWASP</text>
+              <rect x="976" y="408" width="80" height="22" rx="5" fill="rgba(77,139,255,0.08)" stroke="rgba(77,139,255,0.2)" stroke-width="0.8" />
+              <text x="1016" y="423" text-anchor="middle" font-size="10" font-weight="600" fill="#4d8bff">CERT-In</text>
+            </g>
+
+            <rect x="640" y="440" width="420" height="54" rx="8" fill="rgba(30,8,8,0.5)" stroke="rgba(220,60,60,0.2)" stroke-width="0.8" />
+            <text x="660" y="460" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" font-weight="600" fill="#e05050" letter-spacing="1">LIVE THREAT SIMULATION</text>
+            <text x="660" y="480" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#803030">Attack vectors probed · Payloads injected · Sessions hijacked · Escalation tested</text>
+            <circle cx="1044" cy="463" r="6" fill="#e05050" filter="url(#gls)"><animate attributeName="opacity" values="1;0.2;1" dur="0.6s" repeatCount="indefinite" /></circle>
+
+            <rect x="0" y="522" width="1100" height="30" fill="rgba(5,8,15,0.98)" />
+            <line x1="0" y1="522" x2="1100" y2="522" stroke="rgba(220,60,60,0.15)" stroke-width="0.8" />
+            <circle cx="32" cy="537" r="4" fill="#e05050" filter="url(#gls)"><animate attributeName="opacity" values="1;0.3;1" dur="0.8s" repeatCount="indefinite" /></circle>
+            <text x="44" y="541" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" font-weight="600" fill="#e05050">Pentest Active</text>
+            <text x="180" y="541" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#1e2a40">10,000+ CVE database · OWASP Top 10 · ISO 27001 compliant · CERT-In aligned · Retest included</text>
+          </svg>
+          <svg *ngSwitchCase="5" viewBox="0 0 1100 552" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <filter id="glo">
+                <feGaussianBlur stdDeviation="14" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="gls">
+                <feGaussianBlur stdDeviation="2.5" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <linearGradient id="cg" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#0d1e3a" />
+                <stop offset="100%" stop-color="#070f22" />
+              </linearGradient>
+              <linearGradient id="prog" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#4d8bff" />
+                <stop offset="100%" stop-color="#2a60e0" />
+              </linearGradient>
+            </defs>
+
+            <rect width="1100" height="552" fill="#050c1a" />
+            <g fill="rgba(77,139,255,0.05)">
+              <circle cx="92" cy="92" r="1.2" /><circle cx="184" cy="92" r="1.2" /><circle cx="276" cy="92" r="1.2" /><circle cx="368" cy="92" r="1.2" /><circle cx="460" cy="92" r="1.2" /><circle cx="552" cy="92" r="1.2" /><circle cx="644" cy="92" r="1.2" /><circle cx="736" cy="92" r="1.2" /><circle cx="828" cy="92" r="1.2" /><circle cx="920" cy="92" r="1.2" /><circle cx="1012" cy="92" r="1.2" />
+              <circle cx="92" cy="184" r="1.2" /><circle cx="184" cy="184" r="1.2" /><circle cx="276" cy="184" r="1.2" /><circle cx="368" cy="184" r="1.2" /><circle cx="460" cy="184" r="1.2" /><circle cx="552" cy="184" r="1.2" /><circle cx="644" cy="184" r="1.2" /><circle cx="736" cy="184" r="1.2" /><circle cx="828" cy="184" r="1.2" /><circle cx="920" cy="184" r="1.2" /><circle cx="1012" cy="184" r="1.2" />
+              <circle cx="92" cy="276" r="1.2" /><circle cx="184" cy="276" r="1.2" /><circle cx="276" cy="276" r="1.2" /><circle cx="368" cy="276" r="1.2" /><circle cx="460" cy="276" r="1.2" /><circle cx="644" cy="276" r="1.2" /><circle cx="736" cy="276" r="1.2" /><circle cx="828" cy="276" r="1.2" /><circle cx="920" cy="276" r="1.2" /><circle cx="1012" cy="276" r="1.2" />
+              <circle cx="92" cy="368" r="1.2" /><circle cx="184" cy="368" r="1.2" /><circle cx="276" cy="368" r="1.2" /><circle cx="368" cy="368" r="1.2" /><circle cx="460" cy="368" r="1.2" /><circle cx="552" cy="368" r="1.2" /><circle cx="644" cy="368" r="1.2" /><circle cx="736" cy="368" r="1.2" /><circle cx="828" cy="368" r="1.2" /><circle cx="920" cy="368" r="1.2" /><circle cx="1012" cy="368" r="1.2" />
+              <circle cx="92" cy="460" r="1.2" /><circle cx="184" cy="460" r="1.2" /><circle cx="276" cy="460" r="1.2" /><circle cx="368" cy="460" r="1.2" /><circle cx="460" cy="460" r="1.2" /><circle cx="552" cy="460" r="1.2" /><circle cx="644" cy="460" r="1.2" /><circle cx="736" cy="460" r="1.2" /><circle cx="828" cy="460" r="1.2" /><circle cx="920" cy="460" r="1.2" /><circle cx="1012" cy="460" r="1.2" />
+            </g>
+            <ellipse cx="550" cy="276" rx="440" ry="240" fill="rgba(77,139,255,0.04)" filter="url(#glo)" />
+
+            <rect x="40" y="40" width="1020" height="148" rx="12" fill="rgba(7,14,30,0.95)" stroke="rgba(77,139,255,0.13)" stroke-width="1" />
+            <rect x="40" y="40" width="1020" height="4" rx="2" fill="#4d8bff" />
+            <text x="60" y="64" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" font-weight="600" fill="#2a4a7a" letter-spacing="1.5">ANNUAL MAINTENANCE CONTRACT - 12-MONTH SCHEDULE</text>
+
+            <g font-family="Helvetica Neue,Helvetica,Arial,sans-serif">
+              <text x="99" y="86" text-anchor="middle" font-size="9" fill="#4a6a82">JAN</text>
+              <text x="184" y="86" text-anchor="middle" font-size="9" fill="#4a6a82">FEB</text>
+              <text x="269" y="86" text-anchor="middle" font-size="9" fill="#4a6a82">MAR</text>
+              <text x="354" y="86" text-anchor="middle" font-size="9" fill="#4a6a82">APR</text>
+              <text x="439" y="86" text-anchor="middle" font-size="9" fill="#4a6a82">MAY</text>
+              <text x="524" y="86" text-anchor="middle" font-size="9" fill="#4a6a82">JUN</text>
+              <text x="609" y="86" text-anchor="middle" font-size="9" fill="#4a6a82">JUL</text>
+              <text x="694" y="86" text-anchor="middle" font-size="9" fill="#4a6a82">AUG</text>
+              <text x="779" y="86" text-anchor="middle" font-size="9" fill="#4a6a82">SEP</text>
+              <text x="864" y="86" text-anchor="middle" font-size="9" fill="#4a6a82">OCT</text>
+              <text x="949" y="86" text-anchor="middle" font-size="9" fill="#4a6a82">NOV</text>
+              <text x="1017" y="86" text-anchor="middle" font-size="9" fill="#4a6a82">DEC</text>
+
+              <rect x="57" y="96" width="158" height="16" rx="3" fill="rgba(77,139,255,0.25)" stroke="rgba(77,139,255,0.4)" stroke-width="0.8" />
+              <text x="136" y="108" text-anchor="middle" font-size="8" font-weight="600" fill="#4d8bff">Q1 Preventive Maintenance</text>
+              <rect x="312" y="96" width="158" height="16" rx="3" fill="rgba(77,139,255,0.25)" stroke="rgba(77,139,255,0.4)" stroke-width="0.8" />
+              <text x="391" y="108" text-anchor="middle" font-size="8" font-weight="600" fill="#4d8bff">Q2 Preventive Maintenance</text>
+              <rect x="567" y="96" width="158" height="16" rx="3" fill="rgba(77,139,255,0.25)" stroke="rgba(77,139,255,0.4)" stroke-width="0.8" />
+              <text x="646" y="108" text-anchor="middle" font-size="8" font-weight="600" fill="#4d8bff">Q3 Preventive Maintenance</text>
+              <rect x="822" y="96" width="220" height="16" rx="3" fill="rgba(77,139,255,0.25)" stroke="rgba(77,139,255,0.4)" stroke-width="0.8" />
+              <text x="932" y="108" text-anchor="middle" font-size="8" font-weight="600" fill="#4d8bff">Q4 Maintenance + Review</text>
+
+              <rect x="57" y="118" width="74" height="12" rx="3" fill="rgba(106,143,168,0.2)" stroke="rgba(106,143,168,0.3)" stroke-width="0.8" />
+              <text x="94" y="128" text-anchor="middle" font-size="7.5" fill="#6a8fa8">Firmware</text>
+              <rect x="227" y="118" width="74" height="12" rx="3" fill="rgba(106,143,168,0.2)" stroke="rgba(106,143,168,0.3)" stroke-width="0.8" />
+              <text x="264" y="128" text-anchor="middle" font-size="7.5" fill="#6a8fa8">Firmware</text>
+              <rect x="482" y="118" width="74" height="12" rx="3" fill="rgba(106,143,168,0.2)" stroke="rgba(106,143,168,0.3)" stroke-width="0.8" />
+              <text x="519" y="128" text-anchor="middle" font-size="7.5" fill="#6a8fa8">Firmware</text>
+              <rect x="737" y="118" width="74" height="12" rx="3" fill="rgba(106,143,168,0.2)" stroke="rgba(106,143,168,0.3)" stroke-width="0.8" />
+              <text x="774" y="128" text-anchor="middle" font-size="7.5" fill="#6a8fa8">Firmware</text>
+
+              <rect x="57" y="136" width="56" height="10" rx="3" fill="rgba(60,179,113,0.15)" stroke="rgba(60,179,113,0.3)" stroke-width="0.8" />
+              <text x="85" y="144" text-anchor="middle" font-size="7" fill="#3cb371">MIS Rpt</text>
+              <rect x="142" y="136" width="56" height="10" rx="3" fill="rgba(60,179,113,0.15)" stroke="rgba(60,179,113,0.3)" stroke-width="0.8" />
+              <text x="170" y="144" text-anchor="middle" font-size="7" fill="#3cb371">MIS Rpt</text>
+              <rect x="227" y="136" width="56" height="10" rx="3" fill="rgba(60,179,113,0.15)" stroke="rgba(60,179,113,0.3)" stroke-width="0.8" />
+              <text x="255" y="144" text-anchor="middle" font-size="7" fill="#3cb371">MIS Rpt</text>
+              <rect x="312" y="136" width="56" height="10" rx="3" fill="rgba(60,179,113,0.15)" stroke="rgba(60,179,113,0.3)" stroke-width="0.8" />
+              <text x="340" y="144" text-anchor="middle" font-size="7" fill="#3cb371">MIS Rpt</text>
+              <rect x="397" y="136" width="56" height="10" rx="3" fill="rgba(60,179,113,0.15)" stroke="rgba(60,179,113,0.3)" stroke-width="0.8" />
+              <text x="425" y="144" text-anchor="middle" font-size="7" fill="#3cb371">MIS Rpt</text>
+              <rect x="482" y="136" width="56" height="10" rx="3" fill="rgba(60,179,113,0.15)" stroke="rgba(60,179,113,0.3)" stroke-width="0.8" />
+              <text x="510" y="144" text-anchor="middle" font-size="7" fill="#3cb371">MIS Rpt</text>
+              <rect x="567" y="136" width="56" height="10" rx="3" fill="rgba(60,179,113,0.15)" stroke="rgba(60,179,113,0.3)" stroke-width="0.8" />
+              <text x="595" y="144" text-anchor="middle" font-size="7" fill="#3cb371">MIS Rpt</text>
+              <rect x="652" y="136" width="56" height="10" rx="3" fill="rgba(60,179,113,0.15)" stroke="rgba(60,179,113,0.3)" stroke-width="0.8" />
+              <text x="680" y="144" text-anchor="middle" font-size="7" fill="#3cb371">MIS Rpt</text>
+              <rect x="737" y="136" width="56" height="10" rx="3" fill="rgba(60,179,113,0.15)" stroke="rgba(60,179,113,0.3)" stroke-width="0.8" />
+              <text x="765" y="144" text-anchor="middle" font-size="7" fill="#3cb371">MIS Rpt</text>
+              <rect x="822" y="136" width="56" height="10" rx="3" fill="rgba(60,179,113,0.15)" stroke="rgba(60,179,113,0.3)" stroke-width="0.8" />
+              <text x="850" y="144" text-anchor="middle" font-size="7" fill="#3cb371">MIS Rpt</text>
+              <rect x="907" y="136" width="56" height="10" rx="3" fill="rgba(60,179,113,0.15)" stroke="rgba(60,179,113,0.3)" stroke-width="0.8" />
+              <text x="935" y="144" text-anchor="middle" font-size="7" fill="#3cb371">MIS Rpt</text>
+              <rect x="990" y="136" width="56" height="10" rx="3" fill="rgba(60,179,113,0.15)" stroke="rgba(60,179,113,0.3)" stroke-width="0.8" />
+              <text x="1018" y="144" text-anchor="middle" font-size="7" fill="#3cb371">Annual Rev</text>
+
+              <line x1="439" y1="92" x2="439" y2="188" stroke="#4d8bff" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.6" />
+              <rect x="420" y="78" width="38" height="14" rx="3" fill="#4d8bff" />
+              <text x="439" y="89" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">TODAY</text>
+            </g>
+
+            <g>
+              <rect x="40" y="204" width="334" height="298" rx="12" fill="rgba(7,14,30,0.95)" stroke="rgba(77,139,255,0.16)" stroke-width="1" />
+              <rect x="40" y="204" width="334" height="4" rx="2" fill="#4d8bff" />
+              <text x="60" y="228" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" font-weight="600" fill="#2a4a7a" letter-spacing="1.5">WHAT'S COVERED</text>
+              <g font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="11">
+                <circle cx="60" cy="252" r="3.5" fill="#4d8bff" />
+                <text x="74" y="256" fill="#e9f0fa">Routers, Switches, Firewalls</text>
+                <circle cx="60" cy="276" r="3.5" fill="#4d8bff" />
+                <text x="74" y="280" fill="#e9f0fa">Servers &amp; Storage arrays</text>
+                <circle cx="60" cy="300" r="3.5" fill="#4d8bff" />
+                <text x="74" y="304" fill="#e9f0fa">UPS &amp; Power infrastructure</text>
+                <circle cx="60" cy="324" r="3.5" fill="#6a8fa8" />
+                <text x="74" y="328" fill="#e9f0fa">Wireless &amp; Access points</text>
+                <circle cx="60" cy="348" r="3.5" fill="#6a8fa8" />
+                <text x="74" y="352" fill="#e9f0fa">CCTV &amp; Surveillance</text>
+                <circle cx="60" cy="372" r="3.5" fill="#6a8fa8" />
+                <text x="74" y="376" fill="#e9f0fa">Structured cabling</text>
+                <circle cx="60" cy="396" r="3.5" fill="#4d8bff" />
+                <text x="74" y="400" fill="#e9f0fa">Quarterly preventive maintenance</text>
+                <circle cx="60" cy="420" r="3.5" fill="#4d8bff" />
+                <text x="74" y="424" fill="#e9f0fa">Firmware &amp; patch updates</text>
+                <circle cx="60" cy="444" r="3.5" fill="#3cb371" />
+                <text x="74" y="448" fill="#e9f0fa">Monthly MIS reports</text>
+                <circle cx="60" cy="468" r="3.5" fill="#3cb371" />
+                <text x="74" y="472" fill="#e9f0fa">Spare parts &amp; replacement</text>
+              </g>
+
+              <rect x="384" y="204" width="334" height="298" rx="12" fill="rgba(7,14,30,0.95)" stroke="rgba(77,139,255,0.14)" stroke-width="1" />
+              <rect x="384" y="204" width="334" height="4" rx="2" fill="#6a8fa8" />
+              <text x="404" y="228" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" font-weight="600" fill="#2a4a7a" letter-spacing="1.5">AMC PROCESS</text>
+              <line x1="414" y1="240" x2="414" y2="480" stroke="rgba(77,139,255,0.1)" stroke-width="1" stroke-dasharray="3 4" />
+              <g font-family="Helvetica Neue,Helvetica,Arial,sans-serif">
+                <circle cx="414" cy="252" r="9" fill="#4d8bff" filter="url(#gls)" />
+                <text x="414" y="256" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">1</text>
+                <text x="432" y="248" font-size="13" font-weight="700" fill="#e9f0fa">Asset Inventory</text>
+                <text x="432" y="262" font-size="10" fill="#4a6a82">Document all devices &amp; warranties</text>
+                <circle cx="414" cy="300" r="9" fill="#4d8bff" filter="url(#gls)" />
+                <text x="414" y="304" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">2</text>
+                <text x="432" y="296" font-size="13" font-weight="700" fill="#e9f0fa">Contract Signing</text>
+                <text x="432" y="310" font-size="10" fill="#4a6a82">SLA terms, coverage, escalation</text>
+                <circle cx="414" cy="348" r="9" fill="#4d8bff" filter="url(#gls)" />
+                <text x="414" y="352" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">3</text>
+                <text x="432" y="344" font-size="13" font-weight="700" fill="#e9f0fa">Scheduled Visits</text>
+                <text x="432" y="358" font-size="10" fill="#4a6a82">Quarterly on-site preventive checks</text>
+                <circle cx="414" cy="396" r="9" fill="#6a8fa8" filter="url(#gls)" />
+                <text x="414" y="400" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">4</text>
+                <text x="432" y="392" font-size="13" font-weight="700" fill="#e9f0fa">Break-Fix Support</text>
+                <text x="432" y="406" font-size="10" fill="#4a6a82">On-call dispatch within SLA window</text>
+                <circle cx="414" y="444" r="9" fill="#6a8fa8" filter="url(#gls)" />
+                <text x="414" y="448" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">5</text>
+                <text x="432" y="440" font-size="13" font-weight="700" fill="#e9f0fa">Monthly Reporting</text>
+                <text x="432" y="454" font-size="10" fill="#4a6a82">MIS + uptime + incident summary</text>
+                <circle cx="414" y="480" r="9" fill="#6a8fa8" filter="url(#gls)" />
+                <text x="414" y="484" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">6</text>
+                <text x="432" y="476" font-size="13" font-weight="700" fill="#e9f0fa">Annual Review</text>
+                <text x="432" y="490" font-size="10" fill="#4a6a82">Renewal, upgrades, asset refresh</text>
+              </g>
+
+              <rect x="728" y="204" width="334" height="298" rx="12" fill="rgba(7,14,30,0.95)" stroke="rgba(77,139,255,0.14)" stroke-width="1" />
+              <rect x="728" y="204" width="334" height="4" rx="2" fill="#4d8bff" />
+              <text x="748" y="228" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" font-weight="600" fill="#2a4a7a" letter-spacing="1.5">SLA COMMITMENTS</text>
+              <g font-family="Helvetica Neue,Helvetica,Arial,sans-serif">
+                <text x="748" y="258" font-size="12" font-weight="700" fill="#e9f0fa">Response Time</text>
+                <rect x="748" y="264" width="294" height="6" rx="3" fill="rgba(77,139,255,0.08)" />
+                <rect x="748" y="264" width="260" height="6" rx="3" fill="url(#prog)">
+                  <animate attributeName="width" from="0" to="260" dur="1.4s" fill="freeze" />
+                </rect>
+                <text x="748" y="282" font-size="10" fill="#4a6a82">&lt; 4 hours on-site · NBD for non-critical</text>
+
+                <text x="748" y="308" font-size="12" font-weight="700" fill="#e9f0fa">Uptime Guarantee</text>
+                <rect x="748" y="314" width="294" height="6" rx="3" fill="rgba(77,139,255,0.08)" />
+                <rect x="748" y="314" width="285" height="6" rx="3" fill="url(#prog)">
+                  <animate attributeName="width" from="0" to="285" dur="1.6s" fill="freeze" />
+                </rect>
+                <text x="748" y="332" font-size="10" fill="#4a6a82">99.9% network availability per contract</text>
+
+                <text x="748" y="358" font-size="12" font-weight="700" fill="#e9f0fa">Preventive Visits</text>
+                <rect x="748" y="364" width="294" height="6" rx="3" fill="rgba(77,139,255,0.08)" />
+                <rect x="748" y="364" width="220" height="6" rx="3" fill="url(#prog)">
+                  <animate attributeName="width" from="0" to="220" dur="1.2s" fill="freeze" />
+                </rect>
+                <text x="748" y="382" font-size="10" fill="#4a6a82">4 scheduled site visits per year (Q-wise)</text>
+
+                <text x="748" y="408" font-size="12" font-weight="700" fill="#e9f0fa">Spare Parts</text>
+                <rect x="748" y="414" width="294" height="6" rx="3" fill="rgba(77,139,255,0.08)" />
+                <rect x="748" y="414" width="240" height="6" rx="3" fill="url(#prog)">
+                  <animate attributeName="width" from="0" to="240" dur="1.3s" fill="freeze" />
+                </rect>
+                <text x="748" y="432" font-size="10" fill="#4a6a82">OEM-certified replacements included</text>
+
+                <line x1="748" y1="448" x2="1048" y2="448" stroke="rgba(77,139,255,0.1)" stroke-width="0.8" />
+                <text x="748" y="466" font-size="10" fill="#4a6a82">Coverage:</text>
+                <rect x="810" y="454" width="56" height="18" rx="4" fill="rgba(77,139,255,0.1)" stroke="rgba(77,139,255,0.2)" stroke-width="0.8" />
+                <text x="838" y="467" text-anchor="middle" font-size="9" font-weight="600" fill="#4d8bff">Network</text>
+                <rect x="876" y="454" width="56" height="18" rx="4" fill="rgba(77,139,255,0.1)" stroke="rgba(77,139,255,0.2)" stroke-width="0.8" />
+                <text x="904" y="467" text-anchor="middle" font-size="9" font-weight="600" fill="#4d8bff">Servers</text>
+                <rect x="942" y="454" width="56" height="18" rx="4" fill="rgba(77,139,255,0.1)" stroke="rgba(77,139,255,0.2)" stroke-width="0.8" />
+                <text x="970" y="467" text-anchor="middle" font-size="9" font-weight="600" fill="#4d8bff">Security</text>
+
+                <text x="748" y="490" font-size="11" font-weight="600" fill="#e9f0fa">Vendors: </text>
+                <text x="820" y="490" font-size="11" fill="#4a6a82">Cisco · Juniper · Dell · HPE · Fortinet · Aruba</text>
+              </g>
+            </g>
+
+            <rect x="0" y="522" width="1100" height="30" fill="rgba(5,12,26,0.98)" />
+            <line x1="0" y1="522" x2="1100" y2="522" stroke="rgba(77,139,255,0.12)" stroke-width="0.8" />
+            <circle cx="32" cy="537" r="4" fill="#4d8bff" filter="url(#gls)"><animate attributeName="opacity" values="1;0.3;1" dur="1.4s" repeatCount="indefinite" /></circle>
+            <text x="44" y="541" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" font-weight="600" fill="#4d8bff">AMC Active</text>
+            <text x="160" y="541" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#1e3560">Quarterly visits · Monthly MIS · 4-hr response · Spare parts included · OEM-certified · 24/7</text>
+          </svg>
+          <svg *ngSwitchCase="6" viewBox="0 0 1100 552" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <filter id="glo">
+                <feGaussianBlur stdDeviation="14" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="gls">
+                <feGaussianBlur stdDeviation="2.5" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <linearGradient id="cg" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#0d1e3a" />
+                <stop offset="100%" stop-color="#070f22" />
+              </linearGradient>
+              <linearGradient id="prog" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#4d8bff" />
+                <stop offset="100%" stop-color="#2a60e0" />
+              </linearGradient>
+              <path id="dep1" d="M550,276 C480,240 380,220 260,200" />
+              <path id="dep2" d="M550,276 C550,220 550,180 550,140" />
+              <path id="dep3" d="M550,276 C620,240 720,220 840,200" />
+              <path id="ret1" d="M260,200 C380,220 480,240 550,276" />
+              <path id="ret2" d="M550,140 C550,180 550,220 550,276" />
+              <path id="ret3" d="M840,200 C720,220 620,240 550,276" />
+            </defs>
+
+            <rect width="1100" height="552" fill="#050c1a" />
+            <g fill="rgba(77,139,255,0.05)">
+              <circle cx="92" cy="92" r="1.2" /><circle cx="184" cy="92" r="1.2" /><circle cx="276" cy="92" r="1.2" /><circle cx="368" cy="92" r="1.2" /><circle cx="460" cy="92" r="1.2" /><circle cx="552" cy="92" r="1.2" /><circle cx="644" cy="92" r="1.2" /><circle cx="736" cy="92" r="1.2" /><circle cx="828" cy="92" r="1.2" /><circle cx="920" cy="92" r="1.2" /><circle cx="1012" cy="92" r="1.2" />
+              <circle cx="92" cy="184" r="1.2" /><circle cx="184" cy="184" r="1.2" /><circle cx="276" cy="184" r="1.2" /><circle cx="368" cy="184" r="1.2" /><circle cx="460" cy="184" r="1.2" /><circle cx="552" cy="184" r="1.2" /><circle cx="644" cy="184" r="1.2" /><circle cx="736" cy="184" r="1.2" /><circle cx="828" cy="184" r="1.2" /><circle cx="920" cy="184" r="1.2" /><circle cx="1012" cy="184" r="1.2" />
+              <circle cx="92" cy="276" r="1.2" /><circle cx="184" cy="276" r="1.2" /><circle cx="276" cy="276" r="1.2" /><circle cx="368" cy="276" r="1.2" /><circle cx="460" cy="276" r="1.2" /><circle cx="644" cy="276" r="1.2" /><circle cx="736" cy="276" r="1.2" /><circle cx="828" cy="276" r="1.2" /><circle cx="920" cy="276" r="1.2" /><circle cx="1012" cy="276" r="1.2" />
+              <circle cx="92" cy="368" r="1.2" /><circle cx="184" cy="368" r="1.2" /><circle cx="276" cy="368" r="1.2" /><circle cx="368" cy="368" r="1.2" /><circle cx="460" cy="368" r="1.2" /><circle cx="552" cy="368" r="1.2" /><circle cx="644" cy="368" r="1.2" /><circle cx="736" cy="368" r="1.2" /><circle cx="828" cy="368" r="1.2" /><circle cx="920" cy="368" r="1.2" /><circle cx="1012" cy="368" r="1.2" />
+              <circle cx="92" cy="460" r="1.2" /><circle cx="184" cy="460" r="1.2" /><circle cx="276" cy="460" r="1.2" /><circle cx="368" cy="460" r="1.2" /><circle cx="460" cy="460" r="1.2" /><circle cx="552" cy="460" r="1.2" /><circle cx="644" cy="460" r="1.2" /><circle cx="736" cy="460" r="1.2" /><circle cx="828" cy="460" r="1.2" /><circle cx="920" cy="460" r="1.2" /><circle cx="1012" cy="460" r="1.2" />
+            </g>
+            <ellipse cx="550" cy="276" rx="380" ry="240" fill="rgba(77,139,255,0.05)" filter="url(#glo)" />
+
+            <path d="M550,276 C480,240 380,220 260,200" fill="none" stroke="rgba(77,139,255,0.2)" stroke-width="1.2" />
+            <path d="M550,276 C550,220 550,180 550,140" fill="none" stroke="rgba(77,139,255,0.2)" stroke-width="1.2" />
+            <path d="M550,276 C620,240 720,220 840,200" fill="none" stroke="rgba(77,139,255,0.2)" stroke-width="1.2" />
+
+            <circle r="5" fill="#4d8bff" filter="url(#gls)"><animateMotion dur="1.2s" repeatCount="indefinite" begin="0s"><mpath href="#dep1" /></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.2s" repeatCount="indefinite" /></circle>
+            <circle r="5" fill="#4d8bff" filter="url(#gls)"><animateMotion dur="1s" repeatCount="indefinite" begin="-0.4s"><mpath href="#dep2" /></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1s" repeatCount="indefinite" begin="-0.4s" /></circle>
+            <circle r="5" fill="#4d8bff" filter="url(#gls)"><animateMotion dur="1.3s" repeatCount="indefinite" begin="-0.8s"><mpath href="#dep3" /></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.3s" repeatCount="indefinite" begin="-0.8s" /></circle>
+            <circle r="3" fill="#6a8fa8" filter="url(#gls)"><animateMotion dur="1.4s" repeatCount="indefinite" begin="-0.6s"><mpath href="#ret1" /></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.4s" repeatCount="indefinite" begin="-0.6s" /></circle>
+            <circle r="3" fill="#6a8fa8" filter="url(#gls)"><animateMotion dur="1.2s" repeatCount="indefinite" begin="-0.2s"><mpath href="#ret2" /></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.2s" repeatCount="indefinite" begin="-0.2s" /></circle>
+            <circle r="3" fill="#6a8fa8" filter="url(#gls)"><animateMotion dur="1.5s" repeatCount="indefinite" begin="-1s"><mpath href="#ret3" /></animateMotion><animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" begin="-1s" /></circle>
+
+            <circle cx="550" cy="276" r="70" fill="rgba(8,18,42,0.98)" stroke="#4d8bff" stroke-width="1.6" filter="url(#gls)" />
+            <circle cx="550" cy="276" r="55" fill="rgba(20,50,110,0.3)" stroke="rgba(77,139,255,0.2)" stroke-width="1" />
+            <rect x="528" y="256" width="44" height="8" rx="2" fill="none" stroke="#4d8bff" stroke-width="1.3" />
+            <rect x="528" y="268" width="44" height="8" rx="2" fill="none" stroke="#4d8bff" stroke-width="1.3" opacity="0.7" />
+            <rect x="528" y="280" width="44" height="8" rx="2" fill="none" stroke="#4d8bff" stroke-width="1.3" opacity="0.5" />
+            <circle cx="536" cy="260" r="2" fill="#4d8bff"><animate attributeName="opacity" values="1;0.2;1" dur="0.8s" repeatCount="indefinite" /></circle>
+            <circle cx="536" cy="272" r="2" fill="#3cb371"><animate attributeName="opacity" values="1;0.2;1" dur="1.1s" repeatCount="indefinite" begin="-0.3s" /></circle>
+            <circle cx="536" cy="284" r="2" fill="#4d8bff"><animate attributeName="opacity" values="1;0.2;1" dur="0.9s" repeatCount="indefinite" begin="-0.6s" /></circle>
+            <text x="550" y="304" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="11" font-weight="700" fill="#4d8bff">CES TECH</text>
+            <text x="550" y="318" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="8" fill="#2a4872">RENTAL HUB</text>
+            <circle cx="550" cy="276" r="78" fill="none" stroke="rgba(77,139,255,0.1)" stroke-width="1" stroke-dasharray="6 5">
+              <animateTransform attributeName="transform" type="rotate" from="0 550 276" to="360 550 276" dur="14s" repeatCount="indefinite" />
+            </circle>
+
+            <rect x="160" y="144" width="200" height="112" rx="10" fill="url(#cg)" stroke="rgba(77,139,255,0.28)" stroke-width="1" />
+            <rect x="160" y="144" width="200" height="3.5" rx="2" fill="#4d8bff" />
+            <text x="260" y="168" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="13" font-weight="700" fill="#e9f0fa">Corporate HQ</text>
+            <text x="260" y="184" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">Router · 4x Switches</text>
+            <text x="260" y="197" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">8x APs · Firewall</text>
+            <line x1="176" y1="210" x2="344" y2="210" stroke="rgba(77,139,255,0.1)" stroke-width="0.8" />
+            <text x="260" y="224" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#3cb371">Active Rental · 12 months</text>
+            <text x="260" y="238" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#2a4872">Cisco · Aruba · Fortinet</text>
+
+            <rect x="450" y="68" width="200" height="112" rx="10" fill="url(#cg)" stroke="rgba(77,139,255,0.28)" stroke-width="1" />
+            <rect x="450" y="68" width="200" height="3.5" rx="2" fill="#4d8bff" />
+            <text x="550" y="92" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="13" font-weight="700" fill="#e9f0fa">Event Site</text>
+            <text x="550" y="108" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">Temp Wi-Fi · PoE Switches</text>
+            <text x="550" y="121" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">Video conf · Cabling</text>
+            <line x1="466" y1="134" x2="634" y2="134" stroke="rgba(77,139,255,0.1)" stroke-width="0.8" />
+            <text x="550" y="148" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#e8a020">Short-term · 3 days</text>
+            <text x="550" y="162" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#2a4872">Aruba · Cisco Meraki</text>
+
+            <rect x="740" y="144" width="200" height="112" rx="10" fill="url(#cg)" stroke="rgba(77,139,255,0.28)" stroke-width="1" />
+            <rect x="740" y="144" width="200" height="3.5" rx="2" fill="#4d8bff" />
+            <text x="840" y="168" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="13" font-weight="700" fill="#e9f0fa">Branch Office</text>
+            <text x="840" y="184" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">Router · Switch · 2x APs</text>
+            <text x="840" y="197" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#4a6a82">Server · UPS</text>
+            <line x1="756" y1="210" x2="924" y2="210" stroke="rgba(77,139,255,0.1)" stroke-width="0.8" />
+            <text x="840" y="224" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#3cb371">Active Rental · 6 months</text>
+            <text x="840" y="238" text-anchor="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="9" fill="#2a4872">Juniper · HPE · Cisco</text>
+
+            <rect x="40" y="368" width="490" height="136" rx="12" fill="rgba(7,14,30,0.95)" stroke="rgba(77,139,255,0.14)" stroke-width="1" />
+            <rect x="40" y="368" width="490" height="4" rx="2" fill="#4d8bff" />
+            <text x="60" y="392" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" font-weight="600" fill="#2a4a7a" letter-spacing="1.5">RENTAL FLEET</text>
+            <g font-family="Helvetica Neue,Helvetica,Arial,sans-serif">
+              <text x="60" y="416" font-size="11" fill="#e9f0fa">Routers &amp; Switches</text><text x="230" y="416" font-size="10" fill="#4a6a82">Cisco · Juniper · Aruba</text>
+              <text x="60" y="434" font-size="11" fill="#e9f0fa">Firewalls &amp; UTM</text><text x="230" y="434" font-size="10" fill="#4a6a82">Fortinet · Palo Alto · SonicWall</text>
+              <text x="60" y="452" font-size="11" fill="#e9f0fa">Servers &amp; Storage</text><text x="230" y="452" font-size="10" fill="#4a6a82">Dell · HPE · Lenovo</text>
+              <text x="60" y="470" font-size="11" fill="#e9f0fa">Wireless Infrastructure</text><text x="230" y="470" font-size="10" fill="#4a6a82">Wi-Fi 6 APs · Controllers</text>
+              <text x="60" y="488" font-size="11" fill="#e9f0fa">Video Conferencing</text><text x="230" y="488" font-size="10" fill="#4a6a82">Cisco Webex · Poly rooms</text>
+            </g>
+
+            <rect x="548" y="368" width="512" height="136" rx="12" fill="rgba(7,14,30,0.95)" stroke="rgba(77,139,255,0.14)" stroke-width="1" />
+            <rect x="548" y="368" width="512" height="4" rx="2" fill="#6a8fa8" />
+            <text x="568" y="392" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" font-weight="600" fill="#2a4a7a" letter-spacing="1.5">HOW IT WORKS</text>
+            <line x1="596" y1="404" x2="596" y2="492" stroke="rgba(77,139,255,0.1)" stroke-width="1" stroke-dasharray="3 4" />
+            <g font-family="Helvetica Neue,Helvetica,Arial,sans-serif">
+              <circle cx="596" cy="416" r="8" fill="#4d8bff" filter="url(#gls)" /><text x="596" y="420" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">1</text>
+              <text x="614" y="412" font-size="12" font-weight="700" fill="#e9f0fa">Requirement Brief</text><text x="614" y="424" font-size="10" fill="#4a6a82">Scope · duration · site details</text>
+
+              <circle cx="596" cy="444" r="8" fill="#4d8bff" filter="url(#gls)" /><text x="596" y="448" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">2</text>
+              <text x="614" y="440" font-size="12" font-weight="700" fill="#e9f0fa">Equipment Staging</text><text x="614" y="452" font-size="10" fill="#4a6a82">Pre-configured, tested &amp; bagged</text>
+
+              <circle cx="596" cy="472" r="8" fill="#6a8fa8" filter="url(#gls)" /><text x="596" y="476" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">3</text>
+              <text x="614" y="468" font-size="12" font-weight="700" fill="#e9f0fa">Deploy &amp; Support</text><text x="614" y="480" font-size="10" fill="#4a6a82">On-site install · 24/7 during event</text>
+
+              <circle cx="596" cy="492" r="8" fill="#6a8fa8" filter="url(#gls)" /><text x="596" y="496" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">4</text>
+              <text x="614" y="492" font-size="12" font-weight="700" fill="#e9f0fa">Return &amp; Audit</text>
+
+              <rect x="820" y="410" width="72" height="20" rx="5" fill="rgba(77,139,255,0.1)" stroke="rgba(77,139,255,0.2)" stroke-width="0.8" />
+              <text x="856" y="424" text-anchor="middle" font-size="9" font-weight="600" fill="#4d8bff">Daily</text>
+              <rect x="902" y="410" width="72" height="20" rx="5" fill="rgba(77,139,255,0.1)" stroke="rgba(77,139,255,0.2)" stroke-width="0.8" />
+              <text x="938" y="424" text-anchor="middle" font-size="9" font-weight="600" fill="#4d8bff">Monthly</text>
+              <rect x="984" y="410" width="72" height="20" rx="5" fill="rgba(77,139,255,0.1)" stroke="rgba(77,139,255,0.2)" stroke-width="0.8" />
+              <text x="1020" y="424" text-anchor="middle" font-size="9" font-weight="600" fill="#4d8bff">Annual</text>
+
+              <text x="820" y="450" font-size="9" fill="#2a4872">Lease terms: Daily · Weekly · Monthly · Annual</text>
+              <text x="820" y="464" font-size="9" fill="#2a4872">Insurance &amp; logistics included</text>
+              <text x="820" y="478" font-size="9" fill="#2a4872">No CAPEX — pure OPEX model</text>
+            </g>
+
+            <rect x="0" y="522" width="1100" height="30" fill="rgba(5,12,26,0.98)" />
+            <line x1="0" y1="522" x2="1100" y2="522" stroke="rgba(77,139,255,0.12)" stroke-width="0.8" />
+            <circle cx="32" cy="537" r="4" fill="#3cb371" filter="url(#gls)"><animate attributeName="opacity" values="1;0.3;1" dur="1.4s" repeatCount="indefinite" /></circle>
+            <text x="44" y="541" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" font-weight="600" fill="#3cb371">Fleet Ready</text>
+            <text x="170" y="541" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="10" fill="#1e3560">Daily / Monthly / Annual lease · Pre-configured &amp; tested · No CAPEX · On-site support · All OEM brands</text>
+          </svg>
+          <img *ngSwitchDefault [src]="activeServiceFeature.image" [alt]="activeServiceFeature.label + ' service visual'" />
+        </div>
+      </div>
+    </article>
+
+    <div class="services-switchboard__copy">
+      <div class="services-switchboard__text">
+        <h3>{{ titleCase(activeServiceFeature.title) }}</h3>
+        <p>{{ activeServiceFeature.description }}</p>
+      </div>
+      <button type="button" class="services-switchboard__cta">
+        {{ activeServiceFeature.cta }}
+      </button>
+    </div>
+  </div>
+</section>
+
+ 
+
+<!-- Scroll budget wrapper — gives the sticky section room to animate -->
+<div class="reveal-scroll-container" id="reveal-scroll-container">
+  <section class="reveal-block" id="reveal-block">
+    <div class="reveal-inner">
+
+      <!-- Image: starts full-screen, JS shrinks it -->
+      <div class="reveal-visual" id="reveal-visual" aria-hidden="true">
+        <div class="reveal-visual__img"
+          style="background-image: linear-gradient(135deg, rgba(7, 15, 30, 0.15), rgba(7, 15, 30, 0.55)), url('../../../assets/data center home page.jpeg');">
+        </div>
+      </div>
+
+      <!-- Text: hidden until JS reveals it -->
+      <div class="reveal-copy" id="reveal-copy">
+        <p class="reveal-kicker">Trusted delivery, human approach</p>
+        <h2>{{ titleCase('Beyond IT Services, We Deliver Solutions!') }}</h2>
+        <p class="reveal-lede">
+          Innovation meets reliability so your network, data center, cloud, and collaboration stack stay resilient,
+          secure, and always-on.
+          We've been shipping for customers since 2015 with a team built for outcomes.
+        </p>
+
+        <ul class="reveal-pills">
+          <li>24/7 call support</li>
+          <li>Automation solutions</li>
+          <li>Expert team</li>
+          <li>Site surveys</li>
+          <li>Telecom networks</li>
+          <li>Corporate training</li>
+        </ul>
+
+        <div class="reveal-cta">
+          <button type="button" class="cta-primary">Book a strategy call</button>
+          <a class="cta-secondary" href="/about-us#meet-ces">Learn more</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- Services Section -->
+<section class="services" id="services">
+  <div class="services__inner site-container">
+
+    <div class="services__header">
+      <div class="services__text">
+        <h2>{{ titleCase('Solutions built for resilience') }}</h2>
+        <p class="services__lede section-subtext">
+          From network and cloud to data center and cybersecurity, CES solution suites help you design, secure,
+          deploy, and scale critical IT environments with confidence.
+        </p>
+      </div>
+      <div class="services__actions">
+        <button type="button" class="cta-primary">Talk to a solution expert</button>
+        <a class="cta-secondary" href="/solutions">Explore all solutions</a>
+      </div>
+    </div>
+
+    <div class="services__mosaic">
+      <article class="svc-tile svc-tile--color teal">
+        <div class="svc-tile__body">
+          <h3>{{ titleCase('Modern WAN for Distributed Enterprises') }}</h3>
+          <p>Replaces costly MPLS with flexible, cost-effective WAN architecture. Reduces costs 30-50%, enables rapid branch deployment, and provides application-aware traffic management. Simplifies operations through centralized policy control.</p>
+          <a href="/solutions/sd-wan-solution" class="svc-tile__cta">Read more</a>
+        </div>
+      </article>
+
+      <article class="svc-tile svc-tile--image"
+        style="--tile-image: url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80');">
+        <div class="svc-tile__body">
+          <h3>{{ titleCase('Hybrid Cloud Infrastructure') }}</h3>
+          <p>Combines on-premises control with cloud agility. Aligns architecture with workload requirements, cost constraints, and compliance needs. Includes assessment, migration planning, and managed operations for seamless transition and ongoing optimization.</p>
+          <a href="/solutions/cloud-solution" class="svc-tile__cta">Read more</a>
+        </div>
+      </article>
+
+      <article class="svc-tile svc-tile--color purple">
+        <div class="svc-tile__body">
+          <h3>{{ titleCase('Enterprise Network Security Architecture') }}</h3>
+          <p>Multi-layered defense using next-generation firewalls, intrusion prevention, and threat protection. Includes risk assessment, security hardening, and ongoing threat management. Designed for compliance alignment and business continuity.</p>
+          <a href="/solutions/network-security-solution" class="svc-tile__cta">Read more</a>
+        </div>
+      </article>
+
+      <article class="svc-tile svc-tile--image"
+        style="--tile-image: url('https://images.unsplash.com/photo-1585079542156-2755d9c8ffe8?auto=format&fit=crop&w=1600&q=80');">
+        <div class="svc-tile__body">
+          <h3>{{ titleCase('Data Center Modernization & Optimization') }}</h3>
+          <p>Modernize aging data center infrastructure to improve performance, reduce energy costs, and enable scalability. Designs for high-availability, rapid failover, and efficient operations. Transforms your data center from operational burden to strategic asset.</p>
+          <a href="/solutions/data-center-solution" class="svc-tile__cta">Read more</a>
+        </div>
+      </article>
+
+      <article class="svc-tile svc-tile--color blue">
+        <div class="svc-tile__body">
+          <h3>{{ titleCase('Compute & Storage Architecture') }}</h3>
+          <p>Right-sized compute and storage infrastructure supporting application performance and business growth. Optimized for high-availability, scalability, and cost efficiency. Planning, implementation, and ongoing optimization ensure alignment with application requirements.</p>
+          <a href="/solutions/server-storage-solution" class="svc-tile__cta">Read more</a>
+        </div>
+      </article>
+
+      <article class="svc-tile svc-tile--image"
+        style="--tile-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1600&q=80');">
+        <div class="svc-tile__body">
+          <h3>{{ titleCase('Enterprise Collaboration Infrastructure') }}</h3>
+          <p>Modern unified communications replacing legacy telephony. Supports distributed workforces with reliable voice, video, and messaging. Includes security compliance, integration with existing systems, and continuous optimization.</p>
+          <a href="/solutions/voice-video-solution" class="svc-tile__cta">Read more</a>
+        </div>
+      </article>
+
+      <article class="svc-tile svc-tile--color indigo">
+        <div class="svc-tile__body">
+          <h3>{{ titleCase('Infrastructure Automation') }}</h3>
+          <p>Reduce manual infrastructure operations through infrastructure-as-code and policy automation. Accelerates deployment, reduces human error, and improves consistency. Frees your teams to focus on strategic initiatives rather than operational tasks.</p>
+          <a href="/solutions" class="svc-tile__cta">Read more</a>
+        </div>
+      </article>
+
+      <article class="svc-tile svc-tile--image"
+        style="--tile-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80');">
+        <div class="svc-tile__body">
+          <h3>{{ titleCase('Integrated Solutions Stack') }}</h3>
+          <p>Individual solutions create complexity. Our integrated approach ensures solutions work together—network security enables cloud adoption, automation accelerates policy rollout, data center upgrades support scalability. Reduces vendor relationships, simplifies management, and accelerates outcomes.</p>
+          <a href="/solutions" class="svc-tile__cta">Read more</a>
+        </div>
+      </article>
+    </div>
+
+  </div>
+</section>
+
+<section class="blog-hub" aria-labelledby="blog-hub-title">
+  <div class="blog-hub__inner site-container">
+    <div class="blog-hub__head">
+      <h2 id="blog-hub-title">{{ titleCase('Latest from CES Blogs') }}</h2>
+      <p class="section-subtext">Research, playbooks, and real-world lessons plus operator insights from the CES team.
+      </p>
+    </div>
+
+    <div class="blog-hub__grid">
+      <article class="blog-card blog-card--light">
+        <div class="blog-card__content">
+          <p class="blog-card__type">PERSPECTIVE</p>
+          <h3>{{ titleCase('Building zero-trust branch networks that scale') }}</h3>
+          <p class="blog-card__desc">
+            How CES designs policy-led branch security with resilient failover and better user experience.
+          </p>
+          <a href="/blogs/zero-trust-branch-networks" class="blog-card__read">Read more <mat-icon aria-hidden="true"
+              svgIcon="landing-arrow-forward"></mat-icon></a>
+        </div>
+        <div class="blog-card__media"
+          style="--blog-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80');">
+        </div>
+      </article>
+
+      <article class="blog-card blog-card--dark">
+        <div class="blog-card__content">
+          <p class="blog-card__type">RESEARCH REPORT</p>
+          <h3>{{ titleCase('Cloud migration patterns for regulated industries') }}</h3>
+          <p class="blog-card__desc">
+            Practical architecture patterns CES teams use for secure cloud modernization.
+          </p>
+          <a href="/blogs/cloud-migration-regulated-industries" class="blog-card__read">Read more <mat-icon
+              aria-hidden="true" svgIcon="landing-arrow-forward"></mat-icon></a>
+        </div>
+        <div class="blog-card__media"
+          style="--blog-image: url('https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&w=1200&q=80');">
+        </div>
+      </article>
+
+      <article class="blog-card blog-card--dark">
+        <div class="blog-card__content">
+          <p class="blog-card__type">RESEARCH REPORT</p>
+          <h3>{{ titleCase('Inside VAPT programs that improve real security posture') }}</h3>
+          <p class="blog-card__desc">
+            A field guide to vulnerability testing cycles, remediation workflows, and audit readiness.
+          </p>
+          <a href="/blogs/vapt-continuous-hardening" class="blog-card__read">Read more <mat-icon aria-hidden="true"
+              svgIcon="landing-arrow-forward"></mat-icon></a>
+        </div>
+        <div class="blog-card__media"
+          style="--blog-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80');">
+        </div>
+      </article>
+
+      <article class="blog-card blog-card--violet">
+        <div class="blog-card__content">
+          <p class="blog-card__type">TREND BRIEF</p>
+          <h3>{{ titleCase('Top networking and security trends for enterprise IT') }}</h3>
+          <p class="blog-card__desc">
+            What matters now for CIOs and network teams planning for scale, resilience, and compliance.
+          </p>
+          <a href="/blogs/network-security-trends-2026" class="blog-card__read">Read more <mat-icon aria-hidden="true"
+              svgIcon="landing-arrow-forward"></mat-icon></a>
+        </div>
+        <div class="blog-card__media"
+          style="--blog-image: url('https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=1200&q=80');">
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="leaders" aria-label="CES leadership stories">
+  <div class="leaders__inner site-container">
+    <h2 class="leaders__title">{{ titleCase('Leadership Value') }}</h2>
+    <p class="section-subtext">The leaders shaping CES strategy, delivery, and customer outcomes.</p>
+
+    <div class="leaders__viewport">
+      <div class="leaders__track" [style.transform]="leaderTrackTransform" [style.transition]="leaderTrackTransition">
+        <div class="leaders__slide" *ngFor="let leader of leaders; let i = index">
+          <article class="leader-showcase" [attr.aria-label]="'Leader profile: ' + leader.name">
+            <div class="leader-showcase__content">
+              <p class="leader-showcase__kicker">{{ leader.designation }}</p>
+              <h3>{{ titleCase(leader.headline) }}</h3>
+              <p class="leader-showcase__summary">{{ leader.summary }}</p>
+              <p class="leader-showcase__trust">{{ leader.trust }}</p>
+
+              <div class="leader-showcase__meta">
+                <p class="leader-showcase__name">{{ leader.name }}</p>
+                <p class="leader-showcase__designation">{{ leader.designation }}</p>
+              </div>
+            </div>
+
+            <div class="leader-showcase__media">
+              <img class="leader-showcase__photo" [src]="leader.photo" [alt]="leader.name + ' portrait'"
+                loading="lazy" />
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="leaders__controls" aria-label="Leader slide selectors">
+      <div class="leaders__controls-left">
+        <div class="leaders__active-role" aria-live="polite">
+          {{ leaders[activeLeaderIndex]?.designation }}
+        </div>
+        <div class="leaders__numbers">
+          <button type="button" class="leaders__number" *ngFor="let leader of leaders; let i = index"
+            [class.leaders__number--active]="i === activeLeaderIndex" [attr.aria-label]="'Go to slide ' + (i + 1)"
+            [attr.aria-pressed]="i === activeLeaderIndex" (click)="goToLeader(i)">
+            {{ formatLeaderIndex(i) }}
+          </button>
+        </div>
+      </div>
+
+      <div class="leaders__arrows">
+        <button type="button" class="leaders__nav-arrow" (click)="prevLeader()" aria-label="Previous leader slide">
+          <mat-icon aria-hidden="true" svgIcon="landing-arrow-back"></mat-icon>
+        </button>
+        <button type="button" class="leaders__nav-arrow" (click)="nextLeader()" aria-label="Next leader slide">
+          <mat-icon aria-hidden="true" svgIcon="landing-arrow-forward"></mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="awards-hub" aria-labelledby="awards-hub-title">
+  <div class="awards-hub__inner site-container">
+    <h2 id="awards-hub-title">{{ titleCase('Awards and Certifications') }}</h2>
+    <p class="awards-hub__lede section-subtext">
+      Recognized globally for delivery excellence, partner credentials, and verified technical competency across
+      networking, cloud, and cybersecurity.
+    </p>
+
+    <div class="awards-hub__divider" aria-hidden="true"></div>
+
+    <div class="awards-hub__cert-scroller" aria-label="Certifications scroller">
+      <div class="awards-hub__cert-track">
+        <a *ngFor="let cert of certificationBadges" class="awards-hub__cert" routerLink="/achievements"
+          [attr.aria-label]="'View details for ' + cert.alt" [title]="cert.alt">
+          <img [src]="cert.image" [alt]="cert.alt" loading="lazy" />
+        </a>
+
+        <a *ngFor="let cert of certificationBadges" class="awards-hub__cert" routerLink="/achievements"
+          [attr.aria-label]="'View details for ' + cert.alt" [title]="cert.alt" aria-hidden="true" tabindex="-1">
+          <img [src]="cert.image" [alt]="cert.alt" loading="lazy" />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

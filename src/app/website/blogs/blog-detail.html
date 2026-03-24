@@ -1,0 +1,72 @@
+<section class="blog-detail" [class]="themeClass">
+  <section class="blog-detail__hero">
+    <div class="blog-detail__hero-bg" [style.background-image]="'url(' + blog.image + ')'"></div>
+    <div class="blog-detail__veil"></div>
+    <div class="blog-detail__hero-inner reveal-on-scroll site-container">
+      <a class="blog-detail__back" routerLink="/blogs">&larr; Back to all blogs</a>
+      <p class="blog-detail__meta-line">
+        <span>{{ blog.type }}</span>
+        <span>{{ blog.readTime }}</span>
+      </p>
+      <h1>{{ blog.title }}</h1>
+      <p class="blog-detail__date">{{ blog.publishedOn }}</p>
+    </div>
+  </section>
+
+  <section class="blog-detail__lead reveal-on-scroll site-container">
+    <div class="blog-detail__lead-empty"></div>
+    <p>{{ blog.intro }} {{ blog.summary }}</p>
+  </section>
+
+  <section class="blog-detail__statement reveal-on-scroll site-container">
+    <h2>
+      Change is accelerating, and enterprise teams are prioritizing resilient execution over isolated wins.
+    </h2>
+  </section>
+
+  <section class="blog-detail__pulse reveal-on-scroll site-container">
+    <div class="blog-detail__pulse-headline">
+      <span aria-hidden="true"></span>
+      <h3>{{ blog.paragraphs[0] }}</h3>
+    </div>
+    <div class="blog-detail__pulse-metrics">
+      <article *ngFor="let stat of pulseStats">
+        <span aria-hidden="true"></span>
+        <h4>{{ stat.value }}</h4>
+        <p>{{ stat.text }}</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="blog-detail__body reveal-on-scroll site-container">
+    <div class="blog-detail__body-grid">
+      <article class="blog-detail__body-card" *ngFor="let paragraph of blog.paragraphs; let i = index">
+        <h4>Section {{ i + 1 }}</h4>
+        <p>{{ paragraph }}</p>
+      </article>
+    </div>
+
+    <ul class="blog-detail__highlights">
+      <li *ngFor="let point of blog.highlights">{{ point }}</li>
+    </ul>
+
+  </section>
+
+  <section class="blog-detail__related reveal-on-scroll site-container" aria-labelledby="related-blogs-title">
+    <h2 id="related-blogs-title">Related blogs</h2>
+    <div class="blog-detail__related-grid">
+      <a
+        *ngFor="let item of relatedBlogs"
+        [routerLink]="['/blogs', item.slug]"
+        class="blog-detail__related-card"
+      >
+        <img [src]="item.image" [alt]="item.title + ' cover'" loading="lazy" />
+        <div>
+          <p>{{ item.type }}</p>
+          <h3>{{ item.title }}</h3>
+        </div>
+      </a>
+    </div>
+  </section>
+
+</section>

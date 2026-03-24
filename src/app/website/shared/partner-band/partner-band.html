@@ -1,0 +1,25 @@
+<section class="growth-story__logos-band" aria-label="Trusted CES partner logos">
+  <p class="growth-story__logos-title">Trusted by leading partners and enterprise customers</p>
+  <div class="growth-story__logos-scroller" aria-label="Partner logos scroller">
+    <div class="growth-story__logos-track">
+      <a
+        class="growth-story__logo-item"
+        *ngFor="let partner of logos"
+        routerLink="/partners"
+        [attr.aria-label]="'View partners page: ' + partner.name"
+      >
+        <img [src]="partner.image" [alt]="partner.name + ' logo'" loading="lazy" />
+      </a>
+      <a
+        class="growth-story__logo-item"
+        *ngFor="let partner of logos"
+        routerLink="/partners"
+        [attr.aria-label]="'View partners page: ' + partner.name"
+        aria-hidden="true"
+        tabindex="-1"
+      >
+        <img [src]="partner.image" [alt]="partner.name + ' logo'" loading="lazy" />
+      </a>
+    </div>
+  </div>
+</section>

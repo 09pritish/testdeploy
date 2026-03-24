@@ -1,0 +1,53 @@
+<section class="blogs-page">
+  <div class="blogs-shell site-container">
+    <div class="blogs-breadcrumb">Home <span>&rsaquo;</span> Blogs</div>
+
+    <section class="blogs-hero">
+      <p class="blogs-hero__kicker">Insights & Stories</p>
+      <h1>CES Tech Blogs</h1>
+      <p>All new and archived CES Tech blogs in one place, following the same card pattern as the home page.</p>
+    </section>
+
+    <section class="blogs-block" aria-labelledby="new-blogs-title">
+      <h2 id="new-blogs-title">New Blogs</h2>
+      <div class="blogs-grid">
+        <article
+          class="blog-card"
+          *ngFor="let blog of newBlogs"
+          [class.blog-card--light]="blog.tone === 'light'"
+          [class.blog-card--dark]="blog.tone === 'dark'"
+          [class.blog-card--violet]="blog.tone === 'violet'"
+        >
+          <div class="blog-card__content">
+            <p class="blog-card__type">{{ blog.type }}</p>
+            <h3>{{ blog.title }}</h3>
+            <p class="blog-card__desc">{{ blog.summary }}</p>
+            <a [routerLink]="['/blogs', blog.slug]" class="blog-card__read">Read more &rarr;</a>
+          </div>
+          <div class="blog-card__media" [style.--blog-image]="'url(' + blog.image + ')'"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="blogs-block" aria-labelledby="archive-blogs-title">
+      <h2 id="archive-blogs-title">Archived Blogs</h2>
+      <div class="blogs-grid">
+        <article
+          class="blog-card"
+          *ngFor="let blog of archivedBlogs"
+          [class.blog-card--light]="blog.tone === 'light'"
+          [class.blog-card--dark]="blog.tone === 'dark'"
+          [class.blog-card--violet]="blog.tone === 'violet'"
+        >
+          <div class="blog-card__content">
+            <p class="blog-card__type">{{ blog.type }}</p>
+            <h3>{{ blog.title }}</h3>
+            <p class="blog-card__desc">{{ blog.summary }}</p>
+            <a [routerLink]="['/blogs', blog.slug]" class="blog-card__read">Read more &rarr;</a>
+          </div>
+          <div class="blog-card__media" [style.--blog-image]="'url(' + blog.image + ')'"></div>
+        </article>
+      </div>
+    </section>
+  </div>
+</section>

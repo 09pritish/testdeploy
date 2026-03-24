@@ -1,0 +1,114 @@
+<section class="service-detail">
+  <section class="service-detail__intro-shell">
+    <div class="service-detail__intro service-layout">
+      <article class="service-detail__intro-copy">
+        <p class="service-detail__tag">{{ service.tag }}</p>
+        <h1>What Is {{ service.title }}?</h1>
+        <p>{{ service.summary }}</p>
+        <p>{{ service.bodyIntro }}</p>
+        <div class="service-detail__intro-actions">
+          <a routerLink="/contact-us" class="service-detail__btn service-detail__btn--solid">Get Started</a>
+          <a routerLink="/services" class="service-detail__btn service-detail__btn--ghost">View All Services</a>
+        </div>
+      </article>
+
+      <figure class="service-detail__intro-media">
+        <div class="service-detail__intro-graphic" [ngSwitch]="service.slug">
+          <img *ngSwitchCase="'it-services'" src="/assets/service-graphics/it-services.svg" alt="IT services overview graphic" />
+          <img *ngSwitchCase="'network-audit'" src="/assets/service-graphics/network-audit.svg" alt="Network audit overview graphic" />
+          <img *ngSwitchCase="'network-implementation'" src="/assets/service-graphics/network-implementation.svg" alt="Network implementation overview graphic" />
+          <img *ngSwitchCase="'managed-services'" src="/assets/service-graphics/managed-services.svg" alt="Managed services overview graphic" />
+          <img *ngSwitchCase="'vapt'" src="/assets/service-graphics/vapt.svg" alt="VAPT overview graphic" />
+          <img *ngSwitchCase="'annual-maintenance-contract'" src="/assets/service-graphics/annual-maintenance-contract.svg" alt="Annual maintenance contract overview graphic" />
+          <img *ngSwitchCase="'rental'" src="/assets/service-graphics/rental.svg" alt="Rental services overview graphic" />
+          <img *ngSwitchDefault [src]="service.contentImage || service.heroImage" [alt]="service.title + ' overview image'" loading="eager" (error)="useFallbackImage($event)" />
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="service-detail__advantages service-layout">
+    <h2>Advantages of {{ service.title }}</h2>
+    <div class="service-detail__advantages-grid">
+      <article class="service-detail__advantage-card" *ngFor="let feature of advantages">
+        <span class="service-detail__advantage-icon" aria-hidden="true">
+          <mat-icon>{{ feature.icon }}</mat-icon>
+        </span>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.description }}</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="service-detail__process service-layout">
+    <h2>Why Do You Need {{ service.title }}?</h2>
+    <p class="service-detail__process-intro">{{ service.featureIntroBody }}</p>
+
+    <div class="service-detail__timeline">
+      <article
+        class="service-detail__timeline-item"
+        *ngFor="let step of processSteps; let i = index"
+        [class.service-detail__timeline-item--right]="i % 2 === 0"
+      >
+        <span class="service-detail__timeline-index">{{ i + 1 }}</span>
+        <div class="service-detail__timeline-card">
+          <h3>{{ step.title }}</h3>
+          <p>{{ step.description }}</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="why-choose-us" aria-labelledby="why-choose-us-services-detail-title">
+    <div class="why-choose-us__inner site-container">
+      <div class="why-choose-us__header">
+        <h2 id="why-choose-us-services-detail-title">Why Choose CES</h2>
+        <p>Designed for uptime, delivered with precision, and backed by teams who stay with you end-to-end.</p>
+      </div>
+      <div class="why-choose-us__grid">
+        <article class="why-choose-us__item">
+          <span class="why-choose-us__icon" aria-hidden="true"><mat-icon>verified_user</mat-icon></span>
+          <h3>Built for uptime</h3>
+          <p>Designed for uptime, delivered with precision, and backed by teams who stay with you end-to-end.</p>
+        </article>
+
+        <article class="why-choose-us__item">
+          <span class="why-choose-us__icon" aria-hidden="true"><mat-icon>workspace_premium</mat-icon></span>
+          <h3>Our edge</h3>
+          <p>
+            Trust, reliability, precision, speed, efficiency, connectivity, care, security, future-proofing, global reach,
+            24x7 customer support, best quality service, easy to connect, affordable cost, scalability, low latency,
+            satisfaction guarantee, satisfied clients.
+          </p>
+        </article>
+
+        <article class="why-choose-us__item">
+          <span class="why-choose-us__icon" aria-hidden="true"><mat-icon>security</mat-icon></span>
+          <h3>Secure, on-time delivery</h3>
+          <p>Secure staging, rapid deployment, on-time delivery.</p>
+        </article>
+
+        <article class="why-choose-us__item">
+          <span class="why-choose-us__icon" aria-hidden="true"><mat-icon>precision_manufacturing</mat-icon></span>
+          <h3>We deliver with precision and care.</h3>
+          <p>SLA-backed response, on-site expertise, and continuous monitoring keep your critical systems ahead of risk.</p>
+        </article>
+
+        <article class="why-choose-us__item">
+          <span class="why-choose-us__icon" aria-hidden="true"><mat-icon>flash_on</mat-icon></span>
+          <h3>Downtime is expensive. CES prevents it.</h3>
+          <p>We design resilient architectures and deliver proactive fixes before issues impact your business.</p>
+        </article>
+
+        <article class="why-choose-us__item">
+          <span class="why-choose-us__icon" aria-hidden="true"><mat-icon>trending_up</mat-icon></span>
+          <h3>Scale with confidence</h3>
+          <p>Infrastructure that grows with you, blueprinted for resilience, and people-powered delivery.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <app-partner-band></app-partner-band>
+  <app-awards-strip></app-awards-strip>
+</section>

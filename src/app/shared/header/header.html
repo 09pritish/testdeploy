@@ -1,0 +1,178 @@
+<header #headerShell class="header-shell" [class.mobile-open]="isMobileMenuOpen"
+  (mouseleave)="closeMega()">
+  <div class="header-container">
+    <div class="top-nav">
+      <div class="container-fluid">
+        <div class="top-bar">
+          <nav class="top-links">
+            <a *ngFor="let link of quickLinks" [href]="normalizeHref(link.href)"
+              (click)="onQuickLinkClick($event, link.href)">
+              {{ link.label }}
+            </a>
+          </nav>
+          <div class="social_medias">
+            <a href="https://www.linkedin.com/company/ces-tech" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="https://twitter.com/cestech" target="_blank" rel="noopener" aria-label="X (Twitter)">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a href="https://www.facebook.com/cestech" target="_blank" rel="noopener" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/cestech" target="_blank" rel="noopener" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://www.youtube.com/@cestech" target="_blank" rel="noopener" aria-label="YouTube">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-bar">
+      <div class="container" id="inner_nav">
+
+        <!-- Mobile hamburger -->
+        <button class="mobile-menu-btn" type="button" aria-label="Open menu" [attr.aria-expanded]="isMobileMenuOpen"
+          (click)="toggleMobileMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <!-- LEFT: Logo -->
+        <a class="logo" href="/" aria-label="CES Tech home">
+          <img src="assets/CESlogo.png" alt="CES Tech logo">
+        </a>
+
+        <!-- CENTER: Desktop search bar -->
+        <div class="desktop-search">
+          <span class="material-icons-outlined search-icon" aria-hidden="true">search</span>
+          <input type="text" placeholder="Search by keyword" aria-label="Search" />
+        </div>
+
+        <!-- Mobile search trigger -->
+        <button class="mobile-search-btn" type="button" aria-label="Search" (click)="onSearchClick()">
+          <span class="material-icons-outlined" aria-hidden="true">search</span>
+        </button>
+
+        <!-- RIGHT: Nav links + CTA -->
+        <div class="nav_inner" [class.is-open]="isMobileMenuOpen">
+          <nav class="nav-links">
+            <a *ngFor="let item of menuItems" [attr.href]="normalizeHref(item.href || '#')" class="nav-item-link"
+              (mouseenter)="onNavItemHover(item.label, !!item.mega)" (focus)="onNavItemHover(item.label, !!item.mega)"
+              (click)="onNavItemClick($event, item)">
+              <span>{{ item.label }}</span>
+              <span class="suffix material-icons-outlined" *ngIf="item.suffix" aria-hidden="true">arrow_drop_down</span>
+            </a>
+          </nav>
+
+          <!-- Contact Us CTA button -->
+          <button class="cta" type="button" [routerLink]="['/contact-us']" routerLinkActive="router-link-active"  routerLinkActive="router-link-active" >
+            <span class="cta-icon material-icons-outlined" aria-hidden="true">phone_in_talk</span>
+            <span>Contact Us</span>
+          </button>
+        </div>
+
+        <!-- Mega panel -->
+        <div class="mega-panel" *ngIf="activeMega" (mouseenter)="onMegaPanelHover()">
+          <ng-container *ngFor="let item of menuItems">
+            <ng-container *ngIf="item.label === activeMega && item.mega">
+              <div class="mega-content">
+                <div class="mega-feature">
+                  <h3>{{ item.mega.feature.title }}</h3>
+                  <p>{{ item.mega.feature.body }}</p>
+                  <button class="feature-cta" type="button" (click)="onFeatureCtaClick(item.mega.feature.ctaHref)">
+                    {{ item.mega.feature.ctaLabel }}
+                  </button>
+                </div>
+                <div class="mega-columns">
+                  <div class="mega-column" *ngFor="let col of item.mega.columns">
+                    <h4>{{ col.title }}</h4>
+                    <a *ngFor="let link of col.links" [href]="normalizeHref(link.href)" class="mega-link"
+                      (click)="onMenuLinkClick($event, link.href)">
+                      {{ link.label }}
+                      <span class="material-icons-outlined arrow">arrow_forward</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+
+      </div>
+    </div>
+
+    <form class="mobile-search-panel" *ngIf="isMobileSearchOpen" (submit)="onMobileSearchSubmit($event)">
+      <input #mobileSearchInput type="text" placeholder="Search by keyword" [value]="mobileSearchQuery"
+        (input)="onMobileSearchInput($event)" aria-label="Mobile search" />
+      <button type="submit" aria-label="Search from mobile panel">
+        <span class="material-icons-outlined" aria-hidden="true">search</span>
+      </button>
+    </form>
+  </div>
+
+  <!-- Mobile side drawer -->
+  <div class="mobile-side-shell" [class.is-open]="isMobileMenuOpen" aria-hidden="false">
+    <button class="mobile-side-backdrop" type="button" aria-label="Close menu" (click)="closeMobileMenu()"></button>
+    <aside class="mobile-side-panel" role="dialog" aria-label="Mobile menu" [class.level-1]="mobileMenuLevel === 1"
+      [class.level-2]="mobileMenuLevel === 2">
+      <div class="mobile-side-top">
+        <button class="mobile-side-close" type="button" aria-label="Close menu" (click)="closeMobileMenu()">
+          <span class="material-icons-outlined" aria-hidden="true">close</span>
+        </button>
+        <a class="mobile-side-logo" href="/" aria-label="CES Tech home" (click)="closeMobileMenu()">
+          <img src="assets/CESlogo.png" alt="CES Tech logo">
+        </a>
+      </div>
+
+      <div class="mobile-side-level" *ngIf="mobileMenuLevel === 0">
+        <nav class="mobile-main-links">
+          <button type="button" class="mobile-main-link" *ngFor="let item of mobileNavSections"
+            (click)="onMobileSectionClick(item)">
+            <span>{{ item.label }}</span>
+            <span class="material-icons-outlined" aria-hidden="true" *ngIf="item.children?.length">chevron_right</span>
+          </button>
+        </nav>
+
+        <nav class="mobile-minor-links" aria-label="Secondary links">
+          <a *ngFor="let link of quickLinks" [href]="normalizeHref(link.href)"
+            (click)="onQuickLinkClick($event, link.href)">{{ link.label }}</a>
+        </nav>
+      </div>
+
+      <div class="mobile-side-level" *ngIf="mobileMenuLevel === 1 && activeMobileSection">
+        <button class="mobile-back" type="button" (click)="backToMobileMain()">
+          <span class="material-icons-outlined" aria-hidden="true">chevron_left</span>
+          <span>Main Menu</span>
+        </button>
+        <div class="mobile-level-title">{{ activeMobileSection.label }}</div>
+        <nav class="mobile-sub-links">
+          <button type="button" class="mobile-sub-link" *ngFor="let sub of activeMobileSection.children"
+            (click)="onMobileSubsectionClick(sub)">
+            <span>{{ sub.label }}</span>
+            <span class="material-icons-outlined" aria-hidden="true" *ngIf="sub.children?.length">chevron_right</span>
+          </button>
+        </nav>
+      </div>
+
+      <div class="mobile-side-level" *ngIf="mobileMenuLevel === 2 && activeMobileSection && activeMobileSubsection">
+        <button class="mobile-back" type="button" (click)="backToMobileSection()">
+          <span class="material-icons-outlined" aria-hidden="true">chevron_left</span>
+          <span>{{ activeMobileSection.label }}</span>
+        </button>
+        <div class="mobile-level-title">{{ activeMobileSubsection.label }}</div>
+        <nav class="mobile-leaf-links">
+          <a *ngFor="let leaf of activeMobileSubsection.children" [href]="normalizeHref(leaf.href)"
+            (click)="onMobilePrimaryClick($event, leaf.href)">
+            {{ leaf.label }}
+          </a>
+        </nav>
+      </div>
+    </aside>
+  </div>
+</header>
+<div class="header-spacer" [class.header-spacer--overlay]="isLandingPage" aria-hidden="true"></div> 

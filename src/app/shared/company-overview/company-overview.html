@@ -1,0 +1,97 @@
+<section class="showcase" aria-labelledby="company-overview-title">
+  <div class="showcase__intro">
+    <p class="showcase__eyebrow">Selected client outcomes</p>
+    <h2 id="company-overview-title" class="showcase__title">{{ intro.title }}</h2>
+    <p *ngFor="let paragraph of intro.copy" class="showcase__copy">
+      {{ paragraph }}
+    </p>
+    <a class="showcase__cta" [href]="intro.ctaHref">{{ intro.ctaLabel }}</a>
+  </div>
+
+  <div class="showcase__stats" aria-label="CES Tech company stats">
+    <article *ngFor="let stat of overviewStats" class="showcase__stat">
+      <span class="showcase__stat-icon" aria-hidden="true">
+        <mat-icon>{{ stat.icon }}</mat-icon>
+      </span>
+      <div class="showcase__stat-text">
+        <span class="showcase__stat-value">{{ stat.value }}</span>
+        <span class="showcase__stat-label">{{ stat.label }}</span>
+      </div>
+    </article>
+  </div>
+
+  <div class="showcase__chips" role="tablist" aria-label="Client case studies">
+    <button
+      *ngFor="let client of clients; let i = index; trackBy: trackByName"
+      type="button"
+      class="chip"
+      [class.chip--active]="i === activeIndex"
+      [attr.aria-selected]="i === activeIndex"
+      [attr.tabindex]="i === activeIndex ? 0 : -1"
+      (click)="goTo(i)">
+      {{ client.name }}
+    </button>
+  </div>
+
+  <div class="showcase__stage">
+    <button type="button" class="nav nav--prev" aria-label="Previous case study" (click)="prev()">
+      <span aria-hidden="true">&#8592;</span>
+    </button>
+
+    <div
+      class="carousel"
+      [class.carousel--dragging]="isDragging"
+      aria-live="polite"
+      (touchstart)="onTouchStart($event)"
+      (touchmove)="onTouchMove($event)"
+      (touchend)="onTouchEnd()"
+      (touchcancel)="onTouchCancel()">
+      <article
+        *ngFor="let client of clients; let i = index; trackBy: trackByName"
+        class="card"
+        [ngClass]="getCardClasses(i)"
+        [ngStyle]="getCardStyles(i)"
+        [attr.aria-hidden]="i === activeIndex ? 'false' : 'true'"
+        [attr.aria-label]="getCardAriaLabel(i)">
+        <div class="card__header">
+          <div class="card__brand">
+            <div class="card__logo">
+              <img *ngIf="client.logo; else logoFallback" [src]="client.logo" [alt]="client.name + ' logo'" loading="lazy" />
+              <ng-template #logoFallback>{{ client.logoInitial }}</ng-template>
+            </div>
+            <div>
+              <p class="card__name">{{ client.name }}</p>
+              <p class="card__category">{{ client.category }}</p>
+            </div>
+          </div>
+          <span class="card__badge">Case Study</span>
+        </div>
+
+        <p class="card__description">{{ client.description }}</p>
+
+        <div class="card__metrics">
+          <div class="metric">
+            <span class="metric__value">{{ client.stat1.value }}</span>
+            <span class="metric__label">{{ client.stat1.label }}</span>
+          </div>
+          <div class="metric">
+            <span class="metric__value">{{ client.stat2.value }}</span>
+            <span class="metric__label">{{ client.stat2.label }}</span>
+          </div>
+          <div class="metric metric--wide">
+            <span class="metric__value">{{ client.stat3.value }}</span>
+            <span class="metric__label">{{ client.stat3.label }}</span>
+          </div>
+        </div>
+
+        <div class="card__visual">
+          <img class="card__image" [src]="client.image" [alt]="client.name + ' case study visual'" loading="lazy" />
+        </div>
+      </article>
+    </div>
+
+    <button type="button" class="nav nav--next" aria-label="Next case study" (click)="next()">
+      <span aria-hidden="true">&#8594;</span>
+    </button>
+  </div>
+</section>

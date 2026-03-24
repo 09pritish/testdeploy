@@ -1,0 +1,37 @@
+$font-family-base:    "Plus Jakarta Sans", "Inter", "Roboto", "Helvetica Neue", Arial, sans-serif;
+$font-size-base: 16px;
+
+$color-body-bg: #f6f7fb;
+$color-surface: #071326;
+$color-surface-strong: #0a1831;
+$color-text-primary: #0f172a;
+$color-text-muted: #4b5563;
+$color-border: rgba(0, 0, 0, 0.08);
+
+$color-accent-start: #0f4ba3; // CES logo blue dark
+$color-accent-end: #00a0e3;   // CES logo blue light
+$color-cta-text: #f8fafc;
+$shadow-elevated: 0 10px 40px rgba(5, 14, 36, 0.18);
+
+$radius-pill: 999px;
+$radius-card: 12px;
+$spacing-1: 4px;
+$spacing-2: 8px;
+$spacing-3: 12px;
+$spacing-4: 16px;
+
+@mixin gradient-cta {
+ background: #1f67e5;
+    color: #f8fafc;
+    box-shadow: 0 12px 30px rgba(31, 103, 229, 0.24);
+    border: none;
+    padding: 0.6rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    min-width: 130px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+    

@@ -1,0 +1,112 @@
+<section class="achievements" aria-labelledby="achievements-title">
+  <div class="achievements__inner site-container">
+    <header class="achievements__hero">
+      <h1 id="achievements-title">Awards and Recognitions</h1>
+      <p>
+        Explore how CES is recognized across partner ecosystems, technical excellence programs, and customer success milestones.
+      </p>
+    </header>
+
+    <div class="achievements__grid" role="tablist" aria-label="Awards sections">
+      <button
+        type="button"
+        class="dimension-card"
+        [class.dimension-card--active]="activeSection === 'awards'"
+        (click)="setActiveSection('awards')"
+      >
+        <div class="dimension-card__image">
+          <img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=1400&q=80" alt="Awards ceremony and recognition" />
+        </div>
+        <h2>Awards</h2>
+      </button>
+
+      <button
+        type="button"
+        class="dimension-card"
+        [class.dimension-card--active]="activeSection === 'certifications'"
+        (click)="setActiveSection('certifications')"
+      >
+        <div class="dimension-card__image">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1400&q=80" alt="Professional certifications and credentials" />
+        </div>
+        <h2>Certifications</h2>
+      </button>
+
+      <button
+        type="button"
+        class="dimension-card"
+        [class.dimension-card--active]="activeSection === 'yearbook'"
+        (click)="setActiveSection('yearbook')"
+      >
+        <div class="dimension-card__image">
+          <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1400&q=80" alt="Yearbook and annual highlights" />
+        </div>
+        <h2>Year Book</h2>
+      </button>
+    </div>
+
+    <section class="detail-panel detail-panel--awards" *ngIf="activeSection === 'awards'" aria-live="polite">
+      <p class="detail-panel__kicker">Awards</p>
+      <div class="awards-list">
+        <article class="awards-list__card" *ngFor="let award of awardsList">
+          <h3>{{ award.title }}</h3>
+          <p class="awards-list__date">{{ award.date }}</p>
+          <p class="awards-list__description">{{ award.description }}</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="detail-panel detail-panel--certifications" *ngIf="activeSection === 'certifications'" aria-live="polite">
+      <p class="detail-panel__kicker">Certifications</p>
+      <div class="certifications-list">
+        <article class="certifications-list__card" *ngFor="let cert of certificationsList">
+          <h3>{{ cert.title }}</h3>
+          <p class="certifications-list__date">{{ cert.date }}</p>
+          <p class="certifications-list__description">{{ cert.description }}</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="detail-panel detail-panel--yearbook" *ngIf="activeSection === 'yearbook'" aria-live="polite">
+      <p class="detail-panel__kicker">Year Book</p>
+      <h3>Innovation in action: real results powered by leading technology</h3>
+
+      <div class="yearbook-years" role="tablist" aria-label="Yearbook years">
+        <button
+          type="button"
+          class="yearbook-years__item"
+          *ngFor="let year of yearbookYears"
+          [class.yearbook-years__item--active]="activeYear === year"
+          (click)="setActiveYear(year)"
+        >
+          {{ year }}
+        </button>
+      </div>
+
+      <div class="yearbook-scroller">
+        <button type="button" class="yearbook-scroller__nav" (click)="prevYearbook()" aria-label="Previous yearbook slide">
+          &#8249;
+        </button>
+
+        <div class="yearbook-scroller__track-wrap">
+          <div class="yearbook-scroller__track" [style.transform]="yearbookTransform">
+            <article class="yearbook-slide" *ngFor="let slide of filteredYearbookSlides">
+              <div class="yearbook-slide__image" [style.background-image]="'url(' + slide.image + ')'">
+                <div class="yearbook-slide__overlay"></div>
+              </div>
+              <div class="yearbook-slide__content">
+                <p class="yearbook-slide__year">{{ slide.year }}</p>
+                <h4>{{ slide.title }}</h4>
+                <a [href]="slide.link" target="_blank" rel="noopener">{{ slide.cta }}</a>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <button type="button" class="yearbook-scroller__nav" (click)="nextYearbook()" aria-label="Next yearbook slide">
+          &#8250;
+        </button>
+      </div>
+    </section>
+  </div>
+</section>
