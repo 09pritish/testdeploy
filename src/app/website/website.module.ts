@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 import { WebsiteRoutingModule } from './website-routing.module';
 import { Landing } from './landing/landing';
@@ -45,6 +46,7 @@ import { Careers } from './careers/careers';
     CommonModule,
     ReactiveFormsModule,
     MatIconModule,
+    CarouselModule,
     WebsiteRoutingModule,
     SharedModule
   ]

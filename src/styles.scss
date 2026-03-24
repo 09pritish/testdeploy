@@ -1,4 +1,6 @@
 @use './styles/variables' as *;
+@use 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@use 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default' as owl-theme;
 
 :root {
   --header-total-height: 96px;

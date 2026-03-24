@@ -1,6 +1,11 @@
 {
   "workspace": {
+<<<<<<< Updated upstream
     "root": "C:\\Users\\Saanvi Sharma\\Desktop\\CES website\\CES-website-ng",
     "uuid": "1aff4144-c010-4a45-be04-1f7873d93792"
+=======
+    "root": "/Users/mohitsingh/Documents/CES/CES-website-ng",
+    "uuid": "0d97703b-5956-4f64-9dca-ce010eab1445"
+>>>>>>> Stashed changes
   }
 }

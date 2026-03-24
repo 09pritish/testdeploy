@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, Renderer2, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 import { HOMEPAGE_PARTNER_LOGOS, CERTIFICATION_BADGES } from '../shared/site-constants';
 import { Subscription, interval } from 'rxjs';
 
@@ -75,6 +76,68 @@ export class Landing implements AfterViewInit, OnDestroy {
   ];
 
   readonly certificationBadges = CERTIFICATION_BADGES;
+  awardsCarouselOptions: OwlOptions = {
+  // ── Loop & autoplay ───────────────────────────────────────
+  loop: true,
+  rewind: false,
+
+  autoplay: true,
+  autoplayTimeout: 2800,
+  autoplaySpeed: 900,
+  autoplayHoverPause: true,
+  autoplayMouseleaveTimeout: 200,
+
+  // ── Drag ──────────────────────────────────────────────────
+  mouseDrag: true,
+  touchDrag: true,
+  pullDrag: true,
+  freeDrag: false,
+
+  // ── Transition ────────────────────────────────────────────
+  smartSpeed: 900,
+  fluidSpeed: false,
+  slideTransition: 'ease',
+
+  // ── UI ────────────────────────────────────────────────────
+  nav: false,
+  dots: false,
+  margin: 24,
+  stagePadding: 0,
+  center: false,
+  startPosition: 0,
+  URLhashListener: false,
+  lazyLoad: false,
+
+  // ── Responsive breakpoints ────────────────────────────────
+  // Key rule: items must be <= certificationBadges.length
+  // for loop to work correctly
+  responsive: {
+    0: {
+      items: 1,
+      margin: 12
+    },
+    400: {
+      items: 2,
+      margin: 14
+    },
+    600: {
+      items: 3,
+      margin: 16
+    },
+    820: {
+      items: 4,
+      margin: 20
+    },
+    1024: {
+      items: 5,
+      margin: 24
+    },
+    1280: {
+      items: 5,
+      margin: 28
+    }
+  }
+};
   activeServiceFeatureIndex = 2;
 
   readonly companyFocus = [
@@ -438,17 +501,17 @@ export class Landing implements AfterViewInit, OnDestroy {
     if (window.matchMedia('(max-width: 960px)').matches) return;
 
     const container: HTMLElement | null = this.host.nativeElement.querySelector('#reveal-scroll-container');
-    const visual: HTMLElement | null    = this.host.nativeElement.querySelector('#reveal-visual');
-    const copy: HTMLElement | null      = this.host.nativeElement.querySelector('#reveal-copy');
+    const visual: HTMLElement | null = this.host.nativeElement.querySelector('#reveal-visual');
+    const copy: HTMLElement | null = this.host.nativeElement.querySelector('#reveal-copy');
 
     if (!container || !visual || !copy) return;
 
     let ticking = false;
 
     const animate = () => {
-      const rect         = container.getBoundingClientRect();
+      const rect = container.getBoundingClientRect();
       const scrollBudget = container.offsetHeight - window.innerHeight; // 150vh in px
-      const scrolled     = -rect.top;                                   // how far we've scrolled into the container
+      const scrolled = -rect.top;                                   // how far we've scrolled into the container
 
       // progress: 0 = section just entered view, 1 = scroll budget fully used
       const progress = Math.min(Math.max(scrolled / scrollBudget, 0), 1);
@@ -460,9 +523,9 @@ export class Landing implements AfterViewInit, OnDestroy {
       // ── Text: starts fading in at 35% progress ────────────
       // This gives the image time to shrink first before text appears
       const textProgress = Math.min(Math.max((progress - 0.35) / 0.65, 0), 1);
-      const eased        = easeOutCubic(textProgress);
+      const eased = easeOutCubic(textProgress);
 
-      copy.style.opacity   = String(eased);
+      copy.style.opacity = String(eased);
       copy.style.transform = `translateY(-50%) translateX(${(1 - eased) * 60}px)`;
 
       // Enable pointer events once text is substantially visible
@@ -913,10 +976,4 @@ function easeOutCubic(t: number): number {
   return 1 - Math.pow(1 - t, 3);
 }
 
-function easeInOutCubic(t: number): number {
-  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-}
-
-function easeInOutSine(t: number): number {
-  return -(Math.cos(Math.PI * t) - 1) / 2;
-}
+  

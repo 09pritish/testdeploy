@@ -1,0 +1,12 @@
+0 verbose cli /opt/homebrew/Cellar/node@22/22.22.0/bin/node /opt/homebrew/bin/npm
+1 info using npm@10.9.4
+2 info using node@v22.22.0
+3 silly config load:file:/opt/homebrew/Cellar/node@22/22.22.0/lib/node_modules/npm/npmrc
+4 silly config load:file:/Users/mohitsingh/Documents/CES/CES-website-ng/.npmrc
+5 silly config load:file:/Users/mohitsingh/.npmrc
+6 silly config load:file:/opt/homebrew/etc/npmrc
+7 verbose title npm start
+8 verbose argv "start"
+9 verbose logfile logs-max:10 dir:/Users/mohitsingh/Documents/CES/CES-website-ng/.npm-cache/_logs/2026-03-24T05_28_14_054Z-
+10 verbose logfile /Users/mohitsingh/Documents/CES/CES-website-ng/.npm-cache/_logs/2026-03-24T05_28_14_054Z-debug-0.log
+11 silly logfile done cleaning log files

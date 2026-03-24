@@ -51,9 +51,9 @@
     <div class="growth-story__hero-image">
       <img src="/assets/1.jpeg" alt="CES growth highlight image 1" loading="lazy" />
       <a class="growth-story__hero-link" href="/services">
-        <img src="/assets/2.jpeg" alt="CES growth highlight image 2" loading="lazy" />
+        <img src="/assets/2.avif" alt="CES growth highlight image 2" loading="lazy" />
       </a>
-      <img src="/assets/3.jpeg" alt="CES growth highlight image 3" loading="lazy" />
+      <img src="/assets/3.jpg" alt="CES growth highlight image 3" loading="lazy" />
     </div>
 
     <div class="growth-story__logos-band" aria-label="Trusted CES partner logos">
@@ -73,6 +73,7 @@
     </div>
   </div>
 </section>
+
 <app-company-overview></app-company-overview>
 
 <section class="case-hub" aria-labelledby="case-hub-title" [style.--active-accent]="activeTrusted.accent">
@@ -1440,7 +1441,7 @@
         </ul>
 
         <div class="reveal-cta">
-          <button type="button" class="cta-primary">Book a strategy call</button>
+          <a type="button"  href="/contact-us" class="cta-primary">Book a strategy call</a>
           <a class="cta-secondary" href="/about-us#meet-ces">Learn more</a>
         </div>
       </div>
@@ -1669,30 +1670,37 @@
     </div>
   </div>
 </section>
-
-<section class="awards-hub" aria-labelledby="awards-hub-title">
+ <section class="awards-hub" aria-labelledby="awards-hub-title">
   <div class="awards-hub__inner site-container">
     <h2 id="awards-hub-title">{{ titleCase('Awards and Certifications') }}</h2>
     <p class="awards-hub__lede section-subtext">
-      Recognized globally for delivery excellence, partner credentials, and verified technical competency across
-      networking, cloud, and cybersecurity.
+      Recognized globally for delivery excellence, partner credentials, and verified
+      technical competency across networking, cloud, and cybersecurity.
     </p>
 
     <div class="awards-hub__divider" aria-hidden="true"></div>
 
-    <div class="awards-hub__cert-scroller" aria-label="Certifications scroller">
-      <div class="awards-hub__cert-track">
-        <a *ngFor="let cert of certificationBadges" class="awards-hub__cert" routerLink="/achievements"
-          [attr.aria-label]="'View details for ' + cert.alt" [title]="cert.alt">
-          <img [src]="cert.image" [alt]="cert.alt" loading="lazy" />
-        </a>
-
-        <a *ngFor="let cert of certificationBadges" class="awards-hub__cert" routerLink="/achievements"
-          [attr.aria-label]="'View details for ' + cert.alt" [title]="cert.alt" aria-hidden="true" tabindex="-1">
-          <img [src]="cert.image" [alt]="cert.alt" loading="lazy" />
-        </a>
-      </div>
+    <div class="awards-hub__cert-scroller">
+      <owl-carousel-o
+        class="awards-hub__cert-carousel"
+        [options]="awardsCarouselOptions">
+        <ng-template
+          carouselSlide
+          [id]="'cert-' + i"
+          *ngFor="let cert of certificationBadges; let i = index">
+          <div class="awards-hub__cert-wrapper">
+            
+            <a  class="awards-hub__cert"
+              routerLink="/achievements"
+              [attr.aria-label]="'View details for ' + cert.alt"
+              [title]="cert.alt">
+              <img [src]="cert.image" [alt]="cert.alt" loading="lazy">
+            </a>
+          </div>
+        </ng-template>
+      </owl-carousel-o>
     </div>
+
   </div>
 </section>
 
