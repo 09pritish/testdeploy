@@ -1,46 +1,84 @@
 <section class="about-page">
-  <div class="about-shell site-container">
-    <div class="about-breadcrumb">Home <span>&rsaquo;</span> About Us</div>
+  <section class="ap-hero">
+    <div class="hero-bg">
+      <div class="hero-grid"></div>
+      <div
+        *ngFor="let slide of heroSlides; let i = index"
+        class="hero-slide"
+        [class.active]="activeHeroSlide === i"
+        [style.backgroundImage]="'url(' + slide.image + ')'"
+        aria-hidden="true"
+      ></div>
+      <div class="hero-glow hero-glow-1"></div>
+      <div class="hero-glow hero-glow-2"></div>
+      <div class="hero-scrim"></div>
+    </div>
 
-    <section class="about-hero">
-      <div class="about-hero__image-stack" aria-hidden="true">
-        <div
+    <div class="shell hero-inner">
+      <div><span class="badge-pill">About CES Tech</span></div>
+      <h1 class="hero-heading">{{ currentHeroSlide.title }}</h1>
+      <p class="hero-sub">{{ currentHeroSlide.body }}</p>
+      <div class="hero-actions">
+        <a href="#meet-ces" class="btn btn--primary" (click)="onTabClick($event, 'meet-ces')">
+          {{ currentHeroSlide.cta }}
+          <span class="btn-arrow">→</span>
+        </a>
+        <a routerLink="/contact-us" class="btn btn--ghost">Talk to Us</a>
+      </div>
+      <div class="hero-dots" aria-label="Hero slide controls">
+        <button
           *ngFor="let slide of heroSlides; let i = index"
-          class="about-hero__image"
-          [class.is-active]="activeHeroSlide === i"
-          [style.backgroundImage]="'url(' + slide.image + ')'"
-        ></div>
+          type="button"
+          class="hero-dot"
+          [class.active]="activeHeroSlide === i"
+          [attr.aria-label]="'Show slide ' + (i + 1)"
+          [attr.aria-pressed]="activeHeroSlide === i"
+          (click)="selectHeroSlide(i)"
+        ></button>
       </div>
-      <div class="about-hero__overlay" aria-hidden="true"></div>
-      <div class="about-hero__grain" aria-hidden="true"></div>
+    </div>
 
-      <div class="about-hero__copy">
-        <p class="about-hero__eyebrow">About CES Tech</p>
-        <h1>{{ currentHeroSlide.title }}</h1>
-        <p class="about-hero__summary">{{ currentHeroSlide.body }}</p>
-        <a class="about-hero__cta" href="#meet-ces">{{ currentHeroSlide.cta }} &rarr;</a>
-        <div class="about-hero__dots" aria-label="Hero slide controls">
-          <button
-            *ngFor="let slide of heroSlides; let i = index"
-            type="button"
-            [class.active]="activeHeroSlide === i"
-            [attr.aria-label]="'Show slide ' + (i + 1)"
-            [attr.aria-pressed]="activeHeroSlide === i"
-            (click)="selectHeroSlide(i)"
-          ></button>
+    <div class="hero-glass-wrap">
+      <div class="hero-glass">
+        <div class="hero-glass-icon">
+          <span class="material-icons-outlined">hub</span>
+        </div>
+        <h3>Shaping Resilient IT Journeys</h3>
+        <p>Strategy, implementation, and operations delivered through one accountable CES team.</p>
+        <div class="hero-glass-stat"><span>226K+</span> Professionals worldwide</div>
+      </div>
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">
+      <div class="hero-scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <div class="ap-ticker">
+    <div class="ticker-track">
+      <div class="ticker-inner">
+        <span *ngFor="let capability of capabilityTickerLoop">
+          {{ capability }}
+          <em>·</em>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <section class="ap-stats">
+    <div class="shell">
+      <div class="stats-grid">
+        <div class="stat-item" *ngFor="let metric of missionMetrics">
+          <span class="stat-val">{{ metric.value }}</span>
+          <span class="stat-lbl">{{ metric.label }}</span>
         </div>
       </div>
-      <div class="about-hero__media" aria-hidden="true">
-        <div class="about-hero__glass">
-          <h3>Shaping resilient IT journeys</h3>
-          <p>
-            Strategy, implementation, and operations delivered through one accountable CES team.
-          </p>
-        </div>
-      </div>
-    </section>
+    </div>
+  </section>
 
-    <nav class="about-tabs" aria-label="About section tabs">
+  <nav class="ap-tabs-nav" aria-label="About section tabs">
+    <div class="shell tabs-inner">
       <a
         *ngFor="let tab of sectionTabs"
         [href]="'#' + tab.id"
@@ -49,140 +87,211 @@
       >
         {{ tab.label }}
       </a>
-    </nav>
+    </div>
+  </nav>
 
-    <section class="about-block" id="meet-ces">
-      <h2>Meet CES</h2>
-      <div class="about-two-col">
-        <p>
-          We are a global technology company, home to thousands of professionals across regions, delivering
-          capabilities centered around AI, digital, engineering, cloud, and software, powered by a broad portfolio
-          of services and products.
-        </p>
-        <p>
-          We work with clients across major verticals, providing industry-led solutions for Financial Services,
-          Manufacturing, Healthcare, Telecom, Media, Retail, and Public Services.
-        </p>
-      </div>
-      <div class="about-video-preview">
-        <img
-          src="assets/4.jpeg"
-          alt="CES engineers managing high-availability data center racks"
-        />
-      </div>
-    </section>
+  <section class="ap-section ap-section--meet" id="meet-ces">
+    <div class="shell">
+      <div class="section-label">Who We Are</div>
+      <div class="meet-layout">
+        <div class="meet-copy">
+          <h2 class="ap-display">Meet <span class="ap-highlight">CES</span></h2>
+          <p>
+            We are a global technology company, home to thousands of professionals across regions, delivering
+            capabilities centered around AI, digital, engineering, cloud, and software, powered by a broad portfolio
+            of services and products.
+          </p>
+          <p>
+            We work with clients across major verticals, providing industry-led solutions for Financial Services,
+            Manufacturing, Healthcare, Telecom, Media, Retail, and Public Services.
+          </p>
+          <div class="verticals">
+            <span *ngFor="let vertical of verticals">{{ vertical }}</span>
+          </div>
+        </div>
 
-    <section class="about-block about-objectives" id="strategic-objectives">
-      <h2>Our <span class="about-vision-highlight">Vision</span> drives every strategic move we make.</h2>
-      <div class="objective-list">
-        <article *ngFor="let objective of objectives">
-          <span class="material-icons-outlined" aria-hidden="true">{{ objective.icon }}</span>
+        <div class="media-frame">
+          <img src="assets/4.jpeg" alt="CES enterprise teams delivering infrastructure programs" />
+          <div class="media-badge">
+            <span class="material-icons-outlined">verified</span>
+            Enterprise-grade delivery
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ap-section ap-vision" id="vision">
+    <div class="shell">
+      <div class="section-label">Our Direction</div>
+      <h2 class="ap-display vision-title">
+        Our <span class="ap-highlight">Vision</span> drives every strategic move we make.
+      </h2>
+      <div class="vision-cards">
+        <article class="vision-card" *ngFor="let objective of objectives; let i = index">
+          <div class="vision-num">{{ (i + 1).toString().padStart(2, '0') }}</div>
+          <span class="material-icons-outlined vision-icon">{{ objective.icon }}</span>
           <p>{{ objective.text }}</p>
         </article>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="about-block about-numbers" id="by-numbers">
-      <div class="about-numbers__content">
-        <h2>Our <span class="about-mission-highlight">Mission</span> turns vision into measurable impact.</h2>
-        <p>Powered by a global team, we deliver smarter, better ways for all stakeholders through technology.</p>
-        <div class="metrics-grid">
-          <div><strong>$14.5B</strong><span>Revenue</span></div>
-          <div><strong>226K+</strong><span>People</span></div>
-          <div><strong>60</strong><span>Countries</span></div>
-          <div><strong>167</strong><span>Nationalities</span></div>
-          <div><strong>220+</strong><span>Delivery Centers</span></div>
-          <div><strong>70+</strong><span>Labs</span></div>
+  <section class="ap-section ap-section--mission" id="mission">
+    <div class="shell">
+      <div class="mission-layout">
+        <div class="mission-img">
+          <img src="assets/5.jpeg" alt="CES mission in action across data center and cloud operations" />
+        </div>
+
+        <div class="mission-copy">
+          <div class="section-label">Our Mission</div>
+          <h2 class="ap-display">Turning vision into <span class="ap-highlight">measurable impact.</span></h2>
+          <p>Powered by a global team, we deliver smarter, better ways for all stakeholders through technology.</p>
+
+          <div class="mission-metrics">
+            <div class="mission-metric" *ngFor="let metric of missionMetrics">
+              <strong>{{ metric.value }}</strong>
+              <span>{{ metric.label }}</span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="about-numbers__graphic" aria-hidden="true">
-        <img src="assets/5.jpeg" alt="CES data center operations" />
-      </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="about-block about-values" id="our-values">
-      <h2>Living Our <span class="about-word-highlight">Values</span></h2>
-      <p>Our core values offer a nod to the past with an eye to the future.</p>
+  <section class="ap-section ap-values" id="our-values">
+    <div class="shell">
+      <div class="section-label">Core Principles</div>
+      <div class="values-head">
+        <div>
+          <h2 class="ap-display">Living Our <span class="ap-highlight">Values</span></h2>
+          <p>Our core values offer a nod to the past with an eye to the future.</p>
+        </div>
+      </div>
+
       <div class="values-layout">
-        <div class="values-image">
-          <img
-            src="assets/about/about-dc-values.jpg"
-            alt="Data center operations showcasing reliability and standards"
-          />
+        <div class="values-img">
+          <img src="assets/about/about-dc-values.jpg" alt="CES teams operating with integrity and reliability" />
+          <div class="values-img-badge">
+            <span class="material-icons-outlined">verified_user</span>
+            <span>Integrity-first culture</span>
+          </div>
         </div>
-        <div class="values-accordion">
-          <article *ngFor="let value of values; let i = index" [class.open]="openValueIndex === i">
-            <button type="button" (click)="toggleValue(i)">
-              <span>{{ value.title }}</span>
-              <span>{{ openValueIndex === i ? '&minus;' : '+' }}</span>
+
+        <div class="accordion">
+          <article class="acc-item" *ngFor="let value of values; let i = index" [class.open]="openValueIndex === i">
+            <button class="acc-trigger" type="button" (click)="toggleValue(i)">
+              <span class="acc-label">
+                <span class="material-icons-outlined">{{ value.icon }}</span>
+                {{ value.title }}
+              </span>
+              <span class="acc-chevron">{{ openValueIndex === i ? '−' : '+' }}</span>
             </button>
-            <p *ngIf="openValueIndex === i">{{ value.body }}</p>
+
+            <div class="acc-body" *ngIf="openValueIndex === i">
+              <p>{{ value.body }}</p>
+            </div>
           </article>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="about-block about-purpose" id="our-purpose">
-      <h2>Our <span class="about-word-highlight">Purpose</span></h2>
-      <p>At CES, we bring together the best of technology and people to supercharge progress.</p>
+  <section class="ap-section ap-purpose" id="our-purpose">
+    <div class="shell">
+      <div class="section-label">What Drives Us</div>
+      <h2 class="ap-display">Our <span class="ap-highlight">Purpose</span></h2>
+      <p class="purpose-lead">At CES, we bring together the best of technology and people to supercharge progress.</p>
+
       <div class="purpose-layout">
         <nav class="purpose-tabs" aria-label="Purpose tabs">
           <button
-            type="button"
             *ngFor="let tab of purposeTabs; let i = index"
+            type="button"
+            class="purpose-tab"
             [class.active]="activePurposeTab === i"
             (click)="selectPurposeTab(i)"
           >
-            {{ tab.label }}
+            <span class="material-icons-outlined">{{ tab.icon }}</span>
+            <span>{{ tab.label }}</span>
+            <span class="tab-arrow">→</span>
           </button>
         </nav>
-        <article class="purpose-panel" [class.purpose-panel--compact-media]="activePurposeTab >= 2">
-          <div class="purpose-panel__copy">
-            <h3>{{ purposeTabs[activePurposeTab].heading }}</h3>
-            <p>{{ purposeTabs[activePurposeTab].body }}</p>
+
+        <article class="purpose-panel">
+          <div class="purpose-copy">
+            <h3>{{ activePurpose.heading }}</h3>
+            <p>{{ activePurpose.body }}</p>
             <ul>
-              <li *ngFor="let point of purposeTabs[activePurposeTab].bullets">{{ point }}</li>
+              <li *ngFor="let bullet of activePurpose.bullets">
+                <span class="ap-check">✓</span>
+                <span>{{ bullet }}</span>
+              </li>
             </ul>
           </div>
-          <div class="purpose-panel__media">
-            <img [src]="purposeTabs[activePurposeTab].image" [alt]="'CES ' + purposeTabs[activePurposeTab].label" />
+
+          <div class="purpose-media">
+            <img [src]="activePurpose.image" [alt]="'CES ' + activePurpose.label" />
           </div>
         </article>
       </div>
-    </section>
+    </div>
+  </section>
+<app-awards-strip></app-awards-strip>
 
-    <section class="about-block about-journey" id="our-history">
-      <h2>Our <span class="about-word-highlight">Journey</span></h2>
-      <div class="journey-layout">
-        <div class="journey-years" #journeyYearsScroller role="tablist" aria-label="Our Journey timeline years">
-          <button
-            type="button"
-            *ngFor="let row of journeyYearLoopItems; trackBy: trackByJourneyLoop"
-            [class.active]="activeJourneyYearIndex === row.index"
-            [attr.aria-selected]="activeJourneyYearIndex === row.index"
-            (click)="selectJourneyYear(row.index)"
-          >
-            {{ row.item.year }}
-          </button>
-        </div>
+  <section class="ap-section ap-journey" id="our-history">
+    <div class="shell">
+      <div class="section-label">Timeline</div>
+      <h2 class="ap-display">Our <span class="ap-highlight">Journey</span></h2>
 
-        <article class="journey-detail">
-          <span class="material-icons-outlined" aria-hidden="true">
-            {{ journeyYears[activeJourneyYearIndex].icon }}
-          </span>
-          <div>
-            <h3>{{ journeyYears[activeJourneyYearIndex].year }}</h3>
-            <p><strong>{{ journeyYears[activeJourneyYearIndex].title }}</strong></p>
-            <p *ngFor="let point of journeyYears[activeJourneyYearIndex].points">{{ point }}</p>
+      <div class="timeline">
+        <div class="timeline-line" aria-hidden="true"></div>
+
+        <article
+          class="timeline-item"
+          *ngFor="let item of journeyYears; let i = index"
+          [class.active]="activeJourneyYearIndex === i"
+          (click)="selectJourneyYear(i)"
+        >
+          <div class="tl-year-wrap">
+            <div class="tl-dot"></div>
+            <span class="tl-year">{{ item.year }}</span>
+          </div>
+
+          <div class="tl-card">
+            <div class="tl-icon">
+              <span class="material-icons-outlined">{{ item.icon }}</span>
+            </div>
+            <h3>{{ item.title }}</h3>
+            <ul>
+              <li *ngFor="let point of item.points">{{ point }}</li>
+            </ul>
           </div>
         </article>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="about-block about-contact" id="contact-us">
-      <h2>Contact Us</h2>
+  <section class="ap-contact" id="contact-us">
+    <div class="contact-glow" aria-hidden="true"></div>
+    <div class="shell contact-inner">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="ap-display">Ready to build something <span class="ap-highlight">resilient?</span></h2>
       <p>Talk to our experts about secure networking, cloud modernization, and managed services.</p>
-      <a href="/contact-us">Go to Contact Page &rarr;</a>
-    </section>
-  </div>
+      <div class="contact-actions">
+        <a routerLink="/contact-us" class="btn btn--primary btn--lg">
+          Go to Contact Page
+          <span class="btn-arrow">→</span>
+        </a>
+      </div>
+      <div class="contact-badges">
+        <div class="contact-badge" *ngFor="let tag of contactTags">
+          <span class="material-icons-outlined">{{ tag.icon }}</span>
+          {{ tag.label }}
+        </div>
+      </div>
+    </div>
+  </section>
 </section>
+

@@ -1,12 +1,15 @@
+@use '../../../styles/variables' as *;
+
 .solutions-page {
-  --bg: #000000;
+  --bg: #{$color-black};
   --text: #f5f6fb;
   --muted: #6f7178;
-  --accent: #1f67e5;
+  --accent: #{$color-brand-blue};
   background: var(--bg);
   color: var(--text);
   min-height: calc(100svh - var(--header-total-height, 108px));
   padding: clamp(26px, 2vw, 34px) clamp(18px, 4.8vw, 96px) 0;
+  font-family: $font-family-base;
 }
 
 .solutions-hero {
@@ -113,18 +116,18 @@
   margin-top: clamp(18px, 2vw, 34px);
   padding: 0.9rem 2rem;
   text-decoration: none;
-  color: #ffffff;
+  color: $color-white;
   font-size: clamp(16px, 1.2vw, 24px);
   font-weight: 700;
-  border-radius: 6px;
-  background: #1f67e5;
-  transition: transform 160ms ease, box-shadow 180ms ease, filter 180ms ease;
+  border-radius: $radius-sm;
+  background: $color-brand-blue;
+  transition: transform $transition-fast, box-shadow $transition-base, filter $transition-base;
 
   &:hover,
   &:focus-visible {
     transform: translateY(-1px);
-    box-shadow: 0 12px 24px rgba(31, 103, 229, 0.35);
-    background: #2d78fb;
+    box-shadow: 0 12px 24px rgba($color-brand-blue, 0.35);
+    background: $color-brand-blue-hover;
   }
 }
 
@@ -176,7 +179,7 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.05);
   padding: 10px 16px;
-  border-radius: 12px;
+  border-radius: $radius-card;
   color: var(--muted);
   font-size: clamp(18px, 1.9vw, 28px);
   font-weight: 600;
@@ -185,7 +188,7 @@
   text-align: left;
   cursor: pointer;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.14);
-  transition: color 180ms ease, border-color 180ms ease, background 180ms ease, transform 160ms ease;
+  transition: color $transition-base, border-color $transition-base, background $transition-base, transform $transition-fast;
 }
 
 .service-link__dot {
@@ -194,7 +197,7 @@
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.2);
   transform: translateY(1px);
-  transition: background-color 180ms ease;
+  transition: background-color $transition-base;
 }
 
 .service-link:hover {
@@ -205,7 +208,7 @@
 }
 
 .service-link.is-active {
-  color: #ffffff;
+  color: $color-white;
   border-color: var(--accent);
   background: rgba(255, 255, 255, 0.1);
   box-shadow:
@@ -847,4 +850,3 @@
   }
 
 }
-

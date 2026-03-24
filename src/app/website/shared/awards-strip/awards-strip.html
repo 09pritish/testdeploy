@@ -7,30 +7,21 @@
 
     <div class="awards-hub__divider" aria-hidden="true"></div>
 
-    <div class="awards-hub__cert-scroller" aria-label="Certifications scroller">
-      <div class="awards-hub__cert-track">
-        <a
-          *ngFor="let cert of badges"
-          class="awards-hub__cert"
-          routerLink="/achievements"
-          [attr.aria-label]="'View details for ' + cert.alt"
-          [title]="cert.alt"
-        >
-          <img [src]="cert.image" [alt]="cert.alt" loading="lazy" />
-        </a>
-
-        <a
-          *ngFor="let cert of badges"
-          class="awards-hub__cert"
-          routerLink="/achievements"
-          [attr.aria-label]="'View details for ' + cert.alt"
-          [title]="cert.alt"
-          aria-hidden="true"
-          tabindex="-1"
-        >
-          <img [src]="cert.image" [alt]="cert.alt" loading="lazy" />
-        </a>
-      </div>
+    <div class="awards-hub__cert-scroller">
+      <owl-carousel-o class="awards-hub__cert-carousel" [options]="carouselOptions">
+        <ng-template carouselSlide [id]="'cert-' + i" *ngFor="let cert of badges; let i = index">
+          <div class="awards-hub__cert-wrapper">
+            <a
+              class="awards-hub__cert"
+              routerLink="/achievements"
+              [attr.aria-label]="'View details for ' + cert.alt"
+              [title]="cert.alt"
+            >
+              <img [src]="cert.image" [alt]="cert.alt" loading="lazy" />
+            </a>
+          </div>
+        </ng-template>
+      </owl-carousel-o>
     </div>
   </div>
 </section>

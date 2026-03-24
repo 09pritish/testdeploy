@@ -25,12 +25,56 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-block: 0;
+  font-family: $font-family-base !important;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: inherit;
+}
+
+h1 {
+  font-size: $heading-h1-size !important;
+  line-height: 1.02 !important;
+}
+
+h2 {
+  font-size: $heading-h2-size !important;
+  line-height: 1.08 !important;
+}
+
+h3 {
+  font-size: $heading-h3-size !important;
+  line-height: 1.12 !important;
+}
+
+h4 {
+  font-size: $heading-h4-size !important;
+  line-height: 1.16 !important;
+}
+
+h5 {
+  font-size: $heading-h5-size !important;
+  line-height: 1.2 !important;
+}
+
+h6 {
+  font-size: $heading-h6-size !important;
+  line-height: 1.24 !important;
+}
+
 /* Force consistent typography across Services pages (exclude material icon glyphs). */
 .services-page,
 .services-page *:not(mat-icon):not(.mat-icon),
 .service-detail,
 .service-detail *:not(mat-icon):not(.mat-icon) {
-  font-family: "Plus Jakarta Sans", "Inter", "Roboto", "Helvetica Neue", Arial, sans-serif;
+  font-family: $font-family-base;
 }
 
 html {

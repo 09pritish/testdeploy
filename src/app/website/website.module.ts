@@ -20,8 +20,7 @@ import { BlogDetail } from './blogs/blog-detail';
 import { CompanyProfile } from './company-profile/company-profile';
 import { CaseStudy } from './case-study/case-study';
 import { PartnerBand } from './shared/partner-band/partner-band';
-import { AwardsStrip } from './shared/awards-strip/awards-strip';
-import { Careers } from './careers/careers';
+ import { Careers } from './careers/careers';
 
 @NgModule({
   declarations: [
@@ -40,8 +39,7 @@ import { Careers } from './careers/careers';
     CaseStudy,
     Careers,
     PartnerBand,
-    AwardsStrip
-  ],
+   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,

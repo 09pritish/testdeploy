@@ -10,7 +10,15 @@
   position: relative;
   overflow: hidden;
   padding: 96px 24px;
-  background: #000000;
+  background: radial-gradient(
+      120% 120% at 14% 6%,
+      rgba(0, 120, 255, 0.22),
+      rgba(0, 120, 255, 0) 58%),
+    radial-gradient(
+      90% 100% at 88% 94%,
+      rgba(167, 54, 255, 0.2),
+      rgba(167, 54, 255, 0) 60%),
+    #03070e;
   color: #f3f6ff;
 }
 

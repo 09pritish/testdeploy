@@ -1,141 +1,250 @@
-<section class="solution-layout">
+<section class="solution-detail-page">
   <section class="solution-hero" [style.background-image]="'url(' + solution.image + ')'">
-    <div class="solution-hero__shade" aria-hidden="true"></div>
-    <article class="solution-hero__card site-container">
-      <p>{{ solution.category }}</p>
-      <h1>{{ displayTitle }}</h1>
-    </article>
-  </section>
+    <div class="solution-hero__overlay" aria-hidden="true"></div>
+    <div class="solution-hero__glow solution-hero__glow--one" aria-hidden="true"></div>
+    <div class="solution-hero__glow solution-hero__glow--two" aria-hidden="true"></div>
+    <div class="solution-shell solution-hero__inner">
+      <div class="solution-hero__copy solution-reveal solution-reveal--up">
+        <p class="solution-kicker">{{ solution.category }}</p>
+        <h1>{{ displayTitle }}</h1>
+        <p class="solution-hero__summary">{{ solution.summary }}</p>
+        <div class="solution-hero__actions">
+          <a routerLink="/contact-us" class="solution-btn solution-btn--primary">Schedule a Consultation</a>
+          <a href="#solution-process" class="solution-btn solution-btn--ghost">See Delivery Process</a>
+        </div>
+        <div class="solution-hero__brand-row">
+          <article class="solution-hero__brand-card">
+            <img src="assets/CESlogo.png" alt="CES logo" loading="lazy" />
+            <div>
+              <strong>CES Enterprise Delivery</strong>
+              <span>Architecture, rollout, and lifecycle support under one team</span>
+            </div>
+          </article>
+          <div class="solution-hero__mini-proof">
+            <span *ngFor="let badge of proofBadges">{{ badge.value }} {{ badge.label }}</span>
+          </div>
+        </div>
+        <ul class="solution-hero__trust" aria-label="Key trust points">
+          <li *ngFor="let item of heroTrustPoints">{{ item }}</li>
+        </ul>
+      </div>
 
-  <section class="solution-intro">
-    <article class="solution-intro__content">
-      <h2>Start your journey to better outcomes</h2>
-      <p>{{ solution.description }}</p>
-    </article>
-  </section>
+      <aside class="solution-hero__panel solution-reveal solution-reveal--right">
+        <p class="solution-hero__panel-kicker">What this solution delivers</p>
+        <ul>
+          <li *ngFor="let highlight of heroHighlights">{{ highlight }}</li>
+        </ul>
 
-  <section class="solution-media">
-    <div class="solution-media__left">
-      <h3>Optimize your technology spend</h3>
-      <p>Watch this quick walkthrough to explore how CES accelerates {{ displayTitle.toLowerCase() }} outcomes.</p>
+        <div class="solution-hero__panel-stats">
+          <article class="solution-proof-badge" *ngFor="let badge of panelBadges">
+            <strong>{{ badge.value }}</strong>
+            <span>{{ badge.label }}</span>
+          </article>
+        </div>
+      </aside>
     </div>
-    <figure class="solution-media__right">
-      <iframe
-        src="https://www.youtube.com/embed/kd33UVZhnAA?si=VMphC3a-LGo1zspv"
-        title="CES solutions walkthrough"
-        frameborder="0"
-        loading="lazy"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
-      ></iframe>
-    </figure>
   </section>
 
-  <section class="solution-stories">
-    <h2>Client stories</h2>
-    <div class="solution-stories__stage" *ngIf="activeStory as story">
-      <img [src]="story.image" [alt]="story.title + ' image'" loading="lazy" />
-      <article class="solution-stories__card">
-        <h3>{{ story.title }}</h3>
+  <section class="solution-proof">
+    <div class="solution-shell">
+      <div class="solution-proof__layout">
+        <div class="solution-proof__intro solution-reveal solution-reveal--up">
+          <p class="solution-kicker">Enterprise Focus</p>
+          <h2>Built to improve business outcomes without unnecessary complexity</h2>
+        <p>{{ solution.description }}</p>
+        <p>
+          CES combines practical consulting, expert support, and execution ownership so teams can modernize infrastructure
+          without adding operational noise.
+        </p>
+        </div>
+
+        <div class="solution-proof__grid">
+          <article
+            class="solution-proof-card"
+            *ngFor="let item of metrics; let i = index"
+            [style.--reveal-delay.ms]="i * 90"
+            (mouseenter)="setProofHover($event)"
+            (mousemove)="setProofHover($event)"
+          >
+            <span class="solution-proof-card__icon material-icons-outlined" aria-hidden="true">{{ item.icon }}</span>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="solution-consulting">
+    <div class="solution-shell">
+      <div class="solution-section-head solution-section-head--light">
+        <p class="solution-kicker">Consulting Scope</p>
+        <h2>Reimagining digital frameworks with CES delivery expertise</h2>
+        <p>We pair solution architecture with practical support services so planning, rollout, and operations move together.</p>
+      </div>
+
+      <div class="solution-consulting__panel" *ngIf="activeConsultingPanel as panel">
+        <div class="solution-consulting__list">
+          <button
+            type="button"
+            *ngFor="let item of consultingPanels; let i = index"
+            [class.is-active]="i === activeConsultingIndex"
+            (click)="setActiveConsulting(i)"
+          >
+            <span class="solution-consulting__index">{{ item.index }}.</span>
+            <span class="solution-consulting__title">{{ item.title }}</span>
+          </button>
+        </div>
+
+        <article class="solution-consulting__content">
+          <span class="solution-consulting__icon material-icons-outlined" aria-hidden="true">{{ panel.icon }}</span>
+          <h3>{{ panel.title }}</h3>
+          <p>{{ panel.description }}</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="solution-roi-banner">
+    <div class="solution-shell">
+      <div class="solution-roi-banner__inner">
+        <div class="solution-roi-banner__copy">
+          <p class="solution-kicker">Performance Focus</p>
+          <span class="solution-roi-banner__eyebrow">CES clients gain faster operational confidence</span>
+          <h2>Stronger IT outcomes begin with better support, planning, and execution</h2>
+          <p>Welcome to CES Tech, where innovation meets reliability and technology becomes a catalyst for success. Our delivery teams help businesses transform infrastructure into dependable business capability.</p>
+          <a routerLink="/contact-us" class="solution-btn solution-btn--light">Talk to CES Experts</a>
+          <ul>
+            <li *ngFor="let item of roiBannerPoints">{{ item }}</li>
+          </ul>
+        </div>
+
+        <div class="solution-roi-banner__media">
+          <img src="assets/about/purpose-clients-v2.jpg" alt="CES delivery and client collaboration" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+<app-awards-strip></app-awards-strip>
+
+  <section class="solution-services">
+    <div class="solution-shell">
+      <div class="solution-services__showcase" *ngIf="activeTrack as track">
+        <aside class="solution-services__menu">
+          <div class="solution-services__menu-head">
+            <div>
+              <p class="solution-kicker">Capabilities</p>
+              <h2>Choose the area where you need the most momentum</h2>
+            </div>
+            <span class="material-icons-outlined" aria-hidden="true">south</span>
+          </div>
+
+          <div class="solution-services__list">
+            <button
+              type="button"
+              *ngFor="let item of serviceTracks; let i = index"
+              [class.is-active]="i === activeTrackIndex"
+              (click)="setActiveTrack(i)"
+            >
+              <span class="solution-services__item-index">[{{ i + 1 }}]</span>
+              <div class="solution-services__item-copy">
+                <span>{{ item.title }}</span>
+                <small>{{ item.caption }}</small>
+              </div>
+            </button>
+          </div>
+        </aside>
+
+        <div class="solution-services__stage">
+          <div class="solution-services__media">
+            <img [src]="solution.image" [alt]="displayTitle + ' showcase image'" loading="lazy" />
+          </div>
+
+          <article class="solution-services__feature-card">
+            <p class="solution-kicker">Selected Track</p>
+            <h3>{{ track.title }}</h3>
+            <p>{{ track.description }}</p>
+            <div class="solution-services__nav">
+              <button type="button" (click)="prevTrack()" aria-label="Previous service track">&larr;</button>
+              <button type="button" (click)="nextTrack()" aria-label="Next service track">&rarr;</button>
+            </div>
+          </article>
+
+          <article class="solution-services__insight-card">
+            <ul>
+              <li *ngFor="let point of track.points">{{ point }}</li>
+            </ul>
+            <a routerLink="/contact-us" class="solution-inline-link">Talk to CES Experts <span aria-hidden="true">&rarr;</span></a>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="solution-process" id="solution-process">
+    <div class="solution-shell">
+      <div class="solution-section-head solution-section-head--light">
+        <p class="solution-kicker">Delivery Process</p>
+        <h2>From assessment to measurable rollout</h2>
+        <p>We use a compact delivery rhythm that reduces risk while keeping execution visible.</p>
+      </div>
+
+      <div class="solution-process__grid">
+        <article class="solution-process-card" *ngFor="let step of processSteps; let i = index" [style.--reveal-delay.ms]="i * 110">
+          <span class="solution-process-card__step">0{{ i + 1 }}</span>
+          <h3>{{ step.title }}</h3>
+          <p>{{ step.description }}</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="solution-cta">
+    <div class="solution-shell solution-cta__inner">
+      <div class="solution-cta__content">
+        <p class="solution-kicker">Ready To Move Forward</p>
+        <h2>When enterprise priorities shift, CES helps you respond faster</h2>
+        <p>
+          Move beyond delayed upgrades and fragmented execution. CES teams combine consulting, implementation, and 24x7
+          support so {{ displayTitle.toLowerCase() }} becomes a dependable business advantage.
+        </p>
+        <a routerLink="/contact-us" class="solution-cta__primary">
+          <span class="material-icons-outlined" aria-hidden="true">call</span>
+          <span>Connect with CES Experts</span>
+        </a>
+      </div>
+
+      <div class="solution-cta__visual">
+        <img src="assets/about/purpose-people-v2.jpg" alt="CES experts ready to support enterprise transformation" loading="lazy" />
+      </div>
+    </div>
+  </section>
+  <section class="solution-story">
+    <div class="solution-shell solution-story__layout">
+      <div class="solution-story__media" *ngIf="activeStory as story">
+        <img [src]="story.image" [alt]="story.title + ' image'" loading="lazy" />
+      </div>
+
+      <article class="solution-story__content" *ngIf="activeStory as story">
+        <p class="solution-kicker">Related Success Narrative</p>
+        <h2>{{ story.title }}</h2>
         <p>{{ story.description }}</p>
-        <a [routerLink]="story.href">Read more <span aria-hidden="true">&rarr;</span></a>
-      </article>
-      <div class="solution-stories__controls">
-        <button type="button" (click)="prevStory()" aria-label="Previous story">&lsaquo;</button>
-        <button
-          type="button"
-          *ngFor="let item of clientStories; let i = index"
-          [class.is-active]="i === activeStoryIndex"
-          (click)="setActiveStory(i)"
-          [attr.aria-label]="'Story ' + (i + 1)"
-        ></button>
-        <button type="button" (click)="nextStory()" aria-label="Next story">&rsaquo;</button>
-      </div>
-    </div>
-  </section>
-
-  <section class="solution-what">
-    <h2>What we do</h2>
-    <p class="solution-what__summary">{{ solution.summary }}</p>
-
-    <div class="solution-what__split" *ngIf="activeTrack as track">
-      <div class="solution-what__list">
-        <p>Our services</p>
-        <button
-          type="button"
-          *ngFor="let item of serviceTracks; let i = index"
-          [class.is-active]="i === activeTrackIndex"
-          (click)="setActiveTrack(i)"
-        >
-          {{ item.title }}
+        <div class="solution-story__controls">
+          <button type="button" (click)="prevStory()" aria-label="Previous story">&lsaquo;</button>
+          <button
+            type="button"
+            *ngFor="let item of clientStories; let i = index"
+            [class.is-active]="i === activeStoryIndex"
+            (click)="setActiveStory(i)"
+            [attr.aria-label]="'Story ' + (i + 1)"
+          >
+          {{i + 1}}
         </button>
-      </div>
-      <article class="solution-what__detail">
-        <h3>{{ track.title }}</h3>
-        <p>{{ track.description }}</p>
-        <a routerLink="/contact-us">Learn more <span aria-hidden="true">&rarr;</span></a>
+          <button type="button" (click)="nextStory()" aria-label="Next story">&rsaquo;</button>
+        </div>
+        <a [routerLink]="story.href" class="solution-inline-link">Explore related solution <span aria-hidden="true">&rarr;</span></a>
       </article>
     </div>
   </section>
-
-  <section class="solution-partners">
-    <article class="solution-partners__card" *ngFor="let card of partnerCards">
-      <img [src]="card.image" [alt]="card.heading + ' image'" loading="lazy" />
-      <p>{{ card.title }}</p>
-      <h3>{{ card.heading }}</h3>
-      <span>{{ card.description }}</span>
-      <a [routerLink]="card.href">Read more <span aria-hidden="true">&rarr;</span></a>
-    </article>
-  </section>
-
-  <section class="why-choose-us" aria-labelledby="why-choose-us-title">
-    <div class="why-choose-us__inner site-container">
-      <div class="why-choose-us__header">
-        <h2 id="why-choose-us-title">Why Choose CES</h2>
-        <p>Designed for uptime, delivered with precision, and backed by teams who stay with you end-to-end.</p>
-      </div>
-      <div class="why-choose-us__grid">
-        <article class="why-choose-us__item">
-          <span class="why-choose-us__icon" aria-hidden="true"><mat-icon>verified_user</mat-icon></span>
-          <h3>Built for uptime</h3>
-          <p>Designed for uptime, delivered with precision, and backed by teams who stay with you end-to-end.</p>
-        </article>
-
-        <article class="why-choose-us__item">
-          <span class="why-choose-us__icon" aria-hidden="true"><mat-icon>workspace_premium</mat-icon></span>
-          <h3>Our edge</h3>
-          <p>
-            Trust, reliability, precision, speed, efficiency, connectivity, care, security, future-proofing, global reach,
-            24x7 customer support, best quality service, easy to connect, affordable cost, scalability, low latency,
-            satisfaction guarantee, satisfied clients.
-          </p>
-        </article>
-
-        <article class="why-choose-us__item">
-          <span class="why-choose-us__icon" aria-hidden="true"><mat-icon>security</mat-icon></span>
-          <h3>Secure, on-time delivery</h3>
-          <p>Secure staging, rapid deployment, on-time delivery.</p>
-        </article>
-
-        <article class="why-choose-us__item">
-          <span class="why-choose-us__icon" aria-hidden="true"><mat-icon>precision_manufacturing</mat-icon></span>
-          <h3>We deliver with precision and care.</h3>
-          <p>SLA-backed response, on-site expertise, and continuous monitoring keep your critical systems ahead of risk.</p>
-        </article>
-
-        <article class="why-choose-us__item">
-          <span class="why-choose-us__icon" aria-hidden="true"><mat-icon>flash_on</mat-icon></span>
-          <h3>Downtime is expensive. CES prevents it.</h3>
-          <p>We design resilient architectures and deliver proactive fixes before issues impact your business.</p>
-        </article>
-
-        <article class="why-choose-us__item">
-          <span class="why-choose-us__icon" aria-hidden="true"><mat-icon>trending_up</mat-icon></span>
-          <h3>Scale with confidence</h3>
-          <p>Infrastructure that grows with you, blueprinted for resilience, and people-powered delivery.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
 </section>
+<app-company-overview></app-company-overview>

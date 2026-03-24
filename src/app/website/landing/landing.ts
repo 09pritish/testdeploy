@@ -1,8 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, Renderer2, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
-import { OwlOptions } from 'ngx-owl-carousel-o';
-import { HOMEPAGE_PARTNER_LOGOS, CERTIFICATION_BADGES } from '../shared/site-constants';
+import { HOMEPAGE_PARTNER_LOGOS } from '../shared/site-constants';
 import { Subscription, interval } from 'rxjs';
 
 @Component({
@@ -75,69 +74,6 @@ export class Landing implements AfterViewInit, OnDestroy {
     }
   ];
 
-  readonly certificationBadges = CERTIFICATION_BADGES;
-  awardsCarouselOptions: OwlOptions = {
-  // ── Loop & autoplay ───────────────────────────────────────
-  loop: true,
-  rewind: false,
-
-  autoplay: true,
-  autoplayTimeout: 2800,
-  autoplaySpeed: 900,
-  autoplayHoverPause: true,
-  autoplayMouseleaveTimeout: 200,
-
-  // ── Drag ──────────────────────────────────────────────────
-  mouseDrag: true,
-  touchDrag: true,
-  pullDrag: true,
-  freeDrag: false,
-
-  // ── Transition ────────────────────────────────────────────
-  smartSpeed: 900,
-  fluidSpeed: false,
-  slideTransition: 'ease',
-
-  // ── UI ────────────────────────────────────────────────────
-  nav: false,
-  dots: false,
-  margin: 24,
-  stagePadding: 0,
-  center: false,
-  startPosition: 0,
-  URLhashListener: false,
-  lazyLoad: false,
-
-  // ── Responsive breakpoints ────────────────────────────────
-  // Key rule: items must be <= certificationBadges.length
-  // for loop to work correctly
-  responsive: {
-    0: {
-      items: 1,
-      margin: 12
-    },
-    400: {
-      items: 2,
-      margin: 14
-    },
-    600: {
-      items: 3,
-      margin: 16
-    },
-    820: {
-      items: 4,
-      margin: 20
-    },
-    1024: {
-      items: 5,
-      margin: 24
-    },
-    1280: {
-      items: 5,
-      margin: 28
-    }
-  }
-};
   activeServiceFeatureIndex = 2;
 
   readonly companyFocus = [
@@ -479,7 +415,6 @@ export class Landing implements AfterViewInit, OnDestroy {
   ) {
     this.registerLandingIcons();
     this.homepagePartnerLogos = HOMEPAGE_PARTNER_LOGOS;
-    this.certificationBadges = CERTIFICATION_BADGES;
   }
 
   ngAfterViewInit(): void {

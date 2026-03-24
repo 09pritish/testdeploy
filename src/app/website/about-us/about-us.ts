@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 
 interface HeroSlide {
   title: string;
@@ -29,6 +29,16 @@ interface JourneyYear {
   icon: string;
 }
 
+interface MetricItem {
+  value: string;
+  label: string;
+}
+
+interface ContactTag {
+  icon: string;
+  label: string;
+}
+
 @Component({
   selector: 'app-about-us',
   standalone: false,
@@ -36,34 +46,61 @@ interface JourneyYear {
   styleUrl: './about-us.scss'
 })
 export class AboutUs implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('journeyYearsScroller') private journeyYearsScroller?: ElementRef<HTMLElement>;
-
   readonly heroSlides: HeroSlide[] = [
     {
       title: 'Engineering Reliable Digital Foundations',
-      body: 'CES designs, secures, and operates enterprise infrastructure so your teams can scale with confidence.',
+      body: 'CES designs, secures, and operates enterprise infrastructure so your teams can scale with confidence across networking, cloud, and cybersecurity.',
       cta: 'Explore CES',
       image: 'assets/1.jpeg'
     },
     {
       title: 'From Design to Managed Operations',
-      body: 'Our teams support network, cloud, data center, and cybersecurity journeys with measurable delivery outcomes.',
+      body: 'Our teams support network, cloud, data center, and cybersecurity journeys with measurable delivery outcomes and accountable execution.',
       cta: 'See our delivery model',
-      image: 'assets/2.jpeg'
+      image: 'assets/2.avif'
     },
     {
       title: 'Built for Always-On Enterprise Performance',
-      body: 'With proactive support and strong governance, CES helps organizations run critical systems without disruption.',
+      body: 'With proactive support, strong governance, and expert-led service operations, CES helps organizations run critical systems without disruption.',
       cta: 'Talk to CES',
-      image: 'assets/3.jpeg'
+      image: 'assets/3.jpg'
     }
   ];
 
-  activeHeroSlide = 0;
-  private heroAutoSlideIntervalId: any = null;
-  private sectionRevealObserver: IntersectionObserver | null = null;
-  private removeResizeListener: (() => void) | null = null;
-  private lastStickyTop = -1;
+  readonly capabilityTicker = [
+    'Enterprise Networking',
+    'Cloud Modernization',
+    'Cybersecurity',
+    'AI Operations',
+    'Data Center Management',
+    'Managed Services',
+    'Digital Transformation',
+    'Infrastructure Design',
+    'Observability',
+    'Hybrid Cloud',
+    'Zero Trust Security',
+    'DevOps & Automation'
+  ];
+  readonly capabilityTickerLoop = [...this.capabilityTicker, ...this.capabilityTicker];
+
+  readonly missionMetrics: MetricItem[] = [
+    { value: '$14.5B', label: 'Revenue' },
+    { value: '226K+', label: 'People' },
+    { value: '60', label: 'Countries' },
+    { value: '167', label: 'Nationalities' },
+    { value: '220+', label: 'Delivery Centers' },
+    { value: '70+', label: 'Innovation Labs' }
+  ];
+
+  readonly verticals = [
+    'Financial Services',
+    'Manufacturing',
+    'Healthcare',
+    'Telecom',
+    'Media',
+    'Retail',
+    'Public Services'
+  ];
 
   readonly objectives = [
     {
@@ -116,14 +153,12 @@ export class AboutUs implements OnInit, AfterViewInit, OnDestroy {
     }
   ];
 
-  openValueIndex = 0;
-
   readonly purposeTabs: PurposeTab[] = [
     {
       label: 'Clients',
       icon: 'business_center',
       heading: 'Client outcomes at enterprise scale',
-      body: 'We help deliver business outcomes for our clients at speed and at scale by solving day-to-day and complex transformation challenges.',
+      body: 'We help deliver business outcomes for our clients at speed and at scale by solving day-to-day operational demands as well as complex transformation challenges.',
       bullets: [
         'Trusted partner across network, cloud, security, and managed services programs',
         'Delivery model aligned to SLA, governance, and measurable ROI',
@@ -135,31 +170,31 @@ export class AboutUs implements OnInit, AfterViewInit, OnDestroy {
       label: 'People',
       icon: 'person',
       heading: 'People-first engineering culture',
-      body: 'Our delivery teams combine deep technical capability with execution discipline across architecture, implementation, and support.',
+      body: 'Our delivery teams combine deep technical capability with disciplined execution across architecture, implementation, support, and lifecycle management.',
       bullets: [
         'Cross-functional teams across network, cloud, and cybersecurity',
         'Continuous capability development through training and certifications',
         'Culture focused on ownership, mentoring, and transparent execution'
       ],
-      image: 'assets/6.jpeg'
+      image: 'assets/4.jpeg'
     },
     {
       label: 'Communities',
       icon: 'groups',
       heading: 'Communities and ecosystem impact',
-      body: 'CES builds long-term value by engaging with institutions, partners, and communities through responsible technology initiatives.',
+      body: 'CES builds long-term value by engaging with institutions, partners, and communities through responsible technology initiatives and digital readiness programs.',
       bullets: [
         'Partnership programs supporting digital readiness',
         'Security and infrastructure awareness engagements',
         'Consistent emphasis on ethical and inclusive growth'
       ],
-      image: 'assets/6.jpeg'
+      image: 'assets/5.jpeg'
     },
     {
       label: 'Planet',
       icon: 'nature',
       heading: 'Sustainable infrastructure choices',
-      body: 'We align infrastructure decisions with sustainability goals by optimizing architecture, operations, and lifecycle management.',
+      body: 'We align infrastructure decisions with sustainability goals by optimizing architecture, operations, energy efficiency, and lifecycle management.',
       bullets: [
         'Energy-conscious design and modernization approaches',
         'Operational efficiency through automation and observability',
@@ -169,7 +204,6 @@ export class AboutUs implements OnInit, AfterViewInit, OnDestroy {
     }
   ];
 
-  activePurposeTab = 0;
   readonly journeyYears: JourneyYear[] = [
     {
       year: '2003-05',
@@ -226,21 +260,34 @@ export class AboutUs implements OnInit, AfterViewInit, OnDestroy {
       icon: 'hub'
     }
   ];
-  readonly journeyYearLoopItems = [0, 1, 2].flatMap((loop) =>
-    this.journeyYears.map((item, index) => ({ item, index, key: `${loop}-${index}` }))
-  );
-  activeJourneyYearIndex = 3;
-  private removeJourneyScrollListener: (() => void) | null = null;
-  private journeyLoopSegmentHeight = 0;
+
+  readonly contactTags: ContactTag[] = [
+    { icon: 'security', label: 'Cybersecurity' },
+    { icon: 'cloud', label: 'Cloud Modernization' },
+    { icon: 'router', label: 'Secure Networking' },
+    { icon: 'support_agent', label: 'Managed Services' }
+  ];
+
   readonly sectionTabs = [
     { id: 'meet-ces', label: 'Meet CES' },
-    { id: 'by-numbers', label: 'Vision & Mission' },
+    { id: 'mission', label: 'Mission' },
     { id: 'our-values', label: 'Our Values' },
     { id: 'our-purpose', label: 'Our Purpose' },
     { id: 'our-history', label: 'Our History' },
-    { id: 'contact-us', label: 'Contact us' }
+    { id: 'contact-us', label: 'Contact Us' }
   ];
+
+  activeHeroSlide = 0;
+  openValueIndex = 0;
+  activePurposeTab = 0;
+  activeJourneyYearIndex = 0;
   activeSectionId = 'meet-ces';
+
+  private heroAutoSlideIntervalId: any = null;
+  private sectionRevealObserver: IntersectionObserver | null = null;
+  private sectionTabsObserver: IntersectionObserver | null = null;
+  private removeResizeListener: (() => void) | null = null;
+  private lastStickyTop = -1;
 
   constructor(private host: ElementRef, private renderer: Renderer2) {}
 
@@ -250,11 +297,7 @@ export class AboutUs implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.syncTabsStickyOffset();
-    this.initJourneyYearsLoop();
-    this.removeResizeListener = this.renderer.listen('window', 'resize', () => {
-      this.syncTabsStickyOffset();
-      this.refreshJourneyYearsLoopMetrics();
-    });
+    this.removeResizeListener = this.renderer.listen('window', 'resize', () => this.syncTabsStickyOffset());
     this.setupSectionReveals();
     this.setupSectionTabsObserver();
   }
@@ -279,16 +322,14 @@ export class AboutUs implements OnInit, AfterViewInit, OnDestroy {
       this.removeResizeListener();
       this.removeResizeListener = null;
     }
-
-    if (this.removeJourneyScrollListener) {
-      this.removeJourneyScrollListener();
-      this.removeJourneyScrollListener = null;
-    }
-
   }
 
   get currentHeroSlide(): HeroSlide {
     return this.heroSlides[this.activeHeroSlide];
+  }
+
+  get activePurpose(): PurposeTab {
+    return this.purposeTabs[this.activePurposeTab];
   }
 
   selectHeroSlide(index: number): void {
@@ -308,10 +349,6 @@ export class AboutUs implements OnInit, AfterViewInit, OnDestroy {
     this.activeJourneyYearIndex = index;
   }
 
-  trackByJourneyLoop(_: number, row: { key: string }): string {
-    return row.key;
-  }
-
   onTabClick(event: Event, id: string): void {
     event.preventDefault();
     this.activeSectionId = id;
@@ -323,8 +360,6 @@ export class AboutUs implements OnInit, AfterViewInit, OnDestroy {
     const top = target.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top, behavior: 'smooth' });
   }
-
-  private sectionTabsObserver: IntersectionObserver | null = null;
 
   private startHeroAutoSlide(): void {
     if (this.heroAutoSlideIntervalId) {
@@ -340,15 +375,24 @@ export class AboutUs implements OnInit, AfterViewInit, OnDestroy {
     const revealTargets: HTMLElement[] = Array.from(
       this.host.nativeElement.querySelectorAll(
         [
-          '.about-hero',
-          '.about-tabs',
-          '.about-block',
-          '.objective-list article',
-          '.metrics-grid > div',
-          '.values-accordion article',
-          '.purpose-tabs button',
+          '.hero-inner > *',
+          '.hero-glass-wrap',
+          '.ap-ticker',
+          '.stat-item',
+          '.ap-tabs-nav',
+          '.meet-copy > *',
+          '.media-frame',
+          '.vision-card',
+          '.mission-img',
+          '.mission-copy > *',
+          '.mission-metric',
+          '.values-head',
+          '.values-img',
+          '.acc-item',
+          '.purpose-tab',
           '.purpose-panel',
-          '.about-contact a'
+          '.timeline-item',
+          '.contact-inner > *'
         ].join(', ')
       )
     );
@@ -369,13 +413,11 @@ export class AboutUs implements OnInit, AfterViewInit, OnDestroy {
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          const target = entry.target as HTMLElement;
-          this.renderer.addClass(target, 'is-revealed');
-          this.sectionRevealObserver?.unobserve(target);
+          this.renderer.addClass(entry.target, 'is-revealed');
+          this.sectionRevealObserver?.unobserve(entry.target);
         });
       },
       {
-        root: null,
         threshold: 0.12,
         rootMargin: '0px 0px -8% 0px'
       }
@@ -401,9 +443,8 @@ export class AboutUs implements OnInit, AfterViewInit, OnDestroy {
         this.activeSectionId = (visible[0].target as HTMLElement).id;
       },
       {
-        root: null,
         threshold: [0.2, 0.5, 0.8],
-        rootMargin: '-28% 0px -55% 0px'
+        rootMargin: '-24% 0px -52% 0px'
       }
     );
 
@@ -420,41 +461,6 @@ export class AboutUs implements OnInit, AfterViewInit, OnDestroy {
   private getStickyTopOffset(): number {
     const header = document.querySelector('.header-shell') as HTMLElement | null;
     const headerHeight = header ? Math.ceil(header.getBoundingClientRect().height) : 112;
-    return Math.max(headerHeight + 28, 112);
-  }
-
-  private initJourneyYearsLoop(): void {
-    const scroller = this.journeyYearsScroller?.nativeElement;
-    if (!scroller) return;
-
-    this.refreshJourneyYearsLoopMetrics();
-    this.removeJourneyScrollListener = this.renderer.listen(scroller, 'scroll', () => this.handleJourneyLoopScroll());
-  }
-
-  private refreshJourneyYearsLoopMetrics(): void {
-    const scroller = this.journeyYearsScroller?.nativeElement;
-    if (!scroller) return;
-
-    const segment = Math.floor(scroller.scrollHeight / 3);
-    if (!segment) return;
-
-    this.journeyLoopSegmentHeight = segment;
-    if (scroller.scrollTop === 0) {
-      scroller.scrollTop = segment;
-    }
-  }
-
-  private handleJourneyLoopScroll(): void {
-    const scroller = this.journeyYearsScroller?.nativeElement;
-    if (!scroller || !this.journeyLoopSegmentHeight) return;
-
-    const min = this.journeyLoopSegmentHeight * 0.5;
-    const max = this.journeyLoopSegmentHeight * 1.5;
-
-    if (scroller.scrollTop < min) {
-      scroller.scrollTop += this.journeyLoopSegmentHeight;
-    } else if (scroller.scrollTop > max) {
-      scroller.scrollTop -= this.journeyLoopSegmentHeight;
-    }
+    return Math.max(headerHeight + 18, 108);
   }
 }

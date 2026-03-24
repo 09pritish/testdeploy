@@ -1,37 +1,140 @@
 $font-family-base:    "Plus Jakarta Sans", "Inter", "Roboto", "Helvetica Neue", Arial, sans-serif;
+$font-family-heading-alt: "Avenir Next", "Avenir", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 $font-size-base: 16px;
 
+$color-white: #ffffff;
+$color-black: #000000;
 $color-body-bg: #f6f7fb;
+$color-body-bg-soft: #eef1f5;
+$color-surface-soft: #f3f6fc;
+$color-surface-tint: #f8fbff;
+$color-surface-cream: #faf8f5;
 $color-surface: #071326;
 $color-surface-strong: #0a1831;
+$color-surface-dark: #03050d;
+$color-surface-dark-alt: #0e1f3a;
+$color-surface-dark-deep: #030912;
 $color-text-primary: #0f172a;
+$color-text-heading: #111111;
+$color-text-strong: #0f1d3a;
+$color-text-on-dark: #e8f1ff;
+$color-text-on-dark-strong: #f4f8ff;
 $color-text-muted: #4b5563;
+$color-text-subtle: #5a6f8f;
+$color-text-secondary: #334766;
+$color-text-secondary-alt: #334e72;
+$color-text-kicker: #45689e;
 $color-border: rgba(0, 0, 0, 0.08);
+$color-border-soft: #d8e0ee;
+$color-border-softer: #dce4ef;
+$color-border-light: #d7deea;
+$color-border-faint: #e4e8f0;
 
 $color-accent-start: #0f4ba3; // CES logo blue dark
 $color-accent-end: #00a0e3;   // CES logo blue light
+$color-brand-blue: #1f67e5;
+$color-brand-blue-hover: #2d78fb;
+$color-brand-blue-strong: #1254d6;
+$color-brand-blue-soft: #2a67e8;
 $color-cta-text: #f8fafc;
+$color-mask-solid: #000;
 $shadow-elevated: 0 10px 40px rgba(5, 14, 36, 0.18);
+$shadow-card-soft: 0 6px 16px rgba(19, 40, 78, 0.08);
+$shadow-card-medium: 0 10px 24px rgba(10, 30, 68, 0.16);
+$shadow-card-strong: 0 16px 34px rgba(13, 32, 67, 0.12);
+$shadow-brand: 0 10px 20px rgba(22, 78, 180, 0.22);
 
+$radius-sm: 6px;
+$radius-md: 10px;
+$radius-lg: 12px;
+$radius-xl: 16px;
+$radius-xxl: 20px;
 $radius-pill: 999px;
 $radius-card: 12px;
 $spacing-1: 4px;
 $spacing-2: 8px;
 $spacing-3: 12px;
 $spacing-4: 16px;
+$transition-fast: 160ms ease;
+$transition-base: 180ms ease;
+$transition-medium: 220ms ease;
+$transition-standard: 220ms cubic-bezier(0.4, 0, 0.2, 1);
+
+$heading-h1-size: clamp(2.75rem, 5.2vw, 4.5rem);
+$heading-h2-size: clamp(2.1rem, 4vw, 3.5rem);
+$heading-h3-size: clamp(1.6rem, 3vw, 2.4rem);
+$heading-h4-size: clamp(1.3rem, 2.2vw, 2rem);
+$heading-h5-size: clamp(1.08rem, 1.7vw, 1.45rem);
+$heading-h6-size: clamp(0.95rem, 1.25vw, 1.15rem);
+
+$font-family-body-alt: "DM Sans", "Plus Jakarta Sans", "Inter", "Roboto", "Helvetica Neue", Arial, sans-serif;
+$font-family-display-alt: $font-family-base;
+
+$about-color-bg: #03050d;
+$about-color-surface: rgba(9, 17, 36, 0.96);
+$about-color-surface-2: rgba(14, 26, 52, 0.95);
+$about-color-surface-3: rgba(18, 32, 62, 0.9);
+$about-color-blue: #1f67e5;
+$about-color-blue-bright: #2b79ff;
+$about-color-blue-dim: rgba(31, 103, 229, 0.18);
+$about-color-border: rgba(130, 165, 220, 0.22);
+$about-color-border-strong: rgba(116, 164, 255, 0.55);
+$about-color-text: #d9e2f5;
+$about-color-text-muted: #7a98c4;
+$about-color-white: #f3f7ff;
+$about-color-white-soft: rgba(255, 255, 255, 0.88);
+$about-color-white-faint: rgba(255, 255, 255, 0.38);
+$about-color-hero-subtle: rgba(217, 226, 245, 0.82);
+
+$about-radius-sm: 4px;
+$about-radius-md: 10px;
+$about-radius-lg: 18px;
+
+$about-shadow-button: 0 16px 36px rgba(31, 103, 229, 0.4);
+$about-shadow-card: 0 24px 48px rgba(0, 0, 0, 0.36);
+$about-shadow-panel: 0 32px 64px rgba(0, 0, 0, 0.4);
+$about-shadow-sticky: 0 12px 24px rgba(0, 0, 0, 0.18);
+$about-shadow-focus: 0 0 0 1px rgba(43, 121, 255, 0.2), 0 12px 28px rgba(0, 0, 0, 0.28);
+$about-shadow-timeline: 0 0 0 4px rgba(43, 121, 255, 0.25), 0 0 16px rgba(43, 121, 255, 0.5);
+
+$about-overlay-deep: rgba(3, 5, 13, 0.9);
+$about-overlay-mid: rgba(3, 5, 13, 0.55);
+$about-overlay-soft: rgba(3, 5, 13, 0.35);
+$about-overlay-bottom: rgba(3, 5, 13, 0.86);
+$about-overlay-card: rgba(10, 18, 40, 0.82);
+$about-overlay-card-strong: rgba(10, 18, 40, 0.85);
+$about-overlay-accent: rgba(31, 103, 229, 0.1);
+$about-overlay-accent-2: rgba(31, 103, 229, 0.14);
+$about-overlay-accent-3: rgba(43, 121, 255, 0.11);
+$about-overlay-accent-4: rgba(31, 103, 229, 0.15);
+$about-overlay-accent-5: rgba(31, 103, 229, 0.25);
+$about-overlay-grid: rgba(130, 165, 220, 0.06);
+$about-overlay-white-line: rgba(255, 255, 255, 0.08);
+$about-overlay-badge-border: rgba(43, 121, 255, 0.5);
+$about-overlay-timeline: rgba(43, 121, 255, 0.5);
+$about-overlay-hero-glow-2: rgba(42, 60, 130, 0.25);
+$about-overlay-vision: rgba(31, 103, 229, 0.08);
+$about-overlay-mission: rgba(31, 103, 229, 0.09);
 
 @mixin gradient-cta {
- background: #1f67e5;
-    color: #f8fafc;
-    box-shadow: 0 12px 30px rgba(31, 103, 229, 0.24);
+ background: $color-brand-blue;
+    color: $color-cta-text;
+    box-shadow: 0 12px 30px rgba($color-brand-blue, 0.24);
     border: none;
     padding: 0.6rem 2rem;
-    border-radius: 12px;
+    border-radius: $radius-card;
     font-weight: 600;
     font-size: 16px;
     min-width: 130px;
     cursor: pointer;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+@mixin button-brand-pill {
+  border-radius: $radius-pill;
+  background: $color-brand-blue;
+  color: $color-white;
+  transition: transform $transition-fast, box-shadow $transition-fast, background-color $transition-fast, filter $transition-fast;
 }
 
     
